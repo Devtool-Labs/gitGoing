@@ -5,8 +5,9 @@ import brace from 'brace';
 import RepositoryView from './RepositoryView.jsx';
 import fetch from 'isomorphic-fetch';
 
-//import 'brace/theme/monokai';
-//import 'brace/mode/javascript';
+
+import 'brace/theme/monokai';
+import 'brace/mode/javascript';
 export default class TestComponent extends React.Component {
  constructor(props) {
   super(props);
@@ -26,6 +27,7 @@ export default class TestComponent extends React.Component {
     <div>
       <button onClick={this.onClicky}>Button</button>
       <a href='/logout'><button>Logout</button></a>
+      <button onClick={this.props.testApi}>Button</button>
       <Ace theme="monokai" mode='javascript'/>
       <RepositoryView /> 
     </div>
