@@ -5,3 +5,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 require('file?name=[name].[ext]!./index.html');
 
+ReactDom.render((
+  <div>
+    Hello World!
+  </div>
+  ), document.getElementById('app'));
