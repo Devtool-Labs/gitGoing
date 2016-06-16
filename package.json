@@ -20,8 +20,10 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "brace": "^0.8.0",
     "express": "^4.13.4",
     "react": "^15.1.0",
+    "react-ace": "^3.4.1",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
