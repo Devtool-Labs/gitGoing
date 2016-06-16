@@ -18,6 +18,8 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDom.render((
   <Provider store={store}>
-    <TestComponent />
+    <Router history={history} component={App}>
+       <Route path="/" component={TestComponent}/>
+    </Router>
   </Provider>
   ), document.getElementById('app'));
