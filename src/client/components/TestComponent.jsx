@@ -26,6 +26,7 @@ export default class TestComponent extends React.Component {
     <div>
       <button onClick={this.onClicky}>Button</button>
       <a href='/logout'><button>Logout</button></a>
+      <RepositoryView /> 
     </div>
   )
  } 
