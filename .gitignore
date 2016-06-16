@@ -5,3 +5,4 @@ dist/
 dev/
 .DS_Store
 npm-debug.log
+apiKeys.js
