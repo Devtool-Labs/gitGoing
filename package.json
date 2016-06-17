@@ -21,7 +21,12 @@
   },
   "dependencies": {
     "brace": "^0.8.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "isomorphic-fetch": "^2.2.1",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
     "react": "^15.1.0",
     "react-ace": "^3.4.1",
     "react-dom": "^15.1.0",
