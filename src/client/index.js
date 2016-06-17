@@ -7,6 +7,7 @@ import { createStore, combineReducers} from 'redux';
 import { state } from './reducer.js';
 import App from './components/App.jsx';
 import TestComponent from './components/TestComponent.jsx';
+import Signin from './signin.jsx';
 
 require('file?name=[name].[ext]!./index.html');
 let store = createStore(combineReducers({
@@ -14,7 +15,6 @@ let store = createStore(combineReducers({
   routing: routerReducer
 }));
 const history = syncHistoryWithStore(browserHistory, store);
-
 
 ReactDom.render((
   <Provider store={store}>
