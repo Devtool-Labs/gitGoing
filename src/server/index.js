@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const authKeys = require('../../apiKeys.js');
 
+app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({secret: 'mysecret'}));
 app.use(passport.initialize());
@@ -35,6 +36,14 @@ passport.deserializeUser(function(obj, done) {
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
 app.use('/api', router);
+
+app.get('/signin', function(req, res) {
+  res.render('./signin.html');
+})
+
+app.get('/stubdata', function(req, res) {
+  res.json({ data: "HEYYYY"});
+})
 
 app.listen(port, function(err) {
   if (err) {
