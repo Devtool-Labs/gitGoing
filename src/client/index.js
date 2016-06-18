@@ -7,9 +7,9 @@ import { createStore, combineReducers} from 'redux';
 import { state } from './reducer.js';
 import App from './components/App.jsx';
 import TestComponent from './components/TestComponent.jsx';
-import Signin from './signin.jsx';
 
 require('file?name=[name].[ext]!./index.html');
+require('file?name=[name].[ext]!./signin.html');
 let store = createStore(combineReducers({
   state,
   routing: routerReducer
@@ -23,3 +23,4 @@ ReactDom.render((
     </Router>
   </Provider>
   ), document.getElementById('app'));
+
