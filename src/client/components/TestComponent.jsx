@@ -16,8 +16,7 @@ export default class TestComponent extends React.Component {
   return (
     <div>
       <button onClick={this.props.testApi}>Button</button>
-      <Ace theme="monokai" mode='javascript'/>
-      <RepositoryView /> 
+      <a href='/logout'><button>Logout</button></a>
     </div>
   )
  } 
