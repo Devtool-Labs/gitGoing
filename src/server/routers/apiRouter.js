@@ -30,10 +30,16 @@ module.exports = function(app, passport, redisClient) {
         }
         rUtil.checkAndSetUser(userId,JSON.stringify(userObj));
       }
-      
       res.redirect('/');
     });
 
   app.use('/api', router);
-}
 
+  // For testing
+  router.route('/test') 
+    .get(function(req, res) {
+      console.log('Hello, console');
+      res.json('Hello, World');
+    });
+    
+}
