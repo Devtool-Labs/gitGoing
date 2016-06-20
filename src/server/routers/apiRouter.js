@@ -85,11 +85,16 @@ module.exports = function(app, passport, redisClient) {
         }
         rUtil.setUserToken(userId, req.user.accessToken);
       }
-      
       res.redirect('/');
     });
 
   app.use('/api', router);
+
+  // For testing
+  router.route('/test') 
+    .get(function(req, res) {
+      console.log('Hello, console');
+      res.json('Hello, World');
+    });
+    
 }
-
-
