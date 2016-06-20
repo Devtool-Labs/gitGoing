@@ -6,3 +6,4 @@ export const changeState = function(nextState) {
     nextState
   }
 }
+
