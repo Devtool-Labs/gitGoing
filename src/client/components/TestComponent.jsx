@@ -8,16 +8,13 @@ import { render } from 'react-dom';
 export default class TestComponent extends React.Component {
  constructor(props) {
   super(props);
- }
-
- onClicky() {
-  
+  this.props.debugModeOn();
  }
 
  render() {
   return (
     <div>
-      <button>Butt</button>
+      <button onClick={this.props.testApi}>Button</button>
     </div>
   )
  } 
