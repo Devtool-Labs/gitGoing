@@ -1,7 +1,7 @@
 const authKeys = require('../../../apiKeys.js');
 const GithubStrategy = require('passport-github').Strategy;
 
-module.exports = function(passport, redisClient) {
+module.exports = function(passport) {
   passport.use(new GithubStrategy({
     clientID: authKeys.gitHubAuth.clientID,
     clientSecret: authKeys.gitHubAuth.clientSecret,
