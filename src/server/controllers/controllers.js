@@ -1,3 +1,0 @@
-// var users = require('../models/file.js');  // require models here
-
-// controllers here for the future...

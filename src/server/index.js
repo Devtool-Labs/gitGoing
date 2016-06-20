@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-const router = require('./routers/apiRouter.js');
+const apiRouter = require('./routers/apiRouter.js');
 const staticRouter = require('./routers/staticRouter.js');
 const port = process.env.PORT || 3000;
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
+const redisClient = redis.createClient();
 
 
 app.engine('html', require('ejs').renderFile);
@@ -20,12 +22,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport.js')(passport);
+require('./config/passport.js')(passport, redisClient);
 
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
-app.use('/api', router);
-app.use('', staticRouter);
+apiRouter(app, redisClient);
+staticRouter(app, redisClient);
 
 
 
