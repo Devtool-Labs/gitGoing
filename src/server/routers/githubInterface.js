@@ -1,13 +1,12 @@
 var Promise = require('es6-promise').polyfill();
 var fetch = require('isomorphic-fetch');
 
-//testing access token: 256d9d0eab9254ead07c447ec4011cf8040a4851
 
 //function 1:
   // will take the access token as a parameter
   // get the username from github
 
-exports.getUsernameAndRepos = function (accessToken) {
+exports.getUsername = function (accessToken) {
   var userTokenURL = 'https://api.github.com/user?access_token=' + accessToken;
   fetch(userTokenURL)
     .then(function (response) {
