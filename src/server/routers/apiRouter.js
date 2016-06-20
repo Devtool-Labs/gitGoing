@@ -1,5 +1,4 @@
 var router = require('express').Router();
-var auth = require('../controllers/auth.js');
 const passport = require('passport');
 
 
@@ -19,5 +18,4 @@ module.exports = function(app, redisClient) {
     
   app.use('/api', router);
 }
-
 
