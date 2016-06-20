@@ -28,8 +28,8 @@ export const get  = function(actions, endpoint) {
         return response.json();
       })
       .then(json => { return dispatcher(actions.response(status, json))})
-      .catch(() => { return dispatcher(jsonParseError('invalid json from get ' + endpoint))})
-      .error( e => { return dispatcher(fetchError(e))});
+      //.catch(() => { return dispatcher(jsonParseError('invalid json from get ' + endpoint))})
+      //.error( e => { console.log(e);return dispatcher(fetchError(e))});
   }
 }
 

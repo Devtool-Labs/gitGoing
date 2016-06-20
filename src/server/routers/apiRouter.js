@@ -12,4 +12,3 @@ router.route('/auth/github/callback')
   });
 
 module.exports = router;
-

@@ -6,13 +6,16 @@ const port = process.env.PORT || 3000;
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+
 
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
   secret: 'mysecret',
   saveUninitialized: false,
-  resave: true
+  resave: true,
+  store: new RedisStore(),
 }));
 app.use(passport.initialize());
 app.use(passport.session());
