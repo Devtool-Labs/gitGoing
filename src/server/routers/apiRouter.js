@@ -21,11 +21,6 @@ module.exports = function(app, passport, redisClient) {
     });
   app.use('/api', router);
 
-  // Do the auth check
-  exports.isAuthenticated = function(req, res, next) {
-    //     req.authenticated
-    return req.isAuthenticated() ? next(): res.redirect('/login');
-  }
 
   router.route('/user')
     .get(function(req,res) {
@@ -74,10 +69,10 @@ module.exports = function(app, passport, redisClient) {
     })
 
   router.route('/auth/github')
-    .get(exports.isAuthenticated, passport.authenticate('github', { scope: [ 'user:email' ] }));
+    .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
 
   router.route('/auth/github/callback')
-    .get(exports.isAuthenticated, passport.authenticate('github', { failureRedirect: '/signin' }),
+    .get(passport.authenticate('github', { failureRedirect: '/signin' }),
     function(req, res) {
       if(req.user) {
         const userId = req.user.profile.id;

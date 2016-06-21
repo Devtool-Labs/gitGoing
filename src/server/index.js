@@ -16,10 +16,6 @@ const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-
->>>>>>> Rebasing commit
-=======
->>>>>>> Conflict resolving commit
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
@@ -34,8 +30,11 @@ require('./config/passport.js')(passport, redisClient);
 app.use(passport.initialize());
 app.use(passport.session());
 
+<<<<<<< 8b58ba62814fd7f0dbd03345b81b4d5cdf638fb1
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+=======
+>>>>>>> Made auth for middleware
 
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
