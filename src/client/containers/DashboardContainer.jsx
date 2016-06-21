@@ -6,7 +6,7 @@ import RepositoryView from '../components/RepositoryView.jsx';
 const mapStatetoProps = function (state) {
   const { user, repos } = state;
   return {
-    user ,
+    user,
     repos
   };
 };

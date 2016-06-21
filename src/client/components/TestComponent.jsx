@@ -7,7 +7,6 @@ import RepositoryView from './RepositoryView.jsx';
 import fetch from 'isomorphic-fetch';
 import DashboardContainer from '../containers/DashboardContainer.jsx';
 
-
 import 'brace/theme/monokai';
 import 'brace/mode/javascript';
 export default class TestComponent extends React.Component {
