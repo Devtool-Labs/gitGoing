@@ -14,11 +14,6 @@ bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
 const bodyParser = require('body-parser');
 
-<<<<<<< 295fd43300a44f5148d96ee629849ab0547cc6e0
-
-
-=======
->>>>>>> Rebasing commit
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
