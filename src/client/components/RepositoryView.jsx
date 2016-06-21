@@ -26,6 +26,11 @@ var repoData = [
 export default class RepositoryView extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.getUser());
+  }
+
+  componentWillReceiveProps (newProps) {
+    console.log('newprops are', newProps.user);
   }
 
   render() {
@@ -35,7 +40,6 @@ export default class RepositoryView extends React.Component {
           return (
             <div>
               <h3><Link to={`/*`}>{repoObj.repoName}</Link></h3>
-              <h3>{repoObj.repoName}</h3>
               <h5>{repoObj.description}</h5>
               <h5>{repoObj.pushed_at}</h5>
             </div>
