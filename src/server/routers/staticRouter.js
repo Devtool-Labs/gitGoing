@@ -1,4 +1,5 @@
 var router = require('express').Router();
+const isAuthenticated = require('../util/authentication.js');
 
 module.exports = function(app, redisClient) {
   router.route('/signin')
@@ -22,6 +23,10 @@ module.exports = function(app, redisClient) {
       })
     })
 
+  router.route('/')
+    .get(isAuthenticated, function(req, res) {
+      res.render('index.html');
+    });
+
   app.use('', router);
 } 
-
