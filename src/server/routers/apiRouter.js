@@ -1,21 +1,18 @@
 const router = require('express').Router();
 //const passport = require('passport');
-const redisUtil = require('../util/redisUtil'); 
+const redisUtil = require('../util/redisUtil');
+const isAuthenticated = require('../util/authentication.js');
 
 module.exports = function(app, passport, redisClient) {
   let rUtil = redisUtil(redisClient);
   // Do the auth check
-  var isAuthenticated = function(req, res, next) {
-    //     req.authenticated
-    return req.isAuthenticated() ? next(): res.redirect('/login');
-  }
 
   router.route('/room')
     .get(isAuthenticated, function(req,res) {
-      //console.log(req.isAuthenticated());
+      console.log("inside of /room, .get route");
+      console.log('req.isAuthenticated()', req.isAuthenticated());
       res.json({status: 'success!'});
     });
-  app.use('/api', router);
 
 
   router.route('/auth/github')
