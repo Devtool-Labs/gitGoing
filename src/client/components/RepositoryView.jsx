@@ -41,6 +41,7 @@ export default class RepositoryView extends React.Component {
             </div>
           )
         })}
+        <button>Create Editing Room</button>
       </div>
     );
   }
