@@ -1,9 +1,16 @@
 const router = require('express').Router();
-const passport = require('passport');
+//const passport = require('passport');
 const redisUtil = require('../util/redisUtil'); 
 
-module.exports = function(app, redisClient) {
+module.exports = function(app, passport, redisClient) {
   let rUtil = redisUtil(redisClient);
+
+  router.route('/room')
+    .get(function(req,res) {
+      //console.log(req.isAuthenticated());
+      res.json({status: 'success!'});
+    });
+
   router.route('/auth/github')
     .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
 
@@ -21,7 +28,7 @@ module.exports = function(app, redisClient) {
           provider: req.user.profile.provider,
           photos: req.user.profile.photos 
         }
-        rUtil.checkAndSet(userId,JSON.stringify(userObj));
+        rUtil.checkAndSetUser(userId,JSON.stringify(userObj));
       }
       
       res.redirect('/');

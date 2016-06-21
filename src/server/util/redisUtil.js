@@ -1,12 +1,23 @@
 module.exports = function (redisClient) {
   return {
-    checkAndSet : function(key, value) {
-      return redisClient.getAsync(key)
+    checkAndSetUser : function(key, value) {
+      return redisClient.hgetAsync('user', key)
       .then(function(v) {
         if(v === null) {
-          return redisClient.setAsync(key, value)
+          return redisClient.hsetAsync('user', key, value)
         }
       })
+    },
+    createRoom : function(userId) {
+      redisClient.incrbyAync('ROOMCOUNT')
+      .then(function(roomCount) {
+        var room = {
+          roomId: roomCount,
+          host: userId
+        }
+        return redisClient.hset('room', roomId, JSON.stringify(room));
+      });
     }
+
   }
 }

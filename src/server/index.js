@@ -23,14 +23,17 @@ app.use(session({
   resave: true,
   store: new RedisStore(),
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 require('./config/passport.js')(passport, redisClient);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
-apiRouter(app, redisClient);
+apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
 
