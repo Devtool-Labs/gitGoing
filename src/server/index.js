@@ -12,6 +12,7 @@ const redis = require('redis');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
+const bodyParser = require('body-parser');
 
 
 
@@ -29,7 +30,8 @@ require('./config/passport.js')(passport, redisClient);
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);

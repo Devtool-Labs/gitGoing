@@ -14,7 +14,9 @@ export default class TestComponent extends React.Component {
  }
 
  onClicky() {
-  fetch('/api/room')
+  fetch('/api/room', {
+    credentials: 'same-origin'
+  })
   .then((res) => { return res.json() })
   .then(json => {console.log(json)});
  }

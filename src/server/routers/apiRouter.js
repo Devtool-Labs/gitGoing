@@ -7,7 +7,6 @@ module.exports = function(app, passport, redisClient) {
 
   router.route('/room')
     .get(function(req,res) {
-      //console.log(req.isAuthenticated());
       res.json({status: 'success!'});
     });
 
@@ -36,4 +35,5 @@ module.exports = function(app, passport, redisClient) {
 
   app.use('/api', router);
 }
+
 

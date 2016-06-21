@@ -22,7 +22,9 @@ export const get  = function(actions, endpoint) {
   return dispatcher => {
     dispatcher(actions.request());
     let status;
-    return fetch(endpoint)
+    return fetch(endpoint, {
+      credentials: 'same-origin'
+      })
       .then(response => {
         status = response.status;
         return response.json();
@@ -41,6 +43,7 @@ export const post = function(actions, endpoint, data) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'credentials': 'same-origin'
       },
       body: JSON.stringify(data)
     })
@@ -51,7 +54,7 @@ export const post = function(actions, endpoint, data) {
     .then(json => {
       return dispatcher(actions.response(status, json))
     })
-    .catch(() => { return dispatcher(jsonParseError('invalid json from post ' + endpoint))})
-    .error( e => { return dispatcher(fetchError(e))});
+    //.catch(() => { return dispatcher(jsonParseError('invalid json from post ' + endpoint))})
+    //.error( e => { return dispatcher(fetchError(e))});
   }
 }
