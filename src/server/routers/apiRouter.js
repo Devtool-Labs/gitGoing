@@ -4,17 +4,24 @@ const redisUtil = require('../util/redisUtil');
 
 module.exports = function(app, passport, redisClient) {
   let rUtil = redisUtil(redisClient);
+  // Do the auth check
+  var isAuthenticated = function(req, res, next) {
+    //     req.authenticated
+    return req.isAuthenticated() ? next(): res.redirect('/login');
+  }
 
   router.route('/room')
-    .get(function(req,res) {
+    .get(isAuthenticated, function(req,res) {
       //console.log(req.isAuthenticated());
       res.json({status: 'success!'});
     });
+  app.use('/api', router);
+
 
   router.route('/auth/github')
     .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-  router.route('/auth/github/callback') 
+  router.route('/auth/github/callback')
     .get(passport.authenticate('github', { failureRedirect: '/signin' }),
     function(req, res) {
       if(req.user) {
@@ -30,10 +37,15 @@ module.exports = function(app, passport, redisClient) {
         }
         rUtil.checkAndSetUser(userId,JSON.stringify(userObj));
       }
-      
       res.redirect('/');
     });
 
   app.use('/api', router);
-}
 
+  // For testing
+  router.route('/test') 
+    .get(function(req, res, next) {console.log('haha I am in the middleware'); next()}, function(req, res) {
+      console.log('the req.originalUrl looks like this: ', req.originalUrl);
+      res.json('Hello, World');
+    });
+}
