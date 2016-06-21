@@ -7,8 +7,12 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
+const bluebird =require('bluebird');
 const redis = require('redis');
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
+
 
 
 app.engine('html', require('ejs').renderFile);
@@ -19,14 +23,17 @@ app.use(session({
   resave: true,
   store: new RedisStore(),
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 require('./config/passport.js')(passport, redisClient);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
-apiRouter(app, redisClient);
+apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
 
