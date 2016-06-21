@@ -13,7 +13,7 @@ import 'brace/mode/javascript';
 export default class TestComponent extends React.Component {
  constructor(props) {
   super(props);
-  //this.props.debugModeOn();
+  this.props.debugModeOn();
  }
 
  onClicky() {
