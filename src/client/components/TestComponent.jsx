@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+<<<<<<< HEAD
 import Ace from 'react-ace';
 import brace from 'brace';
 import RepositoryView from './RepositoryView.jsx';
