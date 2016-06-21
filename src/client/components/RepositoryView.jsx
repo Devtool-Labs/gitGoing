@@ -10,7 +10,7 @@ export default class RepositoryView extends React.Component {
 
   componentWillReceiveProps (newProps) {
     var username = newProps.user.profile.username;
-    if (newProps.user && !this.newProps) {
+    if (newProps.user && !newProps.repo) {
       this.props.getRepos(username);
     }
   }
