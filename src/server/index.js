@@ -16,11 +16,10 @@ const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+
 >>>>>>> Rebasing commit
-
-
 =======
->>>>>>> Rebasing commit
+>>>>>>> Conflict resolving commit
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
