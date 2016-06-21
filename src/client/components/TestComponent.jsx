@@ -1,11 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-<<<<<<< HEAD
 import Ace from 'react-ace';
 import brace from 'brace';
 import RepositoryView from './RepositoryView.jsx';
 import fetch from 'isomorphic-fetch';
-
 
 import 'brace/theme/monokai';
 import 'brace/mode/javascript';
