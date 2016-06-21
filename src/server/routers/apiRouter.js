@@ -19,6 +19,13 @@ module.exports = function(app, passport, redisClient) {
           res.json(room);
         })
     });
+  app.use('/api', router);
+
+  // Do the auth check
+  exports.isAuthenticated = function(req, res, next) {
+    //     req.authenticated
+    return req.isAuthenticated() ? next(): res.redirect('/login');
+  }
 
   router.route('/user')
     .get(function(req,res) {
@@ -67,10 +74,10 @@ module.exports = function(app, passport, redisClient) {
     })
 
   router.route('/auth/github')
-    .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
+    .get(exports.isAuthenticated, passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-  router.route('/auth/github/callback') 
-    .get(passport.authenticate('github', { failureRedirect: '/signin' }),
+  router.route('/auth/github/callback')
+    .get(exports.isAuthenticated, passport.authenticate('github', { failureRedirect: '/signin' }),
     function(req, res) {
       if(req.user) {
         const userId = req.user.profile.id;
@@ -92,9 +99,8 @@ module.exports = function(app, passport, redisClient) {
 
   // For testing
   router.route('/test') 
-    .get(function(req, res) {
-      console.log('Hello, console');
+    .get(function(req, res, next) {console.log('haha I am in the middleware'); next()}, function(req, res) {
+      console.log('the req.originalUrl looks like this: ', req.originalUrl);
       res.json('Hello, World');
     });
-    
 }

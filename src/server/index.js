@@ -16,7 +16,11 @@ const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+>>>>>>> Rebasing commit
 
+
+=======
+>>>>>>> Rebasing commit
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
@@ -39,6 +43,7 @@ app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
+<<<<<<< 89d78e307fcf755b92125568f9fcddff48108663
 //Socket IO implementation
 io.on('connection', function (socket){
   // on message sent from client
@@ -49,6 +54,9 @@ io.on('connection', function (socket){
 });
 
 server.listen(port, function(err) {
+=======
+app.listen(port, function(err) {
+>>>>>>> Rebasing commit
   if (err) {
     console.log(err);
   }
