@@ -28,7 +28,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
 app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
