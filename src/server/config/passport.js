@@ -14,12 +14,17 @@ module.exports = function(passport) {
   }));
 
   passport.serializeUser(function(user, done) {
-    //console.log('SERAILIZE USER', user);
-    done(null, user);
+    const userObj = {
+      id: user.profile.id,
+      username: user.profile.username,
+      profileUrl: user.profile.profileUrl,
+      provider: user.profile.provider,
+      photos: JSON.stringify(user.profile.photos)
+    }
+    done(null, userObj);
   });
 
   passport.deserializeUser(function(obj, done) {
-    //console.log('DESERAILIZE USER', obj);
     done(null, obj);
   });
 }

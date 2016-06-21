@@ -6,8 +6,12 @@ module.exports = function(app, passport, redisClient) {
   let rUtil = redisUtil(redisClient);
 
   router.route('/room')
-    .get(function(req,res) {
-      res.json({status: 'success!'});
+    .post(function(req,res) {
+      rUtil.createRoom(req.user.id)
+        .then(function(room) {
+          console.log(room);
+          res.json(room);
+        })
     });
 
   router.route('/user')

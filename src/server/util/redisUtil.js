@@ -1,3 +1,5 @@
+const Promise = require('bluebird');
+
 module.exports = function (redisClient) {
   return {
     checkAndSetUser : function(key, value) {
@@ -9,13 +11,19 @@ module.exports = function (redisClient) {
       })
     },
     createRoom : function(userId) {
-      redisClient.incrbyAync('ROOMCOUNT')
+      let roomObj;
+      return redisClient.incrbyAsync('ROOMCOUNT', 1)
       .then(function(roomCount) {
-        var room = {
+        roomObj = {
           roomId: roomCount,
           host: userId
         }
-        return redisClient.hset('room', roomId, JSON.stringify(room));
+        return redisClient.hsetAsync('room', roomCount, JSON.stringify(roomObj));
+      })
+      .then(function() {
+        return new Promise(function(resolve) {
+          resolve(roomObj);
+        })
       });
     }
 
