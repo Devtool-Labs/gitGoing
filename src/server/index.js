@@ -13,8 +13,11 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
 
+<<<<<<< 295fd43300a44f5148d96ee629849ab0547cc6e0
 
 
+=======
+>>>>>>> Rebasing commit
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
@@ -35,8 +38,6 @@ app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
-
-
 
 app.listen(port, function(err) {
   if (err) {
