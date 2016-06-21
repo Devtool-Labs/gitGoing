@@ -19,7 +19,6 @@ module.exports = function(app, passport, redisClient) {
           res.json(room);
         })
     });
-  app.use('/api', router);
 
 
   router.route('/user')
