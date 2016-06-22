@@ -1,13 +1,16 @@
 const router = require('express').Router();
 //const passport = require('passport');
+const github = require('../util/githubInterface');
 const redisUtil = require('../util/redisUtil'); 
 
 module.exports = function(app, passport, redisClient) {
-  let rUtil = redisUtil(redisClient);
+  const rUtil = redisUtil(redisClient);
+  const cache = require('../util/cache.js')(redisClient);
 
   router.route('/room')
-    .post(function(req,res) {
-      rUtil.createRoom(req.user.id)
+    .get(function(req,res) {
+      const repo = req.body.repo || 'repo not defined';
+      rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
           console.log(room);
           res.json(room);
@@ -18,6 +21,42 @@ module.exports = function(app, passport, redisClient) {
     .get(function(req,res) {
       res.json(req.user);
     });
+
+  router.route('/room/:roomid/branch')//get all branches
+    .get(function(req,res) {
+
+    });
+
+  router.route('/room/:roomid/branch/:branch')//get a branch
+    .get(function(req,res) {
+      const path = {
+        roomId: req.params.roomid,
+        branch: req.params.branch
+      }
+      cache.getBranch(req.user, path)
+      .then((data) => {res.json(data)});
+    })
+
+  router.route('/room/:roomid/git/tree/:sha')//get a fileTree
+    .get(function(req,res) {
+      const path = {
+        roomId: req.params.roomid,
+        sha: req.params.sha
+      };
+      cache.getFileTree(req.params.roomId, req.user.username, path)
+      .then((data) => {res.json(data)});
+    })
+
+  router.route('/room/:roomid/sha/:sha/file/:file')//get a file
+    .get(function(req, res) {
+      const path = {
+        roomId: req.params.roomid,
+        sha: req.params.sha,
+        file: req.params.file
+      };
+      cache.getFile(req.user.username, path)
+      .then((data) => {res.json(data)});
+    })
 
   router.route('/auth/github')
     .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
@@ -36,7 +75,7 @@ module.exports = function(app, passport, redisClient) {
           provider: req.user.profile.provider,
           photos: req.user.profile.photos 
         }
-        rUtil.checkAndSetUser(userId,JSON.stringify(userObj));
+        rUtil.setUserToken(userId, req.user.accessToken);
       }
       
       res.redirect('/');

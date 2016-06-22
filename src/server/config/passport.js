@@ -15,6 +15,7 @@ module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
     const userObj = {
+      accessToken: user.accessToken,
       id: user.profile.id,
       username: user.profile.username,
       profileUrl: user.profile.profileUrl,
