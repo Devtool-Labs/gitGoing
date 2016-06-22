@@ -14,8 +14,6 @@ bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
 const bodyParser = require('body-parser');
 
-
-
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(session({
@@ -37,8 +35,6 @@ app.use(express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
-
-
 
 app.listen(port, function(err) {
   if (err) {
