@@ -4,9 +4,6 @@ import { userGetResponse } from './user.js';
 export const REPO_GET_REQUEST = 'REPO_GET_REQUEST';
 export const REPO_GET_RESPONSE = 'REPO_GET_RESPONSE';
 
-// const USER_NAME = userGetResponse();
-//console.log('USER_NAME: ', USER_NAME );
-// const ENDPOINT = 'https://api.github.com/users/'+USER_NAME.userName+'/repos';
 
 export const repoGetRequest = function() {
   return {
