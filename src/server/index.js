@@ -13,7 +13,8 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient();
 const bodyParser = require('body-parser');
-
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 
 app.engine('html', require('ejs').renderFile);
@@ -38,9 +39,16 @@ app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
+//Socket IO implementation
+io.on('connection', function (socket){
+  // on message sent from client
+  socket.on('Room1', function (message) {
+    // broadcast message 
+    io.emit('ServerBroadcast', message);
+  });
+});
 
-
-app.listen(port, function(err) {
+server.listen(port, function(err) {
   if (err) {
     console.log(err);
   }
