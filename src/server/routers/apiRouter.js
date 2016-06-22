@@ -10,6 +10,11 @@ module.exports = function(app, passport, redisClient) {
       res.json({status: 'success!'});
     });
 
+  router.route('/user')
+    .get(function(req,res) {
+      res.json(req.user);
+    });
+
   router.route('/auth/github')
     .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
 

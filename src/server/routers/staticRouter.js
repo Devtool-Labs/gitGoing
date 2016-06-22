@@ -19,9 +19,14 @@ module.exports = function(app, redisClient) {
         }
         res.clearCookie('connect.sid');
         res.redirect('/signin');
-      })
-    })
+      });
+    });
+
+  router.route('/*')
+    .get(function (req, res) {
+      res.render('index.html');
+    });
 
   app.use('', router);
-} 
+} ;
 
