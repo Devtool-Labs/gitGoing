@@ -3,6 +3,8 @@ import { DEBUG_MODE_ON, DEBUG_MODE_OFF } from './actions/debugMode.js';
 import { FETCH_ERROR, JSON_PARSE_ERROR } from './actions/fetchHelper.js';
 import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
 import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
+import { BRANCH_GET_REQUEST, BRANCH_GET_RESPONSE } from './actions/getBranches.js';
+
 
 export const debugMode = function(state=false, action) {
   switch (action.type) {
@@ -40,14 +42,23 @@ export const user = function (state={}, action) {
   }
 };
 
-export const repos = function(state=[],action){
-  switch(action.type){
+export const repos = function(state=[], action){
+  switch (action.type) {
     case REPO_GET_RESPONSE:
       return action.data;
     default:
       return state;
   }
 };
+
+export const branches = function(state=[], action){
+  switch (action.type) {
+    case BRANCH_GET_RESPONSE:
+      return action.data;
+    default:
+      return state;
+  }
+}
 
 
 
