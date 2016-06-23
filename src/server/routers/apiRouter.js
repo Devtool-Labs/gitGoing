@@ -4,6 +4,7 @@ const github = require('../util/githubInterface');
 const redisUtil = require('../util/redisUtil'); 
 
 module.exports = function(app, passport, redisClient) {
+<<<<<<< 25299efec76e0f4cb6646b2d6a980af8bd7cfb5f
   const rUtil = redisUtil(redisClient);
   const cache = require('../util/cache.js')(redisClient);
 
@@ -18,8 +19,14 @@ module.exports = function(app, passport, redisClient) {
           console.log(room);
           res.json(room);
         })
-    });
+=======
+  let rUtil = redisUtil(redisClient);
 
+  router.route('/room')
+    .get(isAuthenticated, function(req,res) {
+      res.json({status: 'success!'});
+>>>>>>> Started work on auth
+    });
 
   router.route('/user')
     .get(function(req,res) {
@@ -91,10 +98,4 @@ module.exports = function(app, passport, redisClient) {
 
   app.use('/api', router);
 
-  // For testing
-  router.route('/test') 
-    .get(function(req, res, next) {console.log('haha I am in the middleware'); next()}, function(req, res) {
-      console.log('the req.originalUrl looks like this: ', req.originalUrl);
-      res.json('Hello, World');
-    });
 }
