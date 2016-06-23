@@ -1,7 +1,8 @@
 const router = require('express').Router();
 //const passport = require('passport');
 const github = require('../util/githubInterface');
-const redisUtil = require('../util/redisUtil'); 
+const redisUtil = require('../util/redisUtil');
+const isAuthenticated = require('../util/authentication.js');
 
 module.exports = function(app, passport, redisClient) {
   const rUtil = redisUtil(redisClient);
