@@ -5,15 +5,11 @@ const isAuthenticated = require('../util/authentication.js');
 
 module.exports = function(app, passport, redisClient) {
   let rUtil = redisUtil(redisClient);
-  // Do the auth check
 
   router.route('/room')
     .get(isAuthenticated, function(req,res) {
-      console.log("inside of /room, .get route");
-      console.log('req.isAuthenticated()', req.isAuthenticated());
       res.json({status: 'success!'});
     });
-
 
   router.route('/user')
     .get(function(req,res) {
@@ -44,10 +40,4 @@ module.exports = function(app, passport, redisClient) {
 
   app.use('/api', router);
 
-  // For testing
-  router.route('/test') 
-    .get(function(req, res, next) {console.log('haha I am in the middleware'); next()}, function(req, res) {
-      console.log('the req.originalUrl looks like this: ', req.originalUrl);
-      res.json('Hello, World');
-    });
 }
