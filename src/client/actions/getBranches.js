@@ -4,7 +4,7 @@ import { userGetResponse } from './user.js';
 export const BRANCH_GET_REQUEST = 'BRANCH_GET_REQUEST';
 export const BRANCH_GET_RESPONSE = 'BRANCH_GET_RESPONSE';
 
-const ENDPOINT; //ToDo: define endpoint
+const ENDPOINT = '/api/room';
 
 export const branchGetRequest = function() {
   return {
@@ -20,9 +20,9 @@ export const branchGetResponse = function(status, data) {
   };
 };
 
-export const get = function(){
+export const get = function(roomid){
   return fetchHelper.get({
     request: branchGetRequest,
     response: branchGetResponse
   }, ENDPOINT);
-}
+};
