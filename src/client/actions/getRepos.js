@@ -1,5 +1,4 @@
 import * as fetchHelper from './fetchHelper.js';
-import { userGetResponse } from './user.js';
 
 export const REPO_GET_REQUEST = 'REPO_GET_REQUEST';
 export const REPO_GET_RESPONSE = 'REPO_GET_RESPONSE';

@@ -7,7 +7,7 @@ export default class RepositoryView extends React.Component {
     super(props);
     props.getUser();
 
-    // this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
 
@@ -25,6 +25,11 @@ export default class RepositoryView extends React.Component {
     //receive the room object/id
     //store room object in redux
     //redirect to the url with the room id in the url  
+  }
+
+  handleClick(event) {
+   event.preventDefault(); 
+   console.log("freak out!");
   }
 
   render() {

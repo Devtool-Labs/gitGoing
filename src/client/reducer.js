@@ -5,6 +5,7 @@ import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
 import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
 import { BRANCHES_GET_REQUEST, BRANCHES_GET_RESPONSE } from './actions/getBranches.js';
 import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
+import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
 
 
 export const debugMode = function(state=false, action) {
@@ -70,5 +71,14 @@ export const commits = function(state=[], action){
   }
 };
 
+export const room = function() {
+  switch (action.type) {
+    case ROOM_POST_REQUEST:
+      return action.data;
+    default:
+      return state;
+
+  }
+}
 
 
