@@ -5,7 +5,7 @@ import { syncHistoryWithStore, routerReducer} from 'react-router-redux';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { state, debugMode, user, repos } from './reducer.js';
+import { state, debugMode, user, repos, branches, commits } from './reducer.js';
 import App from './components/App.jsx';
 import TestContainer from './containers/TestContainer.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';

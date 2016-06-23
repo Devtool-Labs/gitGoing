@@ -4,7 +4,6 @@ import { userGetResponse } from './user.js';
 export const COMMIT_GET_REQUEST = 'COMMIT_GET_REQUEST';
 export const COMMIT_GET_RESPONSE = 'COMMIT_GET_RESPONSE';
 
-const ENDPOINT = "TOBEFIXED"; //ToDo: define endpoint
 
 export const commitGetRequest = function() {
   return {
@@ -20,9 +19,10 @@ export const commitGetResponse = function(status, data) {
   };
 };
 
-export const get = function(){
+export const get = function(roomid, branch){
+  var apiEndpoint = '/api/room/' + roomid + '/branch' + branch;
   return fetchHelper.get({
     request: commitGetRequest,
     response: commitGetResponse
-  }, ENDPOINT);
+  }, apiEndpoint);
 }
