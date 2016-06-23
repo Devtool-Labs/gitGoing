@@ -29,14 +29,17 @@ exports.getRepositoryData = function (username) {
 
 exports.getBranchesData = function (username, repo, path) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches';
+  console.log(endpoint);
   fetch(endpoint)
     .then(function (response) {
+      console.log(response);
       if (response.status >= 400) {
         return Promise.reject('There was an error in retrieving your branches from the server.');
       }
       return response.json();
     })
     .then(function (json) {
+      console.log(json);
       return Promise.resolve(json);
     });
 };

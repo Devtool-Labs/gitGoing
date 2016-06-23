@@ -12,7 +12,7 @@ module.exports = function(app, passport, redisClient) {
       if(req.params.repo === undefined) {
         return res.json({err: 'repo not defined' });
       }
-      const repo = req.body.repo;
+      const repo = req.params.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
           console.log(room);
