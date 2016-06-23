@@ -13,23 +13,16 @@ export default class RepositoryView extends React.Component {
 
   componentWillReceiveProps (newProps) {
     console.log(newProps);
-    var username = newProps.user.profile.username;
+    var username = newProps.user.username;
     if (newProps.user && !newProps.repos.length) {
       this.props.getRepos(username);
     }
   }
 
-  handleClick (event) {
-    event.preventDefault();
-    //create the room
-    //receive the room object/id
-    //store room object in redux
-    //redirect to the url with the room id in the url  
-  }
-
   handleClick(event) {
    event.preventDefault(); 
-   console.log("freak out!");
+   console.log("event.target", event.target.value);
+   this.props.postRoom();
   }
 
   render() {

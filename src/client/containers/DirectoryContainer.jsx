@@ -26,8 +26,8 @@ const mapDispatchtoProps = function(dispatch) {
 		getCommits: function(roomid, branch){
 			dispatch(getCommits.get(roomid, branch));
 		},
-    postRoom: function(reponame, data){
-      dispatch(room.create(reponame, data));
+    postRoom: function(reponame){
+      dispatch(room.create(reponame, {}));
     } 
 	};
 };
