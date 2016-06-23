@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 export default class BranchingView extends React.Component {
  constructor(props) {
   super(props);
+  props.getBranches();
  }
 
 
@@ -13,12 +14,11 @@ export default class BranchingView extends React.Component {
     <div>
     {this.props.branches.map((branchObj) => {
     	return (
-    		<h3>{branchObj.name}</h3>
+    		<h3><Link to={`/room/commits`}>{branchObj.name}</Link></h3>
     		)
    	 })
   	}
     </div>
-    }
   )
  } 
 }

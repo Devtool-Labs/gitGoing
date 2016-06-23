@@ -4,6 +4,7 @@ import { FETCH_ERROR, JSON_PARSE_ERROR } from './actions/fetchHelper.js';
 import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
 import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
 import { BRANCH_GET_REQUEST, BRANCH_GET_RESPONSE } from './actions/getBranches.js';
+import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
 
 
 export const debugMode = function(state=false, action) {
@@ -54,6 +55,15 @@ export const repos = function(state=[], action){
 export const branches = function(state=[], action){
   switch (action.type) {
     case BRANCH_GET_RESPONSE:
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+export const commits = function(state=[], action){
+  switch (action.type) {
+    case COMMITS_GET_RESPONSE:
       return action.data;
     default:
       return state;

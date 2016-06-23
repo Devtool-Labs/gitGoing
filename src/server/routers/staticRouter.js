@@ -27,6 +27,11 @@ module.exports = function(app, redisClient) {
       res.render('index.html');
     });
 
+   router.route('/')
+     .get(function (req, res) {
+       res.render('index.html');
+     });   
+
   app.use('', router);
 } ;
 
