@@ -1,7 +1,8 @@
 const router = require('express').Router();
 //const passport = require('passport');
 const github = require('../util/githubInterface');
-const redisUtil = require('../util/redisUtil'); 
+const redisUtil = require('../util/redisUtil');
+const isAuthenticated = require('../util/authentication.js');
 
 module.exports = function(app, passport, redisClient) {
   const rUtil = redisUtil(redisClient);
@@ -69,7 +70,7 @@ module.exports = function(app, passport, redisClient) {
   router.route('/auth/github')
     .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-  router.route('/auth/github/callback') 
+  router.route('/auth/github/callback')
     .get(passport.authenticate('github', { failureRedirect: '/signin' }),
     function(req, res) {
       if(req.user) {
@@ -85,11 +86,9 @@ module.exports = function(app, passport, redisClient) {
         }
         rUtil.setUserToken(userId, req.user.accessToken);
       }
-      
       res.redirect('/');
     });
 
   app.use('/api', router);
+
 }
-
-
