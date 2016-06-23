@@ -8,8 +8,11 @@ module.exports = function(app, passport, redisClient) {
   const cache = require('../util/cache.js')(redisClient);
 
   router.route('/room')
-    .get(function(req,res) {
-      const repo = req.body.repo || 'repo not defined';
+    .post(function(req,res) {
+      if(req.body.repo === undefined) {
+        return res.json({err: 'repo not defined' });
+      }
+      const repo = req.body.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
           console.log(room);
@@ -24,7 +27,11 @@ module.exports = function(app, passport, redisClient) {
 
   router.route('/room/:roomid/branch')//get all branches
     .get(function(req,res) {
-
+      const path = {
+        roomId: req.params.roomid,
+      }
+      cache.getBranches(req.user, path)
+      .then((data) => {res.json(data)});
     });
 
   router.route('/room/:roomid/branch/:branch')//get a branch
@@ -46,6 +53,7 @@ module.exports = function(app, passport, redisClient) {
       cache.getFileTree(req.params.roomId, req.user.username, path)
       .then((data) => {res.json(data)});
     })
+    
 
   router.route('/room/:roomid/sha/:sha/file/:file')//get a file
     .get(function(req, res) {

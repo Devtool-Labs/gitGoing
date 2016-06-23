@@ -13,7 +13,7 @@ module.exports = function(redisClient) {
           return getGithub(username, repo, path);
         })
         .then(function(data) {
-          setRedis(path, data);
+          setRedis(path, JSON.stringify(data));
           return Promise.resolve(data); 
         });
       } else { //if value, return it
@@ -24,6 +24,15 @@ module.exports = function(redisClient) {
 
   return {
     getBranches: function(username, path) {
+      return checkAndGet({
+        getRedis: rUtil.getBranches,
+        setRedis: rUtil.setBranches,
+        getGithub: Github.getBranchesData,
+        username,
+        path
+      })
+    },
+    getBranch: function(username, path) {
       return checkAndGet({
         getRedis: rUtil.getBranch,
         setRedis: rUtil.setBranch,
