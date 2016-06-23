@@ -18,10 +18,13 @@ export default class RepositoryView extends React.Component {
     }
   }
 
-  //create the room
-  //receive the room object/id
-  //store room object in redux
-  //redirect to the url with the room id in the url
+  handleClick (event) {
+    event.preventDefault();
+    //create the room
+    //receive the room object/id
+    //store room object in redux
+    //redirect to the url with the room id in the url  
+  }
 
   render() {
     return (

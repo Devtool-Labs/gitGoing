@@ -18,8 +18,8 @@ const mapDispatchtoProps = function(dispatch) {
 		getUser: function() {
 		  dispatch(user.get());
 		},
-		getBranches: function() {
-		  dispatch(getBranches.get());
+		getBranches: function(repoName) {
+		  dispatch(getBranches.get(repoName));
 		},
 		getCommits: function(roomid, branch){
 			dispatch(getCommits.get(roomid, branch));
