@@ -4,7 +4,7 @@ import { userGetResponse } from './user.js';
 export const COMMIT_GET_REQUEST = 'COMMIT_GET_REQUEST';
 export const COMMIT_GET_RESPONSE = 'COMMIT_GET_RESPONSE';
 
-const ENDPOINT; //ToDo: define endpoint
+const ENDPOINT = "TOBEFIXED"; //ToDo: define endpoint
 
 export const commitGetRequest = function() {
   return {

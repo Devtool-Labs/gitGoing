@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as getBranches from '../actions/getBranches.js';
-import * as getBranches from '../actions/getCommits.js';
+import * as getCommits from '../actions/getCommits.js';
 import * as user from '../actions/user.js'; 
 import BranchingView from '../components/BranchingView.jsx';
 
