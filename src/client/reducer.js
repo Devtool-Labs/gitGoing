@@ -59,16 +59,16 @@ export const branches = function(state=[], action){
     default:
       return state;
   }
-}
+};
 
 export const commits = function(state=[], action){
   switch (action.type) {
-    case COMMITS_GET_RESPONSE:
+    case COMMIT_GET_RESPONSE:
       return action.data;
     default:
       return state;
   }
-}
+};
 
 
 
