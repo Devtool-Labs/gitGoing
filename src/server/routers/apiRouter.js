@@ -7,9 +7,9 @@ module.exports = function(app, passport, redisClient) {
   const rUtil = redisUtil(redisClient);
   const cache = require('../util/cache.js')(redisClient);
 
-  router.route('/room')
-    .post(function(req,res) {
-      if(req.body.repo === undefined) {
+  router.route('/repo/:repo/createroom')
+    .get(function(req,res) {
+      if(req.params.repo === undefined) {
         return res.json({err: 'repo not defined' });
       }
       const repo = req.body.repo;
