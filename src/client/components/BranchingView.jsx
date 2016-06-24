@@ -5,7 +5,19 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 export default class BranchingView extends React.Component {
  constructor(props) {
   super(props);
-  props.getBranches();
+  props.getBranches(props.location.pathname.split('/')[2]);
+  this.state = {
+    branchName: null
+  };
+ }
+
+ handleClick() {
+
+ }
+
+ clickBranch(event) {
+  this.setState({branchName: event.target.value});
+
  }
 
 
@@ -14,7 +26,8 @@ export default class BranchingView extends React.Component {
     <div>
     {this.props.branches.map((branchObj) => {
     	return (
-    		<h3><Link to={`/room/commits`}>{branchObj.name}</Link></h3>
+    		<h3 onClick={this.clickBranch.bind(this)}>{branchObj.name}</h3>
+
     		)
    	 })
   	}
