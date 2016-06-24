@@ -40,10 +40,10 @@ export const post = function(actions, endpoint, data) {
     dispatcher(actions.request());
     let status;
     return fetch(endpoint, {
+      credentials: 'same-origin',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'credentials': 'same-origin'
       },
       body: JSON.stringify(data)
     })

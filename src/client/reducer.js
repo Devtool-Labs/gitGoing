@@ -21,7 +21,7 @@ export const debugMode = function(state=false, action) {
       console.log('JSON_PARSE_ERROR: ' + action.error);
       return state;
     default:
-      !state || console.log('ACTION DISPATCHED' + JSON.stringify(action));
+      !state || console.log('ACTION DISPATCHED:', action.type);
       return state;
   }
 };

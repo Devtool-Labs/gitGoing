@@ -9,6 +9,16 @@ module.exports = function(app, passport, redisClient) {
   const cache = require('../util/cache.js')(redisClient);
 
   router.route('/repo/:repo/createroom')
+    .post(function(req,res) {
+      if(req.params.repo === undefined) {
+        return res.json({err: 'repo not defined' });
+      }
+      const repo = req.params.repo;
+      rUtil.setNewRoom(req.user.id, repo)
+        .then(function(room) {
+          res.json(room);
+        })
+    })
     .get(function(req,res) {
       if(req.params.repo === undefined) {
         return res.json({err: 'repo not defined' });
@@ -16,10 +26,9 @@ module.exports = function(app, passport, redisClient) {
       const repo = req.params.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
-          console.log(room);
           res.json(room);
         })
-    });
+    });;
 
   router.route('/user')
     .get(function(req,res) {

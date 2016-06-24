@@ -5,34 +5,37 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 export default class RepositoryView extends React.Component {
   constructor(props) {
     super(props);
+    //props.debugModeOn();
     props.getUser();
+    this.state = {repoName: null};
 
-    this.handleClick = this.handleClick.bind(this);
   }
 
 
   componentWillReceiveProps (newProps) {
-    console.log(newProps);
     var username = newProps.user.username;
     if (newProps.user && !newProps.repos.length) {
       this.props.getRepos(username);
     }
   }
 
-  handleClick(event) {
+  handleSubmit(event) {
    event.preventDefault(); 
-   console.log("event.target", event.target.value);
-   this.props.postRoom();
+   this.props.postRoom(this.state.repoName);
+  }
+
+  clickRadio(e) {
+    this.setState({ repoName: e.target.value});
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj) => {
             return (
               <div>
-                <input type="radio" name="repo" value={repoObj.name} />
+                <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} value={repoObj.name} />
                 <h3>{repoObj.name}</h3>
                 <h5>{repoObj.description}</h5>
                 <h5>{repoObj.url}</h5>
