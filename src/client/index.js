@@ -40,6 +40,7 @@ ReactDom.render((
        <Route path="/" component={TestContainer}/>
        <Route path="/dashboard" component={DashboardContainer}/>
        <Route path="/room/:roomid" component={DirectoryContainer}/>
+       <Route path="/test" component={TestContainer} />
     </Router>
   </Provider>
   ), document.getElementById('app'));

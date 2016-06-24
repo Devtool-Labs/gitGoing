@@ -27,9 +27,9 @@ module.exports = function (redisClient) {
       return redisClient.getAsync('room:' + path.roomId +':repo');
     },
     setRepo : function(path, repo) {
-      return redisClient.getAsync('room:' + path.roomId +':repo', repo);
+      return redisClient.setAsync('room:' + path.roomId +':repo', repo);
     },
-    missingParam: function() {
+    missingParam : function() {
       return Promise.reject('missing param');
     },
     path : function(roomId, branch, sha, file) {

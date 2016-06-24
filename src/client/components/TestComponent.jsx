@@ -20,8 +20,8 @@ export default class TestComponent extends React.Component {
 
  }
 
- onClicky() {
-  fetch('/api/room', {
+ onClicky(endpoint) {
+  fetch(endpoint, {
     credentials: 'same-origin'
   })
   .then((res) => { return res.json() })
@@ -47,13 +47,10 @@ emitMessage(newValue) {
 
  render() {
   return (
+    <div>
+      <button onClick={this.onClicky.bind(this, '/api/room/4/branch')}>branches</button>
 
-    <AceEditor
-      mode="javascript"
-      theme="monokai"
-      value={this.state.textEditorValue}
-      onChange={this.emitMessage}
-    />
+    </div>
   )
  } 
 }
