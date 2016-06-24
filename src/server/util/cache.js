@@ -32,31 +32,40 @@ module.exports = function(redisClient) {
         path
       })
     },
-    getBranch: function(username, path) {
+    getBranch: function(user, path) {
       return checkAndGet({
         getRedis: rUtil.getBranch,
         setRedis: rUtil.setBranch,
         getGithub: Github.getBranchData,
-        username,
-        path,
+        user,
+        path
       })
     },
-    getFileTree: function(roomId, username, path) {
+    getCommits: function(user, path) {
+      return checkAndGet({
+        getRedis: rUtil.getCommits,
+        setRedis: rUtil.setCommits,
+        getGithub: Github.getCommitsData,
+        user,
+        path
+      })
+    },
+    getFileTree: function(user, path) {
       return checkAndGet({
         getRedis: rUtil.getFileTree,
         setRedis: rUtil.setFileTree,
         getGithub: Github.getFileTreeData,
-        username,
-        path,
+        user,
+        path
       });
     },
-    getFile: function(roomId, username, path) {
+    getFile: function(user, path) {
       return checkAndGet({
         getRedis: rUtil.getFile,
         setRedis: rUtil.setFile,
         getGithub: Github.getFileData,
-        username,
-        path,
+        user,
+        path
       });
     }
   }

@@ -49,6 +49,8 @@ emitMessage(newValue) {
   return (
     <div>
       <button onClick={this.onClicky.bind(this, '/api/room/4/branch')}>branches</button>
+      <button onClick={this.onClicky.bind(this, '/api/room/4/branch/master')}>branch</button>
+      <button onClick={this.onClicky.bind(this, '/api/room/4/commits')}>commits</button>
 
     </div>
   )

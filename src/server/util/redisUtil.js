@@ -63,7 +63,12 @@ module.exports = function (redisClient) {
     },
     setFile : function(path, file) {
       return redisClient.setAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, file)
+    },
+    getCommits : function(path) {
+      return redisClient.getAsync('room:'+ path.roomId+ ':commits');
+    },
+    setCommits : function(path, commits) {
+      return redisClient.setAsync('room:'+ path.roomId+ ':commits', commits);
     }
-
   }
 }

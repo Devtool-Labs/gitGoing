@@ -55,6 +55,15 @@ module.exports = function(app, passport, redisClient) {
       .then((data) => {res.json(data)});
     });
 
+  router.route('/room/:roomid/commits')
+    .get(function(req, res) {
+      const path = {
+        roomId: req.params.roomid
+      }
+      cache.getCommits(req.user, path)
+      .then((data) => {res.json(data)});
+    });
+
   router.route('/room/:roomid/git/tree/:sha')//get a fileTree
     .get(function(req,res) {
       const path = {
