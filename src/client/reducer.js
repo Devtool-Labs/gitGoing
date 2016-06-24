@@ -79,6 +79,9 @@ export const room = function() {
       return state;
 
   }
+
+  //uistate
+  //sidebar componeent
 }
 
 
