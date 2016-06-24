@@ -6,7 +6,7 @@ import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
 import { BRANCHES_GET_REQUEST, BRANCHES_GET_RESPONSE } from './actions/getBranches.js';
 import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
 import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
-
+import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE } from './actions/ui.js';
 
 export const debugMode = function(state=false, action) {
   switch (action.type) {
@@ -83,5 +83,28 @@ export const room = function() {
   //uistate
   //sidebar componeent
 }
+
+export const uiState = function(state= { sidebarView: 'branches', sidebarStack: [] }, action){
+  switch (action.type) {
+    case SHOW_BRANCHES:
+      return Object.assign({}, state, {
+        sidebarView: action.display,
+        sidebarStack: state.sidebarStack.concat([action])
+      });
+    case SHOW_COMMITS:
+      return Object.assign({}, state, {
+        sidebarView: action.display,
+        sidebarStack: state.sidebarStack.concat([action])
+      });
+    case SHOW_FILE_STRUCTURE:
+      return Object.assign({}, state, {
+        sidebarView: action.display,
+        sidebarStack: state.sidebarStack.concat([action])
+      });
+    default:
+      return state;
+
+  }
+};
 
 
