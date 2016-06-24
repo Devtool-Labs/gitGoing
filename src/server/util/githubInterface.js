@@ -60,6 +60,21 @@ exports.getBranchData = function (username, repo, path) {
     });
 };
 
+exports.getCommitsData = function(username, repo, path) {
+  var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits';
+  console.log(endpoint);
+  return fetch(endpoint)
+    .then(function(response) {
+      if (response.status >= 400) {
+        return Promise.reject('There was an error in retrieving your commits');
+      }
+      return response.json();
+    })
+    .then(function(json) {
+      return Promise.resolve(json);
+    });
+}
+
 exports.getFileTreeData = function (username, repo, path) {
   var {sha} = path;
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha;
