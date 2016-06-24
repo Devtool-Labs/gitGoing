@@ -19,8 +19,8 @@ export const branchesGetResponse = function(status, data) {
   };
 };
 
-export const get = function(repoName){
-  var apiEndpoint = '/repo/' + repoName + '/createroom';
+export const get = function(roomid){
+  var apiEndpoint = '/room/' + roomid + '/branch';
   return fetchHelper.get({
     request: branchesGetRequest,
     response: branchesGetResponse
