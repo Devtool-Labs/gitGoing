@@ -1,6 +1,7 @@
 //var Promise = require('es6-promise').polyfill();
 var Promise = require('bluebird');
 var fetch = require('isomorphic-fetch');
+fetch.Promise = Promise;
 
 exports.getUsername = function (accessToken) {
   var userTokenURL = 'https://api.github.com/user?access_token=' + accessToken;
@@ -24,19 +25,22 @@ exports.getRepositoryData = function (username) {
     })
     .then(function(json) {
       return Promise.resolve(json);
-    });
+    })
 };
 
 exports.getBranchesData = function (username, repo, path) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches';
-  fetch(endpoint)
+  return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
+        console.log(response.status);
         return Promise.reject('There was an error in retrieving your branches from the server.');
       }
       return response.json();
     })
     .then(function (json) {
+      console.log('JSON');
+      console.log(json);
       return Promise.resolve(json);
     });
 };
@@ -44,7 +48,7 @@ exports.getBranchesData = function (username, repo, path) {
 exports.getBranchData = function (username, repo, path) {
   var { branch } = path;
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches/' + branch;
-  fetch(endpoint)
+  return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
         return Promise.reject('There was an error in retrieving your branches from the server.');
@@ -59,7 +63,7 @@ exports.getBranchData = function (username, repo, path) {
 exports.getFileTreeData = function (username, repo, path) {
   var {sha} = path;
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha;
-  fetch(endpoint)
+  return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
         return Promise.reject('There was an error in getting your files from GitHub.');
@@ -74,7 +78,7 @@ exports.getFileTreeData = function (username, repo, path) {
 exports.getFileContents = function (username, repo, path) {
   var {repo, file} = path
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file;
-  fetch(endpoint)
+  return fetch(endpoint)
     .then(function () {
       if (response.status >= 400) {
         return Promise.reject('There was an error loading the file contents.');
