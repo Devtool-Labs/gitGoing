@@ -39,8 +39,6 @@ exports.getBranchesData = function (username, repo, path) {
       return response.json();
     })
     .then(function (json) {
-      console.log('JSON');
-      console.log(json);
       return Promise.resolve(json);
     });
 };
@@ -62,7 +60,6 @@ exports.getBranchData = function (username, repo, path) {
 
 exports.getCommitsData = function(username, repo, path) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits';
-  console.log(endpoint);
   return fetch(endpoint)
     .then(function(response) {
       if (response.status >= 400) {
@@ -94,7 +91,7 @@ exports.getFileContents = function (username, repo, path) {
   var {repo, file} = path
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file;
   return fetch(endpoint)
-    .then(function () {
+    .then(function (response) {
       if (response.status >= 400) {
         return Promise.reject('There was an error loading the file contents.');
       }

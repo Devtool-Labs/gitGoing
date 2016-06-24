@@ -70,11 +70,10 @@ module.exports = function(app, passport, redisClient) {
         roomId: req.params.roomid,
         sha: req.params.sha
       };
-      cache.getFileTree(req.params.roomId, req.user.username, path)
+      cache.getFileTree(req.user, path)
       .then((data) => {res.json(data)});
     })
     
-
   router.route('/room/:roomid/sha/:sha/file/:file')//get a file
     .get(function(req, res) {
       const path = {
@@ -82,7 +81,7 @@ module.exports = function(app, passport, redisClient) {
         sha: req.params.sha,
         file: req.params.file
       };
-      cache.getFile(req.user.username, path)
+      cache.getFile(req.user, path)
       .then((data) => {res.json(data)});
     })
 

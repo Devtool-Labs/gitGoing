@@ -63,7 +63,7 @@ module.exports = function(redisClient) {
       return checkAndGet({
         getRedis: rUtil.getFile,
         setRedis: rUtil.setFile,
-        getGithub: Github.getFileData,
+        getGithub: Github.getFileContents,
         user,
         path
       });
