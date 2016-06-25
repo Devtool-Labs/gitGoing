@@ -5,7 +5,7 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-rout
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { state, debugMode, user, repos, branches, commits, uiState } from './reducer.js';
+import { state, debugMode, user, repos, branches, commits, ui } from './reducer.js';
 import App from './components/App.jsx';
 import TestContainer from './containers/TestContainer.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
@@ -26,7 +26,7 @@ let store = createStore(
     repos,
     branches,
     commits,
-    uiState,
+    ui,
     routing: routerReducer
   }), applyMiddleware(
     thunkMiddleware,
