@@ -18,8 +18,8 @@ const mapDispatchtoProps = function (dispatch, ownProps) {
     getUser: function() {
       dispatch(user.get());
     },
-    getRepos: function(username) {
-      dispatch(getRepos.get(username));
+    getRepos: function( user ) {
+      dispatch(getRepos.get(user.username, user.accessToken));
     },
     postRoom: function(reponame){
       dispatch(room.createAndRedirect(reponame))

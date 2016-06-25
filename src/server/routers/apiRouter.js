@@ -41,7 +41,10 @@ module.exports = function(app, passport, redisClient) {
         roomId: req.params.roomid,
       }
       cache.getBranches(req.user, path)
-      .then((data) => {res.json(data)})
+      .then((data) => {
+        console.log('data is', data);
+        res.json(data)
+      })
       //.error(err => {console.log('hi');res.json({err: err})});
     });
 
@@ -52,16 +55,20 @@ module.exports = function(app, passport, redisClient) {
         branch: req.params.branch
       }
       cache.getBranch(req.user, path)
-      .then((data) => {res.json(data)});
+      .then((data) => {
+        res.json(data)
+      });
     });
 
-  router.route('/room/:roomid/commits')
+  router.route('/room/:roomid/commits')//get commits
     .get(function(req, res) {
       const path = {
         roomId: req.params.roomid
       }
       cache.getCommits(req.user, path)
-      .then((data) => {res.json(data)});
+      .then((data) => {
+        res.json(data)
+      });
     });
 
   router.route('/room/:roomid/git/tree/:sha')//get a fileTree
