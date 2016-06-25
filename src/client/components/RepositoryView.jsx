@@ -33,7 +33,7 @@ export default class RepositoryView extends React.Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
             return (
-              <div>
+              <div key={index}>
                 <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} key={index} value={repoObj.name} />
                 <h3>{repoObj.name}</h3>
                 <h5>{repoObj.description}</h5>
