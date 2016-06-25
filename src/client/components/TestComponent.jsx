@@ -53,7 +53,7 @@ emitMessage(newValue) {
       <button onClick={this.onClicky.bind(this, '/api/room/4/commits')}>commits</button>
       <button onClick={this.onClicky.bind(this, '/api/room/4/git/tree/e3f9980e331906d5e07e3199591557ee43d605c1')}>filetree</button>
       <button onClick={this.onClicky.bind(this, '/api/room/4/git/tree/d77babcb5c6c8ea0f15b36818feba4687fac78d9')}>filetree app</button>
-      <button onClick={this.onClicky.bind(this, '/api/room/4/sha/d77babcb5c6c8ea0f15b36818feba4687fac78d9/file/f5cdee46d4a8f1a91463cc68619808882c29ec42')}>file</button>
+      <button onClick={this.onClicky.bind(this, '/api/room/4/sha/5425d07c1631da83d8a77e45d8c9db3ac30d3a04/file/index.js')}>file</button>
 
     </div>
   )

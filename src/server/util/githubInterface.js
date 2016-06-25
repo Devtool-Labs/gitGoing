@@ -88,8 +88,8 @@ exports.getFileTreeData = function (username, repo, path) {
 };
 
 exports.getFileContents = function (username, repo, path) {
-  var {repo, file} = path
-  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file;
+  var {file, sha} = path
+  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file + '?ref' + sha;
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
