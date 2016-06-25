@@ -11,11 +11,10 @@ export default class RepositoryView extends React.Component {
 
   }
 
-
   componentWillReceiveProps (newProps) {
     var username = newProps.user.username;
     if (newProps.user && !newProps.repos.length) {
-      this.props.getRepos(username);
+      this.props.getRepos(newProps.user);
     }
   }
 
@@ -32,10 +31,10 @@ export default class RepositoryView extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          {this.props.repos.map( (repoObj) => {
+          {this.props.repos.map( (repoObj, index) => {
             return (
               <div>
-                <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} value={repoObj.name} />
+                <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} key={index} value={repoObj.name} />
                 <h3>{repoObj.name}</h3>
                 <h5>{repoObj.description}</h5>
                 <h5>{repoObj.url}</h5>

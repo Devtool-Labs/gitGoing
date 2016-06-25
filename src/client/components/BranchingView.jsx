@@ -33,30 +33,37 @@ export default class BranchingView extends React.Component {
 
 
 
- render() {
-  if (this.props.showBranches) {
-    return (
-      <div>
-      <button>Back</button>
-      {this.props.branches.map((branchObj) => {
-      	return (
-      		<h3 onClick={this.clickBranch}>{branchObj.name}</h3>
-      		)
-     	 })
-    	}
-      </div>
-    )
-  } else if (this.props.showCommits) {
-    return (
-      <div>
-        <button>Back</button>
-        {this.props.commits.map((commitObj) => {
-          return (
-            <h4>{commitObj.commit.message}</h4>
-          )
-        })}
-      </div>
-    )
+  render() {
+    var showCommits = this.props.ui.sidebarStack[this.props.ui.sidebarStack.length - 2];
+    var showBranches = this.props.ui.sidebarStack[this.props.ui.sidebarStack.length - 3];
+    console.log('showBranches is', showBranches);
+    // return (
+    if (showBranches.display && showBranches.type === "SHOW_BRANCHES") {
+      return (
+        <div>
+          <button>Back2</button>
+          {this.props.branches.map((branchObj) => {
+            return (
+              <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
+            )
+           })}
+        </div>
+      )
+    } else if (showCommits.display && showCommits.type === "SHOW_COMMITS") {
+      return (
+        <div>
+          <button>Back3</button>
+          {this.props.commits.map((commitObj) => {
+            return (
+              <h4>{commitObj.commit.message}</h4>
+            )
+          })}
+        </div>
+      )
+    } else {
+      return (
+        <div><h1>HELLO WORLD</h1></div>
+      )
+    } 
   }
- } 
 }
