@@ -16,6 +16,9 @@ exports.getUsername = function (accessToken) {
 
 exports.getRepositoryData = function (username, accessToken) {
   var repositoryEndpoint = 'https://api.github.com/users/' + username + '/repos';
+  if(accessToken) {
+    repositoryEndpoint += '?accessToken=' + accessToken;
+  }
   return fetch(repositoryEndpoint)
     .then(function (response) {
       if (response.status >= 400) {
@@ -30,6 +33,9 @@ exports.getRepositoryData = function (username, accessToken) {
 
 exports.getBranchesData = function (username, repo, path, accessToken) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches';
+  if(accessToken) {
+    endpoint += '?accessToken=' + accessToken;
+  }
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
@@ -46,6 +52,9 @@ exports.getBranchesData = function (username, repo, path, accessToken) {
 exports.getBranchData = function (username, repo, path, accessToken) {
   var { branch } = path;
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches/' + branch;
+  if(accessToken) {
+    endpoint += '?accessToken=' + accessToken;
+  }
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
@@ -60,6 +69,9 @@ exports.getBranchData = function (username, repo, path, accessToken) {
 
 exports.getCommitsData = function(username, repo, path, accessToken) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits';
+  if(accessToken) {
+    endpoint += '?accessToken=' + accessToken;
+  }
   return fetch(endpoint)
     .then(function(response) {
       if (response.status >= 400) {
@@ -75,6 +87,9 @@ exports.getCommitsData = function(username, repo, path, accessToken) {
 exports.getFileTreeData = function (username, repo, path, accessToken) {
   var {sha} = path;
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha;
+  if(accessToken) {
+    endpoint += '?accessToken=' + accessToken;
+  }
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
@@ -90,6 +105,9 @@ exports.getFileTreeData = function (username, repo, path, accessToken) {
 exports.getFileContents = function (username, repo, path, accessToken) {
   var {file, sha} = path
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file + '?ref' + sha;
+  if(accessToken) {
+    endpoint += '?accessToken=' + accessToken;
+  }
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
