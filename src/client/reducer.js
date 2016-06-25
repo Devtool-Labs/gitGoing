@@ -84,7 +84,7 @@ export const room = function() {
   //sidebar componeent
 }
 
-export const uiState = function(state= { sidebarView: 'branches', sidebarStack: [] }, action){
+export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] }, action){
   switch (action.type) {
     case SHOW_BRANCHES:
       return Object.assign({}, state, {
