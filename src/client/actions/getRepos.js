@@ -18,8 +18,8 @@ export const repoGetResponse = function(status, data) {
   };
 };
 
-export const get = function(username){
-  var apiEndpoint = 'https://api.github.com/users/'+ username +'/repos';
+export const get = function(username, accessToken){
+  var apiEndpoint = 'https://api.github.com/users/'+ username +'/repos?accessToken=' + accessToken;
   return fetchHelper.get({
     request: repoGetRequest,
     response: repoGetResponse

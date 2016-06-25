@@ -20,7 +20,7 @@ export const branchesGetResponse = function(status, data) {
 };
 
 export const get = function(roomid){
-  var apiEndpoint = '/room/' + roomid + '/branch';
+  var apiEndpoint = '/api/room/' + roomid + '/branch';
   return fetchHelper.get({
     request: branchesGetRequest,
     response: branchesGetResponse
