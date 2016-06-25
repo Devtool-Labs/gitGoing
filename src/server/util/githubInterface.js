@@ -14,7 +14,7 @@ exports.getUsername = function (accessToken) {
     });
 };
 
-exports.getRepositoryData = function (username) {
+exports.getRepositoryData = function (username, accessToken) {
   var repositoryEndpoint = 'https://api.github.com/users/' + username + '/repos';
   return fetch(repositoryEndpoint)
     .then(function (response) {
@@ -28,7 +28,7 @@ exports.getRepositoryData = function (username) {
     })
 };
 
-exports.getBranchesData = function (username, repo, path) {
+exports.getBranchesData = function (username, repo, path, accessToken) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches';
   return fetch(endpoint)
     .then(function (response) {
@@ -43,7 +43,7 @@ exports.getBranchesData = function (username, repo, path) {
     });
 };
 
-exports.getBranchData = function (username, repo, path) {
+exports.getBranchData = function (username, repo, path, accessToken) {
   var { branch } = path;
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/branches/' + branch;
   return fetch(endpoint)
@@ -58,7 +58,7 @@ exports.getBranchData = function (username, repo, path) {
     });
 };
 
-exports.getCommitsData = function(username, repo, path) {
+exports.getCommitsData = function(username, repo, path, accessToken) {
   var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits';
   return fetch(endpoint)
     .then(function(response) {
@@ -72,7 +72,7 @@ exports.getCommitsData = function(username, repo, path) {
     });
 }
 
-exports.getFileTreeData = function (username, repo, path) {
+exports.getFileTreeData = function (username, repo, path, accessToken) {
   var {sha} = path;
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha;
   return fetch(endpoint)
@@ -87,7 +87,7 @@ exports.getFileTreeData = function (username, repo, path) {
     });
 };
 
-exports.getFileContents = function (username, repo, path) {
+exports.getFileContents = function (username, repo, path, accessToken) {
   var {file, sha} = path
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file + '?ref' + sha;
   return fetch(endpoint)
