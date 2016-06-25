@@ -11,7 +11,7 @@ export default class BranchingView extends React.Component {
   this.props.getCommits(this.props.location.pathname.split('/')[2]);
   this.props.showBranches(true);
 
-  this.clickBranch = this.clickBranch.bind(this)
+  this.clickBranch = this.clickBranch.bind(this);
  }
 
 
@@ -34,28 +34,26 @@ export default class BranchingView extends React.Component {
 
 
   render() {
-    var showCommits = this.props.ui.sidebarStack[this.props.ui.sidebarStack.length - 2];
-    var showBranches = this.props.ui.sidebarStack[this.props.ui.sidebarStack.length - 3];
-    console.log('showBranches is', showBranches);
-    // return (
-    if (showBranches.display && showBranches.type === "SHOW_BRANCHES") {
+    var showProperties = this.props.ui.sidebarStack;
+    if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
           <button>Back2</button>
           {this.props.branches.map((branchObj) => {
+            console.log('getting inside branch map', branchObj);
             return (
               <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
             )
            })}
         </div>
       )
-    } else if (showCommits.display && showCommits.type === "SHOW_COMMITS") {
+    } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
           <button>Back3</button>
-          {this.props.commits.map((commitObj) => {
+          {this.props.commits.map((commitObj, index) => {
             return (
-              <h4>{commitObj.commit.message}</h4>
+              <h4 key={index}>{commitObj.commit.message}</h4>
             )
           })}
         </div>

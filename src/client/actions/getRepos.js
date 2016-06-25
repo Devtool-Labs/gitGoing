@@ -19,7 +19,7 @@ export const repoGetResponse = function(status, data) {
 };
 
 export const get = function(username, accessToken){
-  var apiEndpoint = 'https://api.github.com/users/'+ username +'/repos?accessToken=' + accessToken;
+  var apiEndpoint = 'https://api.github.com/users/'+ username +'/repos?access_token=' + accessToken;
   return fetchHelper.get({
     request: repoGetRequest,
     response: repoGetResponse
