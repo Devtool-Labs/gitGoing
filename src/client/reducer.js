@@ -81,8 +81,6 @@ export const room = function() {
 
   }
 
-  //uistate
-  //sidebar componeent
 }
 
 export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] }, action){
