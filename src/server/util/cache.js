@@ -10,7 +10,7 @@ module.exports = function(redisClient) {
       if(value === null) { //if no value, make call to github
         return rUtil.getRepo(path)
         .then(function(repo) {
-          return getGithub(user.username, repo, path);
+          return getGithub(user.username, repo, path, user.accessToken);
         })
         .then(function(data) {
           setRedis(path, JSON.stringify(data));
