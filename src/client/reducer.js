@@ -7,6 +7,8 @@ import { BRANCHES_GET_REQUEST, BRANCHES_GET_RESPONSE } from './actions/getBranch
 import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
 import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE } from './actions/ui.js';
+import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
+
 
 export const debugMode = function(state=false, action) {
   switch (action.type) {
@@ -103,6 +105,15 @@ export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] },
     default:
       return state;
 
+  }
+};
+
+export const fileTree = function (state={}, action) {
+  switch (action.type) {
+    case FILETREE_GET_RESPONSE:
+      return action.data;
+    default:
+      return state;
   }
 };
 
