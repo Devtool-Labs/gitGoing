@@ -14,7 +14,10 @@ export default class BranchingView extends React.Component {
     <div>
     {this.props.branches.map((branchObj) => {
       return (
-        <h3><Link to={`/room/commits`}>{branchObj.name}</Link></h3>
+        <div>
+          <a href="/logout"><button type="button">Logout</button></a>
+          <h3><Link to={`/room/commits`}>{branchObj.name}</Link></h3>
+        </div>
         )
      })
     }

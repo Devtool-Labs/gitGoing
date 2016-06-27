@@ -18,7 +18,7 @@ module.exports = function(app, redisClient) {
         if (err) {
         }
         res.clearCookie('connect.sid');
-        console.log('session destroyed - hit line 23');
+        req.logout();
         res.redirect('/signin');
       });
     });

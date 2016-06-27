@@ -19,6 +19,7 @@ class Signin extends React.Component {
   render() {
     return (
       <div>
+        <a href="/logout"><button type="button">Logout</button></a>
         <h2>Click to signin here:</h2>
       </div>
     );
