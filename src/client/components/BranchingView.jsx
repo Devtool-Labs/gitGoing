@@ -4,16 +4,13 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import bluebird from 'bluebird';
 
 export default class BranchingView extends React.Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     props.debugModeOn();
     props.getBranches(props.location.pathname.split('/')[2]);
     this.props.getCommits(this.props.location.pathname.split('/')[2]);
     this.props.showBranches(true);
-    this.state = {
-      'sha': null
-    };
+   
     this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
@@ -25,46 +22,12 @@ export default class BranchingView extends React.Component {
     this.props.showCommits(true);
     this.props.showFileStructure(false);
   }
-=======
- constructor(props) {
-  super(props);
-  props.debugModeOn();
-  props.getBranches(props.location.pathname.split('/')[2]);
-  this.props.getCommits(this.props.location.pathname.split('/')[2]);
-  //find a way to get the sha
-  this.props.getFileTree(props.location.pathname.split('/')[2], 'sha');
-  this.props.showBranches(true);
-
-  this.clickBranch = this.clickBranch.bind(this);
-  this.clickCommit = this.clickCommit.bind(this);
- }
-
-
- clickBranch() {
-  this.props.showBranches(false);
-  this.props.showCommits(true);
-  this.props.showFileStructure(false);
-  console.log('commits in props are', this.props.commits);
- }
-
- clickCommit () {
-  this.props.showBranches(false);
-  this.props.showCommits(false);
-  this.props.showFileStructure(true);
- }
->>>>>>> 00a73b6609a6b0d5ceccb6c5b28f61b4bd518b72
 
   clickCommit (event) {
-    this.setState({ 'sha': event.target.value });
     this.getFileTree(this.props.location.pathname.split('/')[2], event.target.value);
-    console.log('event target value is', event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);
     this.props.showFileStructure(true); 
-  }
-
-  componentDidMount () {
-    console.log('the state now is', this.state.sha);
   }
  
   componentWillReceiveProps(newProps) {
@@ -88,7 +51,6 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
-      console.log('props are', this.props);
       return (
         <div>
           <button>Back</button>
@@ -100,7 +62,6 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
-      console.log('filetree is', this.props.fileTree);
       return (
         <div>
           <button>Back</button>
