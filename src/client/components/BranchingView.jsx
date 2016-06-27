@@ -11,7 +11,7 @@ export default class BranchingView extends React.Component {
     this.props.getCommits(this.props.location.pathname.split('/')[2]);
     this.props.showBranches(true);
    
-    this.clickBranch = this.clickBranch.bind(this);
+    this.clickBranch = this.clickBraSignoutnch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
   }
@@ -41,7 +41,7 @@ export default class BranchingView extends React.Component {
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
-          <a href="/logout"><button type="button">Logout</button></a>
+          <a href="/logout"><button type="button">Signout</button></a>
           <button>Back2</button>
           {this.props.branches.map((branchObj) => {
             return (
@@ -53,7 +53,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
-          <a href="/logout"><button type="button">Logout</button></a>
+          <a href="/logout"><button type="button">Signout</button></a>
           <button>Back3</button>
           {this.props.commits.map((commitObj, index) => {
             return (
@@ -65,7 +65,7 @@ export default class BranchingView extends React.Component {
     } else {
       return (
         <div>
-          <a href="/logout"><button type="button">Logout</button></a>
+          <a href="/logout"><button type="button">Signout</button></a>
           <button>Back</button>
           {this.props.fileTree.tree.map(function (fileObj) {
             return (
