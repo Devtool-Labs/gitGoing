@@ -108,7 +108,7 @@ export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] },
   }
 };
 
-export const fileTree = function (state=[], action) {
+export const fileTree = function (state={}, action) {
   switch (action.type) {
     case FILETREE_GET_RESPONSE:
       return action.data;
