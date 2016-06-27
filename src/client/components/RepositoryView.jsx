@@ -30,6 +30,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
+      <a href="/logout"><button type="button">Signout</button></a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
             return (

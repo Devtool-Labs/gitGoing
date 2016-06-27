@@ -48,6 +48,7 @@ emitMessage(newValue) {
  render() {
   return (
     <div>
+      <a href="/logout"><button type="button">Signout</button></a>
       <button onClick={this.onClicky.bind(this, '/api/room/4/branch')}>branches</button>
       <button onClick={this.onClicky.bind(this, '/api/room/4/branch/master')}>branch</button>
       <button onClick={this.onClicky.bind(this, '/api/room/4/commits')}>commits</button>

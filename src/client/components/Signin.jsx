@@ -19,8 +19,8 @@ class Signin extends React.Component {
   render() {
     return (
       <div>
+        <a href="/logout"><button type="button">Signout</button></a>
         <h2>Click to signin here:</h2>
-        <a href="/api/auth/github"><button type="button">Signin</button></a>
       </div>
     );
   }
