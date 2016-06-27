@@ -11,7 +11,7 @@ export default class BranchingView extends React.Component {
     this.props.getCommits(this.props.location.pathname.split('/')[2]);
     this.props.showBranches(true);
    
-    this.clickBranch = this.clickBraSignoutnch.bind(this);
+    this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
   }
