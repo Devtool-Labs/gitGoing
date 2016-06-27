@@ -19,6 +19,7 @@ export default class RepositoryView extends React.Component {
   }
 
   handleSubmit(event) {
+    console.log('this.props = ', this.props);
    event.preventDefault(); 
    this.props.postRoom(this.state.repoName);
   }
@@ -30,6 +31,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
+      <a href="/logout"><button type="button">Logout</button></a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
             return (
