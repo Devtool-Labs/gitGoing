@@ -9,14 +9,17 @@ export const fileTreeGetRequest = function () {
   };
 };
 
-export const fileTreeGetResponse = function () {
+export const fileTreeGetResponse = function (status, data) {
   return {
-    type: FILETREE_GET_RESPONSE
+    type: FILETREE_GET_RESPONSE,
+    status,
+    data
   };
 };
 
 export const get = function (roomid, sha) {
-  var apiEndpoint = '/room/' + roomid + '/git/tree/' + sha;
+  var apiEndpoint = '/api/room/' + roomid + '/git/tree/' + sha;
+  console.log('the endpoint is', apiEndpoint);
   return fetchHelper.get({
     request: fileTreeGetRequest,
     response: fileTreeGetResponse
