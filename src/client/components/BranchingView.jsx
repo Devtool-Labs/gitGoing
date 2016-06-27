@@ -38,9 +38,9 @@ export default class BranchingView extends React.Component {
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
+          <a href="/logout"><button type="button">Logout</button></a>
           <button>Back2</button>
           {this.props.branches.map((branchObj) => {
-            console.log('getting inside branch map', branchObj);
             return (
               <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
             )
@@ -50,6 +50,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
+          <a href="/logout"><button type="button">Logout</button></a>
           <button>Back3</button>
           {this.props.commits.map((commitObj, index) => {
             return (
@@ -60,7 +61,10 @@ export default class BranchingView extends React.Component {
       )
     } else {
       return (
-        <div><h1>HELLO WORLD</h1></div>
+        <div>
+          <a href="/logout"><button type="button">Logout</button></a>
+          <div><h1>HELLO WORLD</h1></div>
+        </div>
       )
     } 
   }

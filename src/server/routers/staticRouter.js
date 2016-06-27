@@ -16,23 +16,28 @@ module.exports = function(app, redisClient) {
     .get(function(req, res) {
       req.session.destroy(function(err) {
         if (err) {
-          console.log(err);
         }
         res.clearCookie('connect.sid');
+        console.log('session destroyed - hit line 23');
         res.redirect('/signin');
       });
     });
 
-  router.route('/*')
+  router.route('/*') // all routes not explicity defined
     .get(function (req, res) {
       res.render('index.html');
     });
 
    router.route('/')
-     .get(function (req, res) {
+     .get(isAuthenticated, function (req, res) {
        res.render('index.html');
      });   
 
   app.use('', router);
 };
+
+/*
+res.redirect('/signin');
+res.render('index.html');
+*/
 
