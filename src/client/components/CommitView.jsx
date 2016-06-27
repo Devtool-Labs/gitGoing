@@ -14,7 +14,7 @@ export default class CommitView extends React.Component {
  		{this.props.commit.message.map((commitObj) => {
  			return (
         <div>
-          <a href="/logout"><button type="button">Signout</button></a>
+          <a href="/logout"><button type="button">Sign out</button></a>
  				  <h3>Commit View</h3>
         </div>
  				)
