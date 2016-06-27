@@ -67,7 +67,6 @@ export default class BranchingView extends React.Component {
         <div>
           <a href="/logout"><button type="button">Logout</button></a>
           <button>Back</button>
-          <a href="/logout"><button type="button">Logout</button></a>
           {this.props.fileTree.tree.map(function (fileObj) {
             return (
               <h4>{fileObj.path}</h4>

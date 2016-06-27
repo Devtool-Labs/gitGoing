@@ -19,7 +19,6 @@ export default class RepositoryView extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('this.props = ', this.props);
    event.preventDefault(); 
    this.props.postRoom(this.state.repoName);
   }

@@ -16,6 +16,7 @@ module.exports = function(app, redisClient) {
     .get(function(req, res) {
       req.session.destroy(function(err) {
         if (err) {
+          console.log(err);
         }
         res.clearCookie('connect.sid');
         req.logout();
@@ -29,7 +30,7 @@ module.exports = function(app, redisClient) {
     });
 
    router.route('/')
-     .get(isAuthenticated, function (req, res) {
+     .get(function (req, res) {
        res.render('index.html');
      });   
 
@@ -40,4 +41,3 @@ module.exports = function(app, redisClient) {
 res.redirect('/signin');
 res.render('index.html');
 */
-
