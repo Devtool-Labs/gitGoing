@@ -19,11 +19,12 @@ module.exports = function(app, redisClient) {
           console.log(err);
         }
         res.clearCookie('connect.sid');
+        req.logout();
         res.redirect('/signin');
       });
     });
 
-  router.route('/*')
+  router.route('/*') // all routes not explicity defined
     .get(function (req, res) {
       res.render('index.html');
     });
@@ -36,3 +37,7 @@ module.exports = function(app, redisClient) {
   app.use('', router);
 };
 
+/*
+res.redirect('/signin');
+res.render('index.html');
+*/

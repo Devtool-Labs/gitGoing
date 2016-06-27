@@ -19,6 +19,7 @@ class Signin extends React.Component {
     return (
       <div>
         <h2>Click to signin here:</h2>
+        <h5>signin.jsx</h5>
         <a href="/api/auth/github"><button type="button">Signin</button></a>
       </div>
     );
