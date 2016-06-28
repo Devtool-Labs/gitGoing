@@ -78,8 +78,12 @@ module.exports = function(app, passport, redisClient) {
         sha: req.params.sha
       };
       cache.getFileTree(req.user, path)
-      .then((data) => {res.json(data)});
-    })
+      .then((data) => {
+        var response = JSON.parse(data);
+        response.sha = path.sha;
+        res.json(response);
+      });
+    });
     
   router.route('/room/:roomid/sha/:sha/file/:file')//get a file
     .get(function(req, res) {
