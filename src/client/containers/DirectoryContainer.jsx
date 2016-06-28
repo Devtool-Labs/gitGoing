@@ -18,7 +18,8 @@ const mapStatetoProps = function (state) {
     room,
     ui,
     fileTree,
-    file
+    file,
+    recursiveFileTree
   };
 };
 
