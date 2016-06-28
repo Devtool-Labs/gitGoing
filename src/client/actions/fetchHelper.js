@@ -17,6 +17,7 @@ export const jsonParseError = function(error) {
 }
 
 export const get  = function(actions, endpoint) {
+  
   return dispatcher => {
     dispatcher(actions.request());
     let status;

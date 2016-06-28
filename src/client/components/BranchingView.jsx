@@ -37,7 +37,7 @@ export default class BranchingView extends React.Component {
   }
 
   clickFolder (event) {
-    console.log('inside click folder', event.target.value);
+    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
   }
 
   clickBackButton () {
@@ -84,3 +84,4 @@ export default class BranchingView extends React.Component {
     } 
   }
 }
+
