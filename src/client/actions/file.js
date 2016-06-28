@@ -9,7 +9,7 @@ export const fileGetRequest = function() {
   };
 };
 
-export const FileGetResponse = function(status, data) {
+export const fileGetResponse = function(status, data) {
   return {
     type: FILE_GET_RESPONSE,
     status,
@@ -18,7 +18,8 @@ export const FileGetResponse = function(status, data) {
 };
 
 export const get = function(roomid, sha, file) {
-  var apiEndpoint = `/api/room/${roomid}/sha/${sha}/file/${file]`;
+  var apiEndpoint = `/api/room/${roomid}/sha/${sha}/file/${file}`;
+  console.log('ENDPOINT', apiEndpoint);
   return fetchHelper.get({
     request: fileGetRequest,
     response: fileGetResponse,

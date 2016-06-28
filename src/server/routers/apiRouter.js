@@ -77,15 +77,16 @@ module.exports = function(app, passport, redisClient) {
       .then((data) => {res.json(data)});
     })
     
-  router.route('/room/:roomid/sha/:sha/file/:file')//get a file
+  router.route('/room/:roomid/sha/:sha/file/*')//get a file
     .get(function(req, res) {
+      console.log('HERE');
       const path = {
         roomId: req.params.roomid,
         sha: req.params.sha,
-        file: req.params.file
+        file: req.url.split('/file/')[1]
       };
       cache.getFile(req.user, path)
-      .then((data) => {res.json(data)});
+      .then((data) => {console.log('DATA',data);res.json(data)});
     })
 
   router.route('/auth/github')

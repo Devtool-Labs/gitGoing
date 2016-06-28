@@ -13,8 +13,7 @@ export const showBranches = function(display) {
 export const showCommits = function(display) {
   return {
     type: SHOW_COMMITS,
-    display,
-    branchName
+    display
   }
 }
 

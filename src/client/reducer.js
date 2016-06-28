@@ -7,6 +7,8 @@ import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js
 import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
+import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
+import io from 'socket.io-client';
 
 
 export const debugMode = function(state=false, action) {
@@ -104,6 +106,10 @@ export const ui = function(state= intialUiState, action){
       return Object.assign({}, state, {
         editorText: action.fileContent
       });
+    case FILE_GET_RESPONSE:
+      return Object.assign({}, state, {
+        editorText: atob(action.data.content)
+      })
     default:
       return state;
 
@@ -118,5 +124,27 @@ export const fileTree = function (state={}, action) {
       return state;
   }
 };
+
+export const file = function(state={}, action) {
+  switch (action.type) {
+    case FILE_GET_RESPONSE:
+      return action.data;
+    default:
+      return state;
+  }
+}
+
+export const socket = function(state={}, action) {
+  switch (action.type) {
+    case CONNECT_SOCKET:
+      return (state.connection) 
+        ? state
+        : Object.assign({}, state, {
+          connection : io.connect()
+        })
+    default:
+      return state;
+  }
+}
 
 
