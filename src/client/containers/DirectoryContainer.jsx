@@ -7,6 +7,7 @@ import * as fileTree from '../actions/getFileTree.js';
 import * as fileAction from '../actions/file.js';
 import BranchingView from '../components/BranchingView.jsx';
 import * as debug from '../actions/debugMode.js';
+import * as recursiveFileTree from '../actions/getFileTreeRecursively.js';
 
 const mapStatetoProps = function (state) {
   const { user, branches, commits, room, ui, fileTree, file } = state;
@@ -36,7 +37,10 @@ const mapDispatchtoProps = function(dispatch, ownProps) {
       dispatch(fileTree.get(roomid, sha));
     },
     getFile: function(roomid, sha, file) {
-      dispatch(fileAction.get(roomid, sha, file))
+      dispatch(fileAction.get(roomid, sha, file));
+    },
+    getFileTreeRecursively: function (roomid, sha) {
+      dispatch(recursiveFileTree.get(roomid, sha));
     },
     showBranches: function(display) {
       dispatch(ui.showBranches(display));

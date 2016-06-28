@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
-import bluebird from 'bluebird';
 
 export default class BranchingView extends React.Component {
   constructor(props) {
@@ -16,6 +15,8 @@ export default class BranchingView extends React.Component {
     this.clickCommit = this.clickCommit.bind(this);
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
+    this.clickFolder = this.clickFolder.bind(this);
+    this.clickBackButton = this.clickBackButton.bind(this);
   }
 
   clickBranch() {
@@ -34,20 +35,26 @@ export default class BranchingView extends React.Component {
   clickFile(event) {
     this.props.getFile(this.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
- 
-  componentWillReceiveProps(newProps) {
 
+  clickFolder (event) {
+    console.log('inside click folder', event.target.value);
   }
 
-
+  clickBackButton () {
+    console.log('back button clicked');
+    console.log('sidebarstack is', this.props.ui.sidebarStack);
+    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
+    for (var i = 0; i < 3; i++) {
+      this.props.ui.sidebarStack.pop();
+    }
+    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
+  }
 
   render() {
     var showProperties = this.props.ui.sidebarStack;
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back2</button>
           {this.props.branches.map((branchObj) => {
             return (
               <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
@@ -58,8 +65,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back3</button>
+          <button onClick={this.clickBackButton}>Back</button>
           {this.props.commits.map((commitObj, index) => {
             return (
               <h4 key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</h4>
@@ -71,14 +77,10 @@ export default class BranchingView extends React.Component {
       return (
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back</button>
-          {this.props.fileTree.tree.map((fileObj, index) => {
-            return (
-              <h4 key={index} onClick={this.clickFile} value={fileObj.path}>{fileObj.path}</h4>
-            );
-          })}
+          <button onClick={this.clickBackButton}>Back</button>
+          <FileTreeView {...this.props} sha={this.state.sha} recursiveFileTree={this.props.getFileTreeRecursively} fileTree={this.props.fileTree}/>
         </div>
-      )
+      );
     } 
   }
 }

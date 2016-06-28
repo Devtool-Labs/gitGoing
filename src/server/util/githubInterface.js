@@ -86,7 +86,7 @@ exports.getCommitsData = function(username, repo, path, accessToken) {
 
 exports.getFileTreeData = function (username, repo, path, accessToken) {
   var {sha} = path;
-  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha + '?recursive=3';
+  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha;
   if(accessToken) {
     endpoint += '&access_token=' + accessToken;
   }
