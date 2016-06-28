@@ -13,6 +13,7 @@ export default class BranchingView extends React.Component {
    
     this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
+    this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
   }
 
@@ -20,14 +21,18 @@ export default class BranchingView extends React.Component {
   clickBranch() {
     this.props.showBranches(false);
     this.props.showCommits(true);
-    this.props.showFileStructure(false);
+    this.props.showFileStructure(false, null);
   }
 
   clickCommit (event) {
     this.getFileTree(this.props.location.pathname.split('/')[2], event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);
-    this.props.showFileStructure(true); 
+    this.props.showFileStructure(true, event.target.value); 
+  }
+
+  clickFile(event) {
+    this.props.getFile(this.props.params.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
  
   componentWillReceiveProps(newProps) {
@@ -67,9 +72,9 @@ export default class BranchingView extends React.Component {
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
           <button>Back</button>
-          {this.props.fileTree.tree.map(function (fileObj) {
+          {this.props.fileTree.tree.map((fileObj, index) => {
             return (
-              <h4>{fileObj.path}</h4>
+              <h4 key={index} onClick={this.clickFile} value={fileObj.path}>{fileObj.path}</h4>
             );
           })}
         </div>

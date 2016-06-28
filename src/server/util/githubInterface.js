@@ -39,7 +39,6 @@ exports.getBranchesData = function (username, repo, path, accessToken) {
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
-        console.log(response.status);
         return Promise.reject('There was an error in retrieving your branches from the server.');
       }
       return response.json();
@@ -90,11 +89,10 @@ exports.getFileTreeData = function (username, repo, path, accessToken) {
   if(accessToken) {
     endpoint += '?access_token=' + accessToken;
   }
-  console.log('this is the endpoint in server', endpoint);
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {
-        return Promise.reject('There was an error in getting your files from GitHub.');
+        return Promise.reject('There was an error in getting your files from GitHub. Status:' + response.status);
       }
       return response.json();
     })
@@ -105,9 +103,9 @@ exports.getFileTreeData = function (username, repo, path, accessToken) {
 
 exports.getFileContents = function (username, repo, path, accessToken) {
   var {file, sha} = path
-  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file + '?ref' + sha;
+  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file + '?ref=' + sha;
   if(accessToken) {
-    endpoint += '?access_token=' + accessToken;
+    endpoint += '&access_token=' + accessToken;
   }
   return fetch(endpoint)
     .then(function (response) {
