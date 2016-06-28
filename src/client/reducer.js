@@ -9,6 +9,7 @@ import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from '
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
 import io from 'socket.io-client';
+import { FILETREE_RECURSIVE_GET_REQUEST, FILETREE_RECURSIVE_GET_RESPONSE } from './actions/getFileTreeRecursively.js';
 
 
 export const debugMode = function(state=false, action) {
@@ -89,12 +90,14 @@ export const ui = function(state= intialUiState, action){
       return Object.assign({}, state, {
         sidebarView: action.display,
         sidebarStack: state.sidebarStack.concat([action]),
+        stackLength: state.sidebarStack.length
       });
     case SHOW_COMMITS:
       return Object.assign({}, state, {
         sidebarView: action.display,
         sidebarStack: state.sidebarStack.concat([action]),
-        currentBranchName: action.branchName
+        currentBranchName: action.branchName,
+        stackLength: state.sidebarStack.length
       });
     case SHOW_FILE_STRUCTURE:
       return Object.assign({}, state, {
@@ -104,7 +107,8 @@ export const ui = function(state= intialUiState, action){
       });
     case UPDATE_EDITOR:
       return Object.assign({}, state, {
-        editorText: action.fileContent
+        editorText: action.fileContent,
+        stackLength: state.sidebarStack.length
       });
     case FILE_GET_RESPONSE:
       return Object.assign({}, state, {
@@ -116,14 +120,46 @@ export const ui = function(state= intialUiState, action){
   }
 };
 
-export const fileTree = function (state={}, action) {
+export const fileTree = function (state=[], action) {
   switch (action.type) {
     case FILETREE_GET_RESPONSE:
-      return action.data;
-    default:
+      var returnArr = [];
+      for (var i = 0; i < action.data.tree.length; i++) {
+        action.data.tree[i].absolutePath = action.data.tree[i].path;
+        action.data.tree[i].children = [];
+        returnArr.push(action.data.tree[i]);
+      }
+      return Object.assign({}, state, {
+        fileData: {
+          sha: '',
+          children: returnArr
+        }
+      });
+    case FILETREE_RECURSIVE_GET_RESPONSE:
+      var findNestedFileTree = function (tree, shaValue) {
+        var filterTree = function (recursiveTree) {
+          if (recursiveTree.sha === shaValue) {
+            recursiveTree.children = recursiveTree.children.concat(action.data.tree);
+            for (var i = 0; i < recursiveTree.children.length; i++) {
+              recursiveTree.children[i].absolutePath = recursiveTree.absolutePath.concat('/', recursiveTree.children[i].path);
+              recursiveTree.children[i].children = [];
+            }
+            return;
+          } else {
+            for (var j = 0; j < recursiveTree.children.length; j++) {
+              filterTree(recursiveTree.children[j]);
+            }
+          }
+        };
+        filterTree(tree);
+        return tree;
+      };
+      findNestedFileTree(state.fileData, action.data.sha);
       return state;
-  }
+    default:
+      return state;  
 };
+
 
 export const file = function(state={}, action) {
   switch (action.type) {
