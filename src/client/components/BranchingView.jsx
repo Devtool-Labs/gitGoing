@@ -55,7 +55,7 @@ export default class BranchingView extends React.Component {
   }
 
   clickFolder (event) {
-    console.log('inside click folder', event.target.value);
+    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
   }
 
   clickBackButton () {
@@ -113,6 +113,7 @@ export default class BranchingView extends React.Component {
           {this.props.fileTree.fileData.map((fileObj, index) => {
             console.log('the filetree looks like:', this.props.fileTree);
             console.log('fileobj is', fileObj);
+            console.log('the recursive file tree looks like:', this.props.recursiveFileTree);
             if (fileObj.type === 'tree') {
               return (
                 <div key={index} onClick={this.clickFolder} value={fileObj.sha}>
