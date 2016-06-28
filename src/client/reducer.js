@@ -8,6 +8,7 @@ import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js
 import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE } from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
+import { FILETREE_RECURSIVE_GET_REQUEST, FILETREE_RECURSIVE_GET_RESPONSE } from './actions/getFileTreeRecursively.js';
 
 
 export const debugMode = function(state=false, action) {
@@ -90,17 +91,20 @@ export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] },
     case SHOW_BRANCHES:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
+        stackLength: state.sidebarStack.length
       });
     case SHOW_COMMITS:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
+        stackLength: state.sidebarStack.length
       });
     case SHOW_FILE_STRUCTURE:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
+        stackLength: state.sidebarStack.length
       });
     default:
       return state;
@@ -111,6 +115,25 @@ export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] },
 export const fileTree = function (state={}, action) {
   switch (action.type) {
     case FILETREE_GET_RESPONSE:
+      var returnArr = [];
+      for (var i = 0; i < action.data.tree.length; i++) {
+        action.data.tree[i].children = [];
+        returnArr.push(action.data.tree[i]);
+      }
+      return Object.assign({}, state, {
+        fileData: returnArr
+      });
+    default:
+      return state;
+  }
+};
+
+export const recursiveFileTree = function (state={}, action) {
+  switch (action.type) {
+    case FILETREE_RECURSIVE_GET_RESPONSE:
+      //iterate through the tree
+        //find the object for the one that was clicked
+        //add action.data.tree into the children array
       return action.data;
     default:
       return state;
