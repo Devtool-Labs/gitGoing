@@ -10,7 +10,10 @@ import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTr
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
 import { CONNECT_ROOM_START, CONNECT_ROOM_END } from './actions/socket';
 import io from 'socket.io-client';
+<<<<<<< 8ee444628c5f7d86aaea118e9b5bc66f251a1bb9
 import { ROOMS_GET_REQUEST, ROOMS_GET_RESPONSE } from './actions/getAllRooms.js';
+=======
+>>>>>>> Add children array to each element in fileTree props in branching view
 import { FILETREE_RECURSIVE_GET_REQUEST, FILETREE_RECURSIVE_GET_RESPONSE } from './actions/getFileTreeRecursively.js';
 
 
@@ -98,7 +101,11 @@ export const ui = function(state= intialUiState, action){
       return Object.assign({}, state, {
         sidebarView: action.display,
         sidebarStack: state.sidebarStack.concat([action]),
+<<<<<<< 8ee444628c5f7d86aaea118e9b5bc66f251a1bb9
         currentBranchName: action.branchName
+=======
+        currentBranchName: action.branchName,
+>>>>>>> Add children array to each element in fileTree props in branching view
         stackLength: state.sidebarStack.length
       });
     case SHOW_FILE_STRUCTURE:
