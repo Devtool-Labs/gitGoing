@@ -84,6 +84,7 @@ export default class BranchingView extends React.Component {
           <FileTreeView {...this.props} sha={this.state.sha} recursiveFileTree={this.props.getFileTreeRecursively} fileTree={this.props.fileTree}/>
         </div>
       );
+
     } 
   }
 }
