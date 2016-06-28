@@ -124,23 +124,26 @@ export const fileTree = function (state={}, action) {
     case FILETREE_GET_RESPONSE:
       var returnArr = [];
       for (var i = 0; i < action.data.tree.length; i++) {
+        if (action.data.tree[i].type === 'tree') {
+          action.data.tree[i].absolutePath = action.data.tree[i].path;
+        }
         action.data.tree[i].children = [];
         returnArr.push(action.data.tree[i]);
       }
       return Object.assign({}, state, {
         fileData: returnArr
       });
-    default:
-      return state;
-  }
-};
-
-export const recursiveFileTree = function (state={}, action) {
-  switch (action.type) {
     case FILETREE_RECURSIVE_GET_RESPONSE:
-      //iterate through the tree
-        //find the object for the one that was clicked
-        //add action.data.tree into the children array
+      returnArr = [];
+      for (var j = 0; j < action.data.tree.length; j++) {
+        console.log('in loop, action data is', action.data.tree[j]);
+        var path = action.data.tree[j].absolutePath;
+        //path.concat('/', action.data.tree.path); 
+        action.data.tree[j].children = [];
+        returnArr.push(action.data.tree[j]);
+      }
+      console.log('return array is', returnArr);
+      console.log('state at this point is', state);
       return action.data;
     default:
       return state;
