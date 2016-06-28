@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
-import bluebird from 'bluebird';
 
 export default class BranchingView extends React.Component {
   constructor(props) {
@@ -15,6 +14,8 @@ export default class BranchingView extends React.Component {
     this.clickCommit = this.clickCommit.bind(this);
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
+    this.clickFolder = this.clickFolder.bind(this);
+    this.clickBackButton = this.clickBackButton.bind(this);
   }
 
 
@@ -34,9 +35,23 @@ export default class BranchingView extends React.Component {
   clickFile(event) {
     this.props.getFile(this.props.params.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
+
+  clickFolder (event) {
+    console.log('inside click folder', event.target.value);
+  }
+
+  clickBackButton () {
+    console.log('back button clicked');
+    console.log('sidebarstack is', this.props.ui.sidebarStack);
+    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
+    for (var i = 0; i < 3; i++) {
+      this.props.ui.sidebarStack.pop();
+    }
+    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
+  }
  
   componentWillReceiveProps(newProps) {
-    console.log('newprops are', newProps);
+    console.log('Just received new props!');
   }
 
 
@@ -46,8 +61,6 @@ export default class BranchingView extends React.Component {
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back2</button>
           {this.props.branches.map((branchObj) => {
             return (
               <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
@@ -58,8 +71,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back3</button>
+          <button onClick={this.clickBackButton}>Back</button>
           {this.props.commits.map((commitObj, index) => {
             return (
               <h4 key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</h4>
@@ -68,14 +80,29 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
+      console.log('the filetree looks like:', this.props.fileTree);
       return (
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
-          <button>Back</button>
-          {this.props.fileTree.tree.map((fileObj, index) => {
-            return (
-              <h4 key={index} onClick={this.clickFile} value={fileObj.path}>{fileObj.path}</h4>
-            );
+          <button onClick={this.clickBackButton}>Back</button>
+          {this.props.fileTree.fileData.map((fileObj, index) => {
+            console.log('the filetree looks like:', this.props.fileTree);
+            console.log('fileobj is', fileObj);
+            if (fileObj.type === 'tree') {
+              return (
+                <div key={index} onClick={this.clickFolder} value={fileObj.sha}>
+                  <i value={fileObj.sha} className="fa fa-folder-open" aria-hidden="true"></i>
+                  <h5 value={fileObj.sha}>{fileObj.path}</h5>
+                </div>
+              );
+            } else {
+              return (
+                <div key={index}>
+                  <i className="fa fa-file-code-o" aria-hidden="true"></i>
+                  <h5>{fileObj.path}</h5>
+                </div>
+              ); 
+            }
           })}
         </div>
       )
