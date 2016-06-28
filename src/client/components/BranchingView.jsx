@@ -27,7 +27,7 @@ export default class BranchingView extends React.Component {
     this.getFileTree(this.props.location.pathname.split('/')[2], event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);
-    this.props.showFileStructure(true); 
+    this.props.showFileStructure(true, event.target.value); 
   }
  
   componentWillReceiveProps(newProps) {

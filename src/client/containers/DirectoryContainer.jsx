@@ -39,7 +39,7 @@ const mapDispatchtoProps = function(dispatch) {
     showCommits: function(display) {
       dispatch(ui.showCommits(display));
     },
-    showFileStructure: function(display) {
+    showFileStructure: function(display, commitSha) {
       dispatch(ui.showFileStructure(display));
     },
     debugModeOn: function() {

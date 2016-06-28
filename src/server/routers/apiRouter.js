@@ -41,11 +41,7 @@ module.exports = function(app, passport, redisClient) {
         roomId: req.params.roomid,
       }
       cache.getBranches(req.user, path)
-      .then((data) => {
-        console.log('data is', data);
-        res.json(data)
-      })
-      //.error(err => {console.log('hi');res.json({err: err})});
+      .then((data) => {res.json(data)})
     });
 
   router.route('/room/:roomid/branch/:branch')//get a branch

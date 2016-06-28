@@ -1,4 +1,3 @@
-import { CHANGE_STATE } from './actions/state.js';
 import { DEBUG_MODE_ON, DEBUG_MODE_OFF } from './actions/debugMode.js';
 import { FETCH_ERROR, JSON_PARSE_ERROR } from './actions/fetchHelper.js';
 import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
@@ -6,7 +5,7 @@ import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
 import { BRANCHES_GET_REQUEST, BRANCHES_GET_RESPONSE } from './actions/getBranches.js';
 import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
 import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
-import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE } from './actions/ui.js';
+import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
 
 
@@ -25,15 +24,6 @@ export const debugMode = function(state=false, action) {
     default:
       !state || console.log('ACTION DISPATCHED:', action.type);
       console.log(action);
-      return state;
-  }
-};
-
-export const state = function(state={}, action) {
-  switch (action.type) {
-    case CHANGE_STATE:
-      return action.newState;
-    default:
       return state;
   }
 };
@@ -85,22 +75,34 @@ export const room = function() {
 
 };
 
-export const ui = function(state= { sidebarView: 'branches', sidebarStack: [] }, action){
+var intialUiState = {
+  sidebarView: 'branches',
+  sidebarStack: [],
+  editorText: '',
+}
+
+export const ui = function(state= intialUiState, action){
   switch (action.type) {
     case SHOW_BRANCHES:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
       });
     case SHOW_COMMITS:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
+        currentBranchName: action.branchName
       });
     case SHOW_FILE_STRUCTURE:
       return Object.assign({}, state, {
         sidebarView: action.display,
-        sidebarStack: state.sidebarStack.concat([action])
+        sidebarStack: state.sidebarStack.concat([action]),
+        currentCommitSha: action.commitSha
+      });
+    case UPDATE_EDITOR:
+      return Object.assign({}, state, {
+        editorText: action.fileContent
       });
     default:
       return state;
