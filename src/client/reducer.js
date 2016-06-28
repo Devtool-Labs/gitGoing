@@ -162,6 +162,7 @@ export const fileTree = function (state=[], action) {
   }
 };
 
+
 export const file = function(state={}, action) {
   switch (action.type) {
     case FILE_GET_RESPONSE:

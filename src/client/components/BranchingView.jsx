@@ -66,6 +66,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
+          <a href="/logout"><button type="button">Sign out</button></a>
           <button onClick={this.clickBackButton}>Back</button>
           {this.props.commits.map((commitObj, index) => {
             return (
@@ -75,6 +76,7 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
+      console.log('the filetree looks like:', this.props.fileTree);
       return (
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
