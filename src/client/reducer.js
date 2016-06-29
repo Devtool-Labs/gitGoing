@@ -124,9 +124,7 @@ export const fileTree = function (state={}, action) {
     case FILETREE_GET_RESPONSE:
       var returnArr = [];
       for (var i = 0; i < action.data.tree.length; i++) {
-        if (action.data.tree[i].type === 'tree') {
-          action.data.tree[i].absolutePath = action.data.tree[i].path;
-        }
+        action.data.tree[i].absolutePath = action.data.tree[i].path;
         action.data.tree[i].children = [];
         returnArr.push(action.data.tree[i]);
       }
@@ -134,17 +132,30 @@ export const fileTree = function (state={}, action) {
         fileData: returnArr
       });
     case FILETREE_RECURSIVE_GET_RESPONSE:
-      returnArr = [];
-      for (var j = 0; j < action.data.tree.length; j++) {
-        console.log('in loop, action data is', action.data.tree[j]);
-        var path = action.data.tree[j].absolutePath;
-        //path.concat('/', action.data.tree.path); 
-        action.data.tree[j].children = [];
-        returnArr.push(action.data.tree[j]);
+      var newArray = [];
+      var pickedObj;
+      for (var j = 0; j < state.fileData.length; j++) {
+        if (state.fileData[j].sha === action.data.sha) {
+          pickedObj = state.fileData[j];
+          //concat the local path with the absolute path
+          for (var k = 0; k < action.data.tree.length; k++) {
+            action.data.tree[k].absolutePath = state.fileData[j].absolutePath + '/' + action.data.tree[k].path;
+          }
+          //concat the data obtained with the children array of the parent
+          pickedObj.children.concat(action.data.tree);
+          newArray.concat(pickedObj);
+        } 
+        //push every fileData into the new array
+        newArray.concat(state.fileData[j]);
+        console.log('state of new array is', newArray);
       }
-      console.log('return array is', returnArr);
+      console.log('the picked object is', pickedObj);
+      console.log('return array is', newArray);
       console.log('state at this point is', state);
-      return action.data;
+      console.log('action is', action.data);
+      return Object.assign({}, state, {
+        fileData: newArray
+      });
     default:
       return state;
   }
@@ -157,7 +168,7 @@ export const file = function(state={}, action) {
     default:
       return state;
   }
-}
+};
 
 export const socket = function(state={}, action) {
   switch (action.type) {

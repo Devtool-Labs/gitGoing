@@ -74,12 +74,8 @@ module.exports = function(app, passport, redisClient) {
         sha: req.params.sha
       };
       cache.getFileTree(req.user, path)
-      .then((data) => {
-        var response = JSON.parse(data);
-        response.sha = path.sha;
-        res.json(response);
-      });
-    });
+      .then((data) => {res.json(data)});
+    })
     
   router.route('/room/:roomid/sha/:sha/file/*')//get a file
     .get(function(req, res) {
