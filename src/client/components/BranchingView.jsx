@@ -111,9 +111,6 @@ export default class BranchingView extends React.Component {
           <a href="/logout"><button type="button">Sign out</button></a>
           <button onClick={this.clickBackButton}>Back</button>
           {this.props.fileTree.fileData.map((fileObj, index) => {
-            console.log('the filetree looks like:', this.props.fileTree);
-            console.log('fileobj is', fileObj);
-            console.log('the recursive file tree looks like:', this.props.recursiveFileTree);
             if (fileObj.type === 'tree') {
               return (
                 <div key={index} onClick={this.clickFolder} value={fileObj.sha}>

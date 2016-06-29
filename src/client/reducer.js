@@ -168,7 +168,7 @@ export const file = function(state={}, action) {
     default:
       return state;
   }
-}
+};
 
 export const socket = function(state={}, action) {
   switch (action.type) {
