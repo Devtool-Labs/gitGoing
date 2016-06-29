@@ -4,9 +4,6 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import RoomTableRow from './RoomTableRow.js';
 import fetch from 'isomorphic-fetch';
 
-
-let rooms = [];
-
 export default class RepositoryView extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +27,10 @@ export default class RepositoryView extends React.Component {
     this.setState({ repoName: e.target.value});
   }
 
+  componentWillMount() {
+    this.props.getAllRooms();
+  }
+
   render() {
     return (
       <div>
@@ -43,7 +44,7 @@ export default class RepositoryView extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {rooms.map(function(room, index) {
+            {this.props.allRooms.map(function(room, index) {
               return (
                 <RoomTableRow room={room} key={index}>{ room.roomName }</RoomTableRow>
               );
