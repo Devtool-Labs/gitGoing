@@ -40,64 +40,10 @@ export default class BranchingView extends React.Component {
   clickFolder (event) {
     this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
   }
-
-  clickBackButton () {
-    console.log('back button clicked');
-    console.log('sidebarstack is', this.props.ui.sidebarStack);
-    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
-    for (var i = 0; i < 3; i++) {
-      this.props.ui.sidebarStack.pop();
-    }
-    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
-  }
-
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
-
-  clickBackButton () {
-    console.log('back button clicked');
-    console.log('sidebarstack is', this.props.ui.sidebarStack);
-    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
-    for (var i = 0; i < 3; i++) {
-      this.props.ui.sidebarStack.pop();
-    }
-    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
-  }
-
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
-
-  clickBackButton () {
-    console.log('back button clicked');
-    console.log('sidebarstack is', this.props.ui.sidebarStack);
-    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
-    for (var i = 0; i < 3; i++) {
-      this.props.ui.sidebarStack.pop();
-    }
-    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
-  }
-
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
-
-  clickBackButton () {
-    console.log('back button clicked');
-    console.log('sidebarstack is', this.props.ui.sidebarStack);
-    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
-    for (var i = 0; i < 3; i++) {
-      this.props.ui.sidebarStack.pop();
-    }
-    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
-  }
  
   componentWillReceiveProps(newProps) {
     console.log('Just received new props!');
   }
-
-
 
   render() {
     var showProperties = this.props.ui.sidebarStack;
@@ -125,7 +71,7 @@ export default class BranchingView extends React.Component {
       )
     } else {
       return (
-        <FileTreeView fileTree={this.props.fileTree} getFileTree={this.props.getFileTree} recursiveFileTree={this.props.getFileTreeRecursively} state={this.props.state}/>
+        <FileTreeView {...this.props}/>
       );
     } 
   }
