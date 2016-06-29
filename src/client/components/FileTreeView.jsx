@@ -5,7 +5,6 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 export default class FileTreeView extends React.Component {
   constructor (props) {
     super(props);
-    //this.props.getFileTree(this.props.location.pathname.split('/')[2]);
     console.log('the props inside filetree view are', props);
   }
 
