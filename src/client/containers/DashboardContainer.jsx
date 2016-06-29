@@ -4,12 +4,14 @@ import * as user from '../actions/user.js';
 import { testAPIget, on } from '../actions/debugMode.js';
 import RepositoryView from '../components/RepositoryView.jsx';
 import * as room from '../actions/room.js';
+import * as getAllRooms from '../actions/getAllRooms.js';
 
 const mapStatetoProps = function (state) {
-  const { user, repos, room} = state;
+  const { user, repos, room, allRooms} = state;
   return {
-    user,
-    repos,
+    user: user,
+    repos: repos,
+    allRooms: allRooms,
   };
 };
 
@@ -23,6 +25,9 @@ const mapDispatchtoProps = function (dispatch, ownProps) {
     },
     postRoom: function(reponame){
       dispatch(room.createAndRedirect(reponame))
+    },
+    getAllRooms: function() {
+      dispatch(getAllRooms.get());
     },
     debugModeOn: function() {
       dispatch(on());
