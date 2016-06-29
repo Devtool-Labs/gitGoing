@@ -41,7 +41,6 @@ emitMessage(newValue) {
  };
 
  updateEditor(message) {
- 	console.log('inside update editor');
  	this.setState({textEditorValue: ''+message});
  };
 
