@@ -35,6 +35,19 @@ export default class RepositoryView extends React.Component {
     return (
       <div>
         <a href="/logout"><button type="button">Sign out</button></a>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          {this.props.repos.map( (repoObj, index) => {
+            return (
+              <div key={index}>
+                <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} key={index} value={repoObj.name} />
+                <h3>{repoObj.name}</h3>
+                <h5>{repoObj.description}</h5>
+                <h5>{repoObj.url}</h5>
+              </div>
+            );
+          })}
+          <button onClick={this.handleClick}>Create Editing Room</button>
+        </form>
         <table>
           <thead>
             <tr>
