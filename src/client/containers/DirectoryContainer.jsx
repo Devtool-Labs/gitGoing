@@ -19,7 +19,6 @@ const mapStatetoProps = function (state) {
     ui,
     fileTree,
     file,
-    recursiveFileTree
   };
 };
 

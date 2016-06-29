@@ -49,6 +49,20 @@ export default class BranchingView extends React.Component {
     }
     console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
   }
+
+  clickFolder (event) {
+    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
+  }
+
+  clickBackButton () {
+    console.log('back button clicked');
+    console.log('sidebarstack is', this.props.ui.sidebarStack);
+    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
+    for (var i = 0; i < 3; i++) {
+      this.props.ui.sidebarStack.pop();
+    }
+    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
+  }
  
   componentWillReceiveProps(newProps) {
     console.log('Just received new props!');
@@ -83,9 +97,17 @@ export default class BranchingView extends React.Component {
       console.log('the filetree looks like:', this.props.fileTree);
       return (
         <div>
+<<<<<<< HEAD
           <a href="/logout"><button type="button">Sign out</button></a>
           <button onClick={this.clickBackButton}>Back</button>
           {this.props.fileTree.fileData.map((fileObj, index) => {
+=======
+          <button onClick={this.clickBackButton}>Back</button>
+          {this.props.fileTree.fileData.map((fileObj, index) => {
+            console.log('the filetree looks like:', this.props.fileTree);
+            console.log('fileobj is', fileObj);
+            console.log('the recursive file tree looks like:', this.props.recursiveFileTree);
+>>>>>>> 46a66c7ac72cff4747445043e6dca842eb2621a1
             if (fileObj.type === 'tree') {
               return (
                 <div key={index} onClick={this.clickFolder} value={fileObj.sha}>

@@ -103,7 +103,8 @@ export const ui = function(state= intialUiState, action){
       return Object.assign({}, state, {
         sidebarView: action.display,
         sidebarStack: state.sidebarStack.concat([action]),
-        currentCommitSha: action.commitSha
+        currentCommitSha: action.commitSha,
+        stackLength: state.sidebarStack.length
       });
     case UPDATE_EDITOR:
       return Object.assign({}, state, {
