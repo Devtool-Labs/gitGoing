@@ -28,7 +28,6 @@ export const get  = function(actions, endpoint) {
       })
       .then(response => {
         status = response.status;
-        console.log(response);
         return response.json();
       })
       .then(json => { return dispatcher(actions.response(status, json))})

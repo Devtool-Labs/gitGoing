@@ -6,7 +6,7 @@ import RepositoryView from '../components/RepositoryView.jsx';
 import * as room from '../actions/room.js';
 
 const mapStatetoProps = function (state) {
-  const { user, repos, room} = state;
+  const { user, repos, room } = state;
   return {
     user,
     repos,

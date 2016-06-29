@@ -26,7 +26,6 @@ export const debugMode = function(state=false, action) {
       return state;
     default:
       !state || console.log('ACTION DISPATCHED:', action.type);
-      console.log(action);
       return state;
   }
 };
@@ -119,6 +118,7 @@ export const ui = function(state= intialUiState, action){
 
   }
 };
+
 
 export const fileTree = function (state=[], action) {
   switch (action.type) {

@@ -1,10 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
-<<<<<<< 53020fdbd468c834215b57f47c2ad8c035c41887
 import FileTreeView from './FileTreeView.jsx';
-=======
->>>>>>> Add children array to each element in fileTree props in branching view
 
 export default class BranchingView extends React.Component {
   constructor(props) {
@@ -89,10 +86,7 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
-<<<<<<< 53020fdbd468c834215b57f47c2ad8c035c41887
           <a href="/logout"><button type="button">Sign out</button></a>
-=======
->>>>>>> Add children array to each element in fileTree props in branching view
           <button onClick={this.clickBackButton}>Back</button>
           {this.props.commits.map((commitObj, index) => {
             return (
@@ -102,34 +96,9 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
-      console.log('the filetree looks like:', this.props.fileTree);
       return (
-<<<<<<< 53020fdbd468c834215b57f47c2ad8c035c41887
-        <FileTreeView />
-=======
-        <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button onClick={this.clickBackButton}>Back</button>
-          {this.props.fileTree.fileData.map((fileObj, index) => {
-            if (fileObj.type === 'tree') {
-              return (
-                <div key={index} onClick={this.clickFolder} value={fileObj.sha}>
-                  <i value={fileObj.sha} className="fa fa-folder-open" aria-hidden="true"></i>
-                  <h5 value={fileObj.sha}>{fileObj.path}</h5>
-                </div>
-              );
-            } else {
-              return (
-                <div key={index}>
-                  <i className="fa fa-file-code-o" aria-hidden="true"></i>
-                  <h5>{fileObj.path}</h5>
-                </div>
-              ); 
-            }
-          })}
-        </div>
->>>>>>> Add children array to each element in fileTree props in branching view
-      )
+        <FileTreeView fileTree={this.props.fileTree} getFileTree={this.props.getFileTree} recursiveFileTree={this.props.getFileTreeRecursively} state={this.props.state}/>
+      );
     } 
   }
 }
