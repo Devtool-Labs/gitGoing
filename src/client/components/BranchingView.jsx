@@ -50,10 +50,6 @@ export default class BranchingView extends React.Component {
     }
     console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
   }
-
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
  
   componentWillReceiveProps(newProps) {
     console.log('Just received new props!');
@@ -86,7 +82,6 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
-      console.log('the filetree looks like:', this.props.fileTree);
       return (
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
@@ -94,7 +89,6 @@ export default class BranchingView extends React.Component {
           <FileTreeView {...this.props} sha={this.state.sha} recursiveFileTree={this.props.getFileTreeRecursively} fileTree={this.props.fileTree}/>
         </div>
       );
-
     } 
   }
 }
