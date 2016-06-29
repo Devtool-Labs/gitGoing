@@ -26,7 +26,6 @@ export const debugMode = function(state=false, action) {
       return state;
     default:
       !state || console.log('ACTION DISPATCHED:', action.type);
-      console.log(action);
       return state;
   }
 };
@@ -120,7 +119,8 @@ export const ui = function(state= intialUiState, action){
   }
 };
 
-export const fileTree = function (state={}, action) {
+
+export const fileTree = function (state=[], action) {
   switch (action.type) {
     case FILETREE_GET_RESPONSE:
       var returnArr = [];
@@ -130,36 +130,38 @@ export const fileTree = function (state={}, action) {
         returnArr.push(action.data.tree[i]);
       }
       return Object.assign({}, state, {
-        fileData: returnArr
+        fileData: {
+          sha: '',
+          children: returnArr
+        }
       });
     case FILETREE_RECURSIVE_GET_RESPONSE:
-      var newArray = [];
-      var pickedObj;
-      for (var j = 0; j < state.fileData.length; j++) {
-        if (state.fileData[j].sha === action.data.sha) {
-          pickedObj = state.fileData[j];
-          //concat the local path with the absolute path
-          for (var k = 0; k < action.data.tree.length; k++) {
-            action.data.tree[k].absolutePath = state.fileData[j].absolutePath + '/' + action.data.tree[k].path;
+      var findNestedFileTree = function (tree, shaValue) {
+        var filterTree = function (recursiveTree) {
+          if (recursiveTree.sha === shaValue) {
+            recursiveTree.children = recursiveTree.children.concat(action.data.tree);
+            for (var i = 0; i < recursiveTree.children.length; i++) {
+              recursiveTree.children[i].absolutePath = recursiveTree.absolutePath.concat('/', recursiveTree.children[i].path);
+              recursiveTree.children[i].children = [];
+            }
+            return;
+          } else {
+            for (var j = 0; j < recursiveTree.children.length; j++) {
+              filterTree(recursiveTree.children[j]);
+            }
           }
-          //concat the data obtained with the children array of the parent
-          pickedObj.children.concat(action.data.tree);
-          newArray.concat(pickedObj);
-        } 
-        //push every fileData into the new array
-        newArray.concat(state.fileData[j]);
-        console.log('state of new array is', newArray);
-      }
-      console.log('the picked object is', pickedObj);
-      console.log('return array is', newArray);
-      console.log('state at this point is', state);
-      console.log('action is', action.data);
-      return Object.assign({}, state, {
-        fileData: newArray
-      });
-    default:
+        };
+        filterTree(tree);
+        return tree;
+      };
+      findNestedFileTree(state.fileData, action.data.sha);
       return state;
-  }
+    default:
+      return state;  
+};
+
+
+
 };
 
 export const file = function(state={}, action) {

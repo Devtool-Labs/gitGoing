@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import FileTreeView from './FileTreeView.jsx';
 
 export default class BranchingView extends React.Component {
   constructor(props) {
@@ -94,37 +95,8 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
-      console.log('the filetree looks like:', this.props.fileTree);
       return (
-        <div>
-<<<<<<< HEAD
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button onClick={this.clickBackButton}>Back</button>
-          {this.props.fileTree.fileData.map((fileObj, index) => {
-=======
-          <button onClick={this.clickBackButton}>Back</button>
-          {this.props.fileTree.fileData.map((fileObj, index) => {
-            console.log('the filetree looks like:', this.props.fileTree);
-            console.log('fileobj is', fileObj);
-            console.log('the recursive file tree looks like:', this.props.recursiveFileTree);
->>>>>>> 46a66c7ac72cff4747445043e6dca842eb2621a1
-            if (fileObj.type === 'tree') {
-              return (
-                <div key={index} onClick={this.clickFolder} value={fileObj.sha}>
-                  <i value={fileObj.sha} className="fa fa-folder-open" aria-hidden="true"></i>
-                  <h5 value={fileObj.sha}>{fileObj.path}</h5>
-                </div>
-              );
-            } else {
-              return (
-                <div key={index}>
-                  <i className="fa fa-file-code-o" aria-hidden="true"></i>
-                  <h5>{fileObj.path}</h5>
-                </div>
-              ); 
-            }
-          })}
-        </div>
+        <FileTreeView fileTree={this.props.fileTree} getFileTree={this.props.getFileTree} recursiveFileTree={this.props.getFileTreeRecursively} state={this.props.state}/>
       )
     } 
   }

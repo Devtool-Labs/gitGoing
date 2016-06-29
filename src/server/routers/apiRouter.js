@@ -75,9 +75,7 @@ module.exports = function(app, passport, redisClient) {
       };
       cache.getFileTree(req.user, path)
       .then((data) => {
-        var response = JSON.parse(data);
-        response.sha = path.sha;
-        res.json(response);
+        res.json(data);
       });
     });
     
