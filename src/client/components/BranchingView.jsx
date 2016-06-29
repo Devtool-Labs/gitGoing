@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import FileTreeView from './FileTreeView.jsx';
 
 export default class BranchingView extends React.Component {
   constructor(props) {
@@ -74,7 +75,6 @@ export default class BranchingView extends React.Component {
         </div>
       )
     } else {
-      console.log('the filetree looks like:', this.props.fileTree);
       return (
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>

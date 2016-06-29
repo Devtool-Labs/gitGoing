@@ -27,7 +27,6 @@ export const debugMode = function(state=false, action) {
       return state;
     default:
       !state || console.log('ACTION DISPATCHED:', action.type);
-      console.log(action);
       return state;
   }
 };
@@ -116,7 +115,7 @@ export const ui = function(state= intialUiState, action){
         currentFileSha: action.data.sha,
         currentFilePath: action.data.path,
         editorText: action.data.content
-      })
+      });
     default:
       return state;
   }
@@ -134,7 +133,10 @@ export const fileTree = function (state=[], action) {
         returnArr.push(action.data.tree[i]);
       }
       return Object.assign({}, state, {
-        fileData: returnArr
+        fileData: {
+          sha: '',
+          children: returnArr
+        }
       });
     case FILETREE_RECURSIVE_GET_RESPONSE:
       for (var j = 0; j < state.fileData.length; j++) {
