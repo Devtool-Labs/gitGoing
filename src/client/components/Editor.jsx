@@ -7,6 +7,15 @@ import 'brace/mode/javascript';
 export default class Editor extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      text: props.ui.editorText
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      text: newProps.ui.editorText
+    })
   }
 
   render() {
@@ -14,7 +23,8 @@ export default class Editor extends React.Component {
       <AceEditor
       mode="javascript"
       theme="monokai"
-      value={this.props.ui.editorText} />
+      value={this.state.text} 
+      onEd />
     )
   }
 }

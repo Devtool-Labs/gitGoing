@@ -11,6 +11,7 @@ import TestContainer from './containers/TestContainer.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import DirectoryContainer from './containers/DirectoryContainer.jsx';
 import EditorContainer from './containers/EditorContainer.jsx';
+import EditRoom from './containers/EditRoomContainer.jsx';
 
 
 require('file?name=[name].[ext]!./index.html');
@@ -41,9 +42,9 @@ ReactDom.render((
   <Provider store={store}>
     <Router history={history} component={App}>
        <Route path="/" component={DashboardContainer}/>
-       <Route path="/room/:roomid" component={DirectoryContainer}/>
+       <Route path="/room/:roomid" component={EditRoom}/>
        <Route path="/test" component={TestContainer} />
-       <Route path="/editor" component={EditorContainer} />
+       <Route path="/editor" component={EditRoom} />
     </Router>
   </Provider>
   ), document.getElementById('app'));
