@@ -11,13 +11,15 @@ export default class BranchingView extends React.Component {
     props.getBranches(this.roomid);
     this.props.getCommits(this.roomid);
     this.props.showBranches(true);
-   
+    
+    this.state = {
+      sha: ''
+    };
+
     this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
-    this.clickFolder = this.clickFolder.bind(this);
-    this.clickBackButton = this.clickBackButton.bind(this);
   }
 
   clickBranch() {
@@ -27,6 +29,9 @@ export default class BranchingView extends React.Component {
   }
 
   clickCommit (event) {
+    this.setState({
+      sha: event.target.value
+    });
     this.getFileTree(this.roomid, event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);

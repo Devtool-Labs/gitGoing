@@ -112,9 +112,13 @@ export const ui = function(state= intialUiState, action){
       });
     case FILE_GET_RESPONSE:
       return Object.assign({}, state, {
+<<<<<<< 2d46aab4bf979619cd5183731bb2adf4f43cf1dc
         currentFileSha: action.data.sha,
         currentFilePath: action.data.path,
         editorText: action.data.content
+=======
+        editorText: atob(action.data.content)
+>>>>>>> Implement finding the top layer files of a repo
       });
     default:
       return state;
@@ -140,6 +144,7 @@ export const fileTree = function (state=[], action) {
         }
       });
     case FILETREE_RECURSIVE_GET_RESPONSE:
+<<<<<<< 2d46aab4bf979619cd5183731bb2adf4f43cf1dc
       for (var j = 0; j < state.fileData.length; j++) {
         if (state.fileData[j].sha === action.data.sha) {
           var currentDepth = state.fileData[j].depth;
@@ -158,6 +163,29 @@ export const fileTree = function (state=[], action) {
       return Object.assign({}, state, {
         fileData: _.flatten(state.fileData)
       });
+=======
+      var findNestedFileTree = function (tree, shaValue) {
+        var filterTree = function (recursiveTree) {
+          if (recursiveTree.sha === shaValue) {
+            recursiveTree.children = recursiveTree.children.concat(action.data.tree);
+            for (var i = 0; i < recursiveTree.children.length; i++) {
+              recursiveTree.children[i].absolutePath = recursiveTree.absolutePath.concat('/', recursiveTree.children[i].path);
+              recursiveTree.children[i].children = [];
+            }
+            return;
+          } else {
+            for (var j = 0; j < recursiveTree.children.length; j++) {
+              filterTree(recursiveTree.children[j]);
+            }
+          }
+        };
+        filterTree(tree);
+        return tree;
+      };
+      findNestedFileTree(state.fileData, action.data.sha);
+      console.log('inside reducer, the state is', state);
+      return state;
+>>>>>>> Implement finding the top layer files of a repo
     default:
       return state;  
   }
@@ -175,10 +203,19 @@ export const file = function(state={}, action) {
 
 export const socket = function(state={}, action) {
   switch (action.type) {
+<<<<<<< 2d46aab4bf979619cd5183731bb2adf4f43cf1dc
     case CONNECT_ROOM_START:
       return Object.assign({},state, {
         connection: io()
       });
+=======
+    case CONNECT_SOCKET:
+      return (state.connection) 
+        ? state
+        : Object.assign({}, state, {
+          connection : io.connect()
+        });
+>>>>>>> Implement finding the top layer files of a repo
     default:
       return state;
   }
