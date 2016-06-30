@@ -6,10 +6,9 @@ export default class FileTreeView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      children: []
+      children: [],
+      sidebarStack: this.props.ui.sidebarStack
     };
-    //props.getFileTree(props.roomid, props.sha);
-    console.log('the props inside filetree view are', props);
     this.clickFolder = this.clickFolder.bind(this);
   }
 
@@ -22,6 +21,9 @@ export default class FileTreeView extends React.Component {
 
   clickFolder (event) {
     this.props.getFileTreeRecursively(this.props.roomid, event.target.value);
+    this.setState({
+      children: this.props.fileTree.fileData.children
+    });
   }
 
   render () {
@@ -29,50 +31,23 @@ export default class FileTreeView extends React.Component {
     console.log('filedata is', this.props.fileTree);
     return (
       <div>
-        <a href="/logout"><button type="button">Sign out</button></a>
-        <button>Back</button>
         {this.state.children.map((childObj) => {
-          var setReturns;
-          var findAllChildren = (childObj) => {
-            if (childObj.children.length === 0) {
-              console.log('inside the map function in the if statement');
-              if (childObj.type === 'tree') {
-                setReturns = (
-                  <h4 value={childObj.sha} onClick={this.clickFolder}>{childObj.path}</h4>
-                );
-              } else {
-                setReturns = (
-                  <h4>{childObj.path}</h4>
-                );
-              }
-              return setReturns;
-            } else {
-              console.log('else statement!');
-              for (var i = 0; i < childObj.children.length; i++) {
-                console.log('iterating through the child object array!', childObj.children[i]);
-                findAllChildren(childObj.children[i]);
-                if (childObj.children[i].type === 'tree') {
-                  setReturns = (
-                    <h4 value={childObj.sha} onClick={this.clickFolder}>{childObj.path}</h4>
-                  );
-                } else {
-                  setReturns = (
-                    <h4>{childObj.children[i].path}</h4>
-                  );
-                }
-                return setReturns;
-              }
+          if (childObj.children.length > 0) {
+            for (var i = 0; i < childObj.children.length; i++) {
+              console.log('inside the iteration, child obj is', childObj.children[i]);
+              return (<h4>{childObj.children[i].path}</h4>);
             }
           }
-          findAllChildren(childObj);
-          return setReturns;
+          if (childObj.type === 'tree') {
+            return (<h4 value={childObj.sha} onClick={this.clickFolder}>{childObj.path}</h4>);
+          } else {
+            return (<h5>{childObj.path}</h5>);
+          }
+
         })}
       </div>
     );
-    // var indent = 10;
-    // var indentStyle = {
-    //   'margin-left': indent + 'px'
-    // };
+   
   }
 }
 
