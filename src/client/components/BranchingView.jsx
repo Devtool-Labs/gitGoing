@@ -13,13 +13,15 @@ export default class BranchingView extends React.Component {
     this.props.showBranches(true);
     
     this.state = {
-      sha: ''
+      sha: '',
+      sidebarStack: this.props.ui.sidebarStack
     };
 
     this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
+    this.clickBackButton = this.clickBackButton.bind(this);
   }
 
   clickBranch() {
@@ -42,22 +44,13 @@ export default class BranchingView extends React.Component {
     this.props.getFile(this.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
 
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
-
   clickBackButton () {
-    console.log('back button clicked');
-    console.log('sidebarstack is', this.props.ui.sidebarStack);
-    console.log('the length of the sidebar stack is now', this.props.ui.stackLength);
     for (var i = 0; i < 3; i++) {
       this.props.ui.sidebarStack.pop();
     }
-    console.log('the length of the sidebar stack after looping is', this.props.ui.stackLength);
-  }
- 
-  componentWillReceiveProps(newProps) {
-    console.log('Just received new props!');
+    this.setState({
+      sidebarStack: this.props.ui.sidebarStack
+    });
   }
 
   render() {
