@@ -7,9 +7,10 @@ import * as fileTree from '../actions/getFileTree.js';
 import * as fileAction from '../actions/file.js';
 import EditRoom from '../components/EditRoom.jsx';
 import * as debug from '../actions/debugMode.js';
+import * as recursiveFileTree from '../actions/getFileTreeRecursively.js';
 
 const mapStateToProps = function (state) {
-  const { user, branches, commits, room, ui, fileTree, file } = state;
+  const { user, branches, commits, room, ui, fileTree, file, recursiveFileTree } = state;
   return {
     user,
     branches,
@@ -17,7 +18,8 @@ const mapStateToProps = function (state) {
     room,
     ui,
     fileTree,
-    file
+    file,
+    recursiveFileTree
   };
 };
 
@@ -34,6 +36,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     getFileTree: function (roomid, sha) {
       dispatch(fileTree.get(roomid, sha));
+    },
+    getFileTreeRecursively: function (roomid, sha) {
+      dispatch(recursiveFileTree.get(roomid, sha));
     },
     getFile: function(roomid, sha, file) {
       dispatch(fileAction.get(roomid, sha, file))

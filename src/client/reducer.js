@@ -72,9 +72,7 @@ export const room = function() {
       return action.data;
     default:
       return state;
-
   }
-
 };
 
 var intialUiState = {
@@ -113,10 +111,9 @@ export const ui = function(state= intialUiState, action){
     case FILE_GET_RESPONSE:
       return Object.assign({}, state, {
         editorText: atob(action.data.content)
-      })
+      });
     default:
       return state;
-
   }
 };
 
@@ -156,9 +153,11 @@ export const fileTree = function (state=[], action) {
         return tree;
       };
       findNestedFileTree(state.fileData, action.data.sha);
+      console.log('inside reducer, the state is', state);
       return state;
     default:
       return state;  
+  }
 };
 
 
@@ -178,10 +177,9 @@ export const socket = function(state={}, action) {
         ? state
         : Object.assign({}, state, {
           connection : io.connect()
-        })
+        });
     default:
       return state;
   }
-}
-
+};
 

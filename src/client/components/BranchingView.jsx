@@ -11,13 +11,15 @@ export default class BranchingView extends React.Component {
     props.getBranches(this.roomid);
     this.props.getCommits(this.roomid);
     this.props.showBranches(true);
-   
+    
+    this.state = {
+      sha: ''
+    };
+
     this.clickBranch = this.clickBranch.bind(this);
     this.clickCommit = this.clickCommit.bind(this);
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
-    this.clickFolder = this.clickFolder.bind(this);
-    this.clickBackButton = this.clickBackButton.bind(this);
   }
 
   clickBranch() {
@@ -27,6 +29,9 @@ export default class BranchingView extends React.Component {
   }
 
   clickCommit (event) {
+    this.setState({
+      sha: event.target.value
+    });
     this.getFileTree(this.roomid, event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);
@@ -35,14 +40,6 @@ export default class BranchingView extends React.Component {
 
   clickFile(event) {
     this.props.getFile(this.roomid, this.props.ui.currentCommitSha, event.target.value);
-  }
-
-  clickFolder (event) {
-    this.props.getFileTreeRecursively(this.props.location.pathname.split('/')[2], event.target.value);
-  }
- 
-  componentWillReceiveProps(newProps) {
-    console.log('Just received new props!');
   }
 
   render() {
@@ -71,7 +68,7 @@ export default class BranchingView extends React.Component {
       )
     } else {
       return (
-        <FileTreeView {...this.props}/>
+        <FileTreeView {...this.props} sha={this.state.sha} recursiveFileTree={this.props.getFileTreeRecursively} fileTree={this.props.fileTree}/>
       );
     } 
   }
