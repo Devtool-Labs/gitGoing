@@ -10,6 +10,7 @@ import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTr
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
 import { CONNECT_ROOM_START, CONNECT_ROOM_END } from './actions/socket';
 import io from 'socket.io-client';
+import { ROOMS_GET_REQUEST, ROOMS_GET_RESPONSE } from './actions/getAllRooms.js';
 
 
 export const debugMode = function(state=false, action) {
@@ -134,7 +135,7 @@ export const file = function(state={}, action) {
     default:
       return state;
   }
-}
+};
 
 export const socket = function(state={}, action) {
   switch (action.type) {
@@ -145,6 +146,13 @@ export const socket = function(state={}, action) {
     default:
       return state;
   }
-}
+};
 
-
+export const allRooms = function (state=[], action) {
+  switch (action.type) {
+    case ROOMS_GET_RESPONSE:
+      return action.data;
+    default:
+      return state;
+  }
+};

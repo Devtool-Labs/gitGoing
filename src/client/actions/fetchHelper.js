@@ -1,7 +1,5 @@
 import fetch from 'isomorphic-fetch';
-
 export const FETCH_ERROR = 'ERROR';
-
 export const JSON_PARSE_ERROR = 'JSON_PARSE_ERROR';
 
 export const fetchError = function(error) {

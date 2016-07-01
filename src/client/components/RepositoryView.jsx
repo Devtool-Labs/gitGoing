@@ -1,14 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
+import RoomTableRow from './RoomTableRow.js';
+import fetch from 'isomorphic-fetch';
 
 export default class RepositoryView extends React.Component {
   constructor(props) {
     super(props);
-    //props.debugModeOn();
     props.getUser();
     this.state = {repoName: null};
-
   }
 
   componentWillReceiveProps (newProps) {
@@ -27,10 +27,14 @@ export default class RepositoryView extends React.Component {
     this.setState({ repoName: e.target.value});
   }
 
+  componentWillMount() {
+    this.props.getAllRooms();
+  }
+
   render() {
     return (
       <div>
-      <a href="/logout"><button type="button">Sign out</button></a>
+        <a href="/logout"><button type="button">Sign out</button></a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
             return (
@@ -44,6 +48,22 @@ export default class RepositoryView extends React.Component {
           })}
           <button onClick={this.handleClick}>Create Editing Room</button>
         </form>
+        <table>
+          <thead>
+            <tr>
+              <th>Room Number</th>
+              <th>Room Name</th>
+              <th>Repo Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.allRooms.map(function(room, index) {
+              return (
+                <RoomTableRow room={room} key={index}>{ room.roomName }</RoomTableRow>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   }

@@ -5,9 +5,17 @@ const github = require('../util/githubInterface');
 const redisUtil = require('../util/redisUtil');
 const isAuthenticated = require('../util/authentication.js');
 
+
 module.exports = function(app, passport, redisClient) {
   const rUtil = redisUtil(redisClient);
   const cache = require('../util/cache.js')(redisClient);
+  
+  let rooms = [{roomNumber: 1, roomName: 'Brandon\'s Room', repoName: 'Roam'}, {roomNumber: 2, roomName: 'Symphonic Dust\'s room', repoName: 'Symphonic Dust'}, {roomNumber: 3, roomName: 'Veena\'s Room', repoName: 'Roam'}, {roomNumber: 4, roomName: 'Sean\'s room', repoName: 'u-do-u'}];
+
+  router.route('/rooms/getAll')
+    .get(function(req, res) {
+      res.json(rooms);
+    });
 
   router.route('/repo/:repo/createroom')
     .post(function(req,res) {
