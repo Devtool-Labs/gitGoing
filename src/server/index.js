@@ -15,6 +15,7 @@ const redisClient = redis.createClient();
 const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+require('./config/socketio.js')(io, redisClient);
 
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
@@ -38,14 +39,7 @@ app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
-//Socket IO implementation
-io.on('connection', function (socket){
-  // on message sent from client
-  socket.on('Room1', function (message) {
-    // broadcast message 
-    io.emit('ServerBroadcast', message);
-  });
-});
+
 
 server.listen(port, function(err) {
   if (err) {

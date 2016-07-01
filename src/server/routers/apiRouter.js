@@ -1,5 +1,6 @@
 const router = require('express').Router();
 //const passport = require('passport');
+const atob = require('atob');
 const github = require('../util/githubInterface');
 const redisUtil = require('../util/redisUtil');
 const isAuthenticated = require('../util/authentication.js');
@@ -86,6 +87,19 @@ module.exports = function(app, passport, redisClient) {
       };
       cache.getFile(req.user, path)
       .then((data) => {res.json(data)});
+    })
+    
+  router.route('/room/:roomid/commitsha/:commitSha/filesha/:fileSha/file/*')
+    .post(function(req,res) {
+      const path = {
+        roomid: req.params.roomid,
+        sha: req.params.commitSha, //this is commit sha
+        file: req.url.split('/file/')[1]
+      };
+      rUtil.getFile(path)
+        .then(function(data){
+          res.json({data: data});
+        });
     })
 
   router.route('/auth/github')

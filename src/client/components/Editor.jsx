@@ -18,13 +18,23 @@ export default class Editor extends React.Component {
     })
   }
 
+  commit() {
+    this.props.commit(this.props.roomid,
+      this.props.ui.currentCommitSha,
+      this.props.ui.currentFileSha,
+      this.props.ui.currentFilePath);
+  }
+
   render() {
     return (
-      <AceEditor
-      mode="javascript"
-      theme="monokai"
-      value={this.state.text} 
-      onEd />
+      <div>
+        <AceEditor
+        mode="javascript"
+        theme="monokai"
+        value={this.state.text} 
+        onEd />
+        <button onClick={this.commit.bind(this)}>Commitment</button>
+      </div>
     )
   }
 }

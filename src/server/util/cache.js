@@ -4,20 +4,21 @@ module.exports = function(redisClient) {
   var rUtil = require('./redisUtil')(redisClient);
 
   var checkAndGet = function(params) {
-    var { getRedis, setRedis, getGithub, path, user } = params;
+    var { getRedis, setRedis, getGithub, path, user, isMultiHash } = params;
     return getRedis(path)
     .then(function(value) {
-      if(value === null) { //if no value, make call to github
+      if(value === null  || 
+        ( isMultiHash && (Object.keys(value).length === 0 && value.constructor === Object) )) { //if no value, make call to github
         return rUtil.getRepo(path)
         .then(function(repo) {
           return getGithub(user.username, repo, path, user.accessToken);
         })
         .then(function(data) {
-          setRedis(path, JSON.stringify(data));
+          setRedis(path, data);
           return Promise.resolve(data); 
         });
       } else { //if value, return it
-        return Promise.resolve(JSON.parse(value));
+        return Promise.resolve(value);
       }
     });
   }
@@ -65,7 +66,8 @@ module.exports = function(redisClient) {
         setRedis: rUtil.setFile,
         getGithub: Github.getFileContents,
         user,
-        path
+        path,
+        isMultiHash: true
       });
     }
   }

@@ -1,5 +1,21 @@
 const Promise = require('bluebird');
 
+const stringifyObj = function(obj) {
+  var output= {};
+  for(var key in obj) {
+    output[key] = JSON.stringify(obj[key]);
+  }
+  return output;
+}
+
+const parseObj = function(obj) {
+  var output = {};
+  for(var key in obj) {
+    output[key] = JSON.parse(obj[key]); 
+  }
+  return output;
+}
+
 module.exports = function (redisClient) {
   return {
     setUserToken : function(userId, token) {
@@ -41,10 +57,13 @@ module.exports = function (redisClient) {
       }
     },
     getBranches : function(path) {
-      return redisClient.getAsync('room:' + path.roomId + ':branches');
+      return redisClient.hgetallAsync('room:' + path.roomId + ':branches')
+      .then(function(data) {
+        return Promise.resolve(JSON.parse(data));
+      });
     },
     setBranches : function(path, branches) {
-      return redisClient.setAsync('room:'+path.roomId+':branches', branches);
+      return redisClient.setAsync('room:'+path.roomId+':branches', JSON.stringify(branches));
     },
     getBranch : function(path) {
       return redisClient.getAsync('room:'+ path.roomId+ ':branch:'+ path.branch);
@@ -53,22 +72,31 @@ module.exports = function (redisClient) {
       return redisClient.setAsync('room:'+ path.roomId+ ':branch:'+ path.branch, branch);
     },
     getFileTree : function(path) {
-      return redisClient.getAsync('room:'+ path.roomId+ ':tree:sha:'+ path.sha);
+      return redisClient.getAsync('room:'+ path.roomId+ ':tree:sha:'+ path.sha)
+      .then(function(str){
+        return Promise.resolve(JSON.parse(str));
+      });
     },
     setFileTree : function(path, tree) {
-      return redisClient.setAsync('room:'+ path.roomId+ ':tree:sha:'+ path.sha, tree);
+      return redisClient.setAsync('room:'+ path.roomId+ ':tree:sha:'+ path.sha, JSON.stringify(tree));
     },
     getFile : function(path) {
-      return redisClient.getAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file)
+      return redisClient.hgetallAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file)
+      .then(function(file) {
+        return Promise.resolve(parseObj(file));
+      })
     },
     setFile : function(path, file) {
-      return redisClient.setAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, file)
+      return redisClient.HMSETAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, stringifyObj(file))
     },
     getCommits : function(path) {
-      return redisClient.getAsync('room:'+ path.roomId+ ':commits');
+      return redisClient.getAsync('room:'+ path.roomId+ ':commits')
+      .then(function(data) {
+        return Promise.resolve(JSON.parse(data));
+      });
     },
     setCommits : function(path, commits) {
-      return redisClient.setAsync('room:'+ path.roomId+ ':commits', commits);
+      return redisClient.setAsync('room:'+ path.roomId+ ':commits', JSON.stringify(commits));
     }
   }
 }

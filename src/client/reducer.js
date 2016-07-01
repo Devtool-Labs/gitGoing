@@ -8,6 +8,7 @@ import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
+import { CONNECT_ROOM_START, CONNECT_ROOM_END } from './actions/socket';
 import io from 'socket.io-client';
 
 
@@ -72,9 +73,7 @@ export const room = function() {
       return action.data;
     default:
       return state;
-
   }
-
 };
 
 var intialUiState = {
@@ -108,11 +107,12 @@ export const ui = function(state= intialUiState, action){
       });
     case FILE_GET_RESPONSE:
       return Object.assign({}, state, {
-        editorText: atob(action.data.content)
+        currentFileSha: action.data.sha,
+        currentFilePath: action.data.path,
+        editorText: action.data.content
       })
     default:
       return state;
-
   }
 };
 
@@ -136,12 +136,10 @@ export const file = function(state={}, action) {
 
 export const socket = function(state={}, action) {
   switch (action.type) {
-    case CONNECT_SOCKET:
-      return (state.connection) 
-        ? state
-        : Object.assign({}, state, {
-          connection : io.connect()
-        })
+    case CONNECT_ROOM_START:
+      return Object.assign({},state, {
+        connection: io.connect('/' + action.roomId)
+      });
     default:
       return state;
   }

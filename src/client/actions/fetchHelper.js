@@ -50,7 +50,6 @@ export const post = function(actions, endpoint, data) {
     })
     .then(response => { 
       status= response.status;
-      console.log('STATUS', status);
       return response.json()
     })
     .then(json => {
