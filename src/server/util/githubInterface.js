@@ -90,7 +90,6 @@ exports.getFileTreeData = function (username, repo, path, accessToken) {
   if(accessToken) {
     endpoint += '&access_token=' + accessToken;
   }
-  console.log(endpoint);
   return fetch(endpoint)
     .then(function (response) {
       if (response.status >= 400) {

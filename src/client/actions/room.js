@@ -20,6 +20,12 @@ export const roomGetResponse = function(status, data) {
   };
 };
 
+export const get = function() {
+  return fetchHelper.get(function() {
+
+  });
+}
+
 export const roomPostRequest = function() {
   return {
     type: ROOM_POST_REQUEST
@@ -59,7 +65,6 @@ export const createAndRedirect = function(repoName) {
     })
     .then(json => {
       dispatcher(roomPostResponse(status, json));
-      console.log(push('/room/'+json.roomId));
       return dispatcher(push('/room/'+json.roomId));
     })
   }

@@ -56,6 +56,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     initializeSocket: function(roomId) {
       dispatch(socket.initialize(roomId));
+    },
+    updateFile: function(fileContent) {
+      dispatch(socket.updateFile(fileContent));
+    },
+    listenToOutwardFileUpdate: function(listener) {
+      dispatch(socket.listenToOutwardFileUpdate(listener));
     }
   };
 };

@@ -4,7 +4,7 @@ import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
 import { REPO_GET_REQUEST, REPO_GET_RESPONSE } from './actions/getRepos.js';
 import { BRANCHES_GET_REQUEST, BRANCHES_GET_RESPONSE } from './actions/getBranches.js';
 import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js';
-import { ROOM_POST_RESPONSE, ROOM_POST_REQUEST } from './actions/room.js';
+import { ROOM_POST_RESPONSE, ROOM_GET_RESPONSE } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
@@ -67,9 +67,11 @@ export const commits = function(state=[], action){
   }
 };
 
-export const room = function() {
+export const room = function(state={}, action) {
   switch (action.type) {
-    case ROOM_POST_REQUEST:
+    case ROOM_GET_RESPONSE:
+      return action.data;
+    case ROOM_POST_RESPONSE:
       return action.data;
     default:
       return state;
@@ -138,7 +140,7 @@ export const socket = function(state={}, action) {
   switch (action.type) {
     case CONNECT_ROOM_START:
       return Object.assign({},state, {
-        connection: io.connect('/' + action.roomId)
+        connection: io()
       });
     default:
       return state;

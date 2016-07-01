@@ -33,29 +33,38 @@ export const socketSendFile = function() {
 
 export const initialize = function(roomId) {
   return (dispatcher, getState) => {
-    let state = getState();
-    if(state.socket.connection) {
+    let { socket } = getState();
+    if(socket.connection) {
       dispatcher(alreadyConnected());
       return;
     }
     dispatcher(connectRoomStart(roomId));
-    state = getState();
-    state.socket.connection.on('connection', () => {
+    socket = getState().socket;
+    socket.connection.on('connection', () => {
       dispatcher(connectRoomComplete());
     })
-
   }
 }
 
-export const updatefile = function(fileContents) {
+export const updateFile = function(fileContents) {
   return (dispatcher, getState) => {
     let { socket, ui, room } = getState();
     dispatcher(socketSendFile());
+    console.log(socket.connection);
     socket.connection.emit('updateFile', {
-      room: room.roomid,
+      room: room.roomId,
       path: ui.currentFilePath,
       sha: ui.currentCommitSha,
       content: fileContents
     })
+  }
+}
+
+export const listenToOutwardFileUpdate = function(listener) {
+  return (dispatcher, getState) => {
+    let socket = getState().socket;
+    socket.connection.on('updateFileOutward', function(message) {
+      listener(message);
+    });
   }
 }

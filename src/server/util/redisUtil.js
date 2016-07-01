@@ -89,6 +89,12 @@ module.exports = function (redisClient) {
     setFile : function(path, file) {
       return redisClient.HMSETAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, stringifyObj(file))
     },
+    setFileContent : function(path, fileContent) {
+      return redisClient.hsetAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, 'content', JSON.stringify(fileContent));
+    },
+    getFileContent : function(path) {
+      return redisClient.hgetAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, 'content');
+    },
     getCommits : function(path) {
       return redisClient.getAsync('room:'+ path.roomId+ ':commits')
       .then(function(data) {
@@ -97,6 +103,7 @@ module.exports = function (redisClient) {
     },
     setCommits : function(path, commits) {
       return redisClient.setAsync('room:'+ path.roomId+ ':commits', JSON.stringify(commits));
-    }
+    },
+
   }
 }

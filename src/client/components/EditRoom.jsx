@@ -13,7 +13,11 @@ export default class EditRoom extends React.Component {
     return (
       <div>
         <BranchView {...this.props} roomid={this.props.params.roomid}/>
-        <Editor ui={this.props.ui} commit={this.props.commit} roomid={this.props.params.roomid}/>
+        <Editor ui={this.props.ui} 
+        commit={this.props.commit} 
+        roomid={this.props.params.roomid}
+        updateFile = {this.props.updateFile}
+        listenToOutwardFileUpdate = {this.props.listenToOutwardFileUpdate}/>
       </div>
     )
   }
