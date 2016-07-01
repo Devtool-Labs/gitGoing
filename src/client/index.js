@@ -45,7 +45,7 @@ ReactDom.render((
     <Router history={history} component={App}>
        <Route path="/" component={DashboardContainer}/>
        <Route path="/room/:roomid" component={EditRoom}/>
-       <Route path="/test" component={TestContainer} />
+       <Route path="/test/test" component={TestContainer} />
     </Router>
   </Provider>
   ), document.getElementById('app'));

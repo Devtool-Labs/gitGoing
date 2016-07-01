@@ -20,10 +20,12 @@ export const roomGetResponse = function(status, data) {
   };
 };
 
-export const get = function() {
-  return fetchHelper.get(function() {
-
-  });
+export const get = function(roomId) {
+  let apiEndpoint = '/api/room/' + roomId;
+  return fetchHelper.get({
+    request: roomGetRequest,
+    response: roomGetResponse
+  }, apiEndpoint);
 }
 
 export const roomPostRequest = function() {
