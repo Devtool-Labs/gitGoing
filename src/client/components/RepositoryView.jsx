@@ -13,6 +13,10 @@ export default class RepositoryView extends React.Component {
 
   }
 
+  componentWillMount() {
+    this.props.getAllRooms();
+  }
+
   componentWillReceiveProps (newProps) {
     var username = newProps.user.username;
     if (newProps.user && !newProps.repos.length) {
@@ -31,9 +35,9 @@ export default class RepositoryView extends React.Component {
     this.setState({ repoName: e.target.value});
   }
 
-  componentWillMount() {
-    this.props.getAllRooms();
-  }
+  // createNewRoom() {
+  //   fetch('/api/');             // route, then body
+  // }
 
   render() {
     return (
