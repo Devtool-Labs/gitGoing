@@ -51,18 +51,18 @@ export const create = function(repoName, data) {
 }
 
 export const createAndRedirect = function(repoName) {
-  return (dispatcher, getState) => {
-    dispatcher(roomPostRequest());
-    let status;
-    return fetch('/api/repo/' + repoName + '/createroom', {
+  return (dispatcher, getState) => { // 
+    dispatcher(roomPostRequest()); // DOES NOTHING => REDUCER LOOKS AT ACTION & CHANGES STATE ACCORDINGLY
+    let status; 
+    return fetch('/api/repo/' + repoName + '/createroom', {  // post request  REPO NAME IS UNIQUE INFO -> CREATES A NEW REPO NAME IN REDIS DB
       credentials: 'same-origin',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    .then(response => { 
-      status= response.status;
+    .then(response => {   // THIS IS THE RESPONSE FROM THE ABOVE POST REQUEST
+      status = response.status;
       return response.json()
     })
     .then(json => {

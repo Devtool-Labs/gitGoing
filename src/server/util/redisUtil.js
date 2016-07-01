@@ -37,14 +37,16 @@ module.exports = function (redisClient) {
       });
     },
     setNewRoom : function(userId, repo) {
-      let roomCount;
-      return redisClient.incrbyAsync('ROOMCOUNT', 1)
+      let roomCount;                                  // initiate roomCount
+      return redisClient.incrbyAsync('ROOMCOUNT', 1)  //  key/value => returns a promise to the rCount on next line 
       .then(function(rCount) {
         roomCount = rCount;
-        return redisClient.setAsync('room:' + rCount +':host', userId);
+        console.log('rCount = ', rCount);
+        console.log('roomCount = ', roomCount);
+        return redisClient.setAsync('room:' + rCount +':host', userId); // save data to database => room:{ roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }:host, 7043747
       })
       .then(function() {
-        return redisClient.setAsync('room:' + roomCount +':repo', repo);
+        return redisClient.setAsync('room:' + roomCount +':repo', repo);// save data to database => room:{ roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }:, repoHowsTheWeather
       })
       .then(function() {
         return new Promise.resolve({
@@ -78,7 +80,7 @@ module.exports = function (redisClient) {
       });
     },
     setBranches : function(path, branches) {
-      return redisClient.setAsync('room:'+path.roomId+':branches', JSON.stringify(branches));
+      return redisClient.setAsync('room:' + path.roomId + ':branches', branches);
     },
     getBranch : function(path) {
       return redisClient.getAsync('room:'+ path.roomId+ ':branch:'+ path.branch);
