@@ -21,6 +21,21 @@ module.exports = function (redisClient) {
     setUserToken : function(userId, token) {
       return redisClient.setAsync('user:' + userId + ':token', token );
     },
+    getRoom : function(roomId) {
+      let hostId;
+      return redisClient.getAsync('room:' + roomId +':host')
+      .then(function(h) {
+        hostId = h;
+        return redisClient.getAsync('room:'+ roomId+ ':repo');
+      })
+      .then(function(repo) {
+        return Promise.resolve({
+          roomId,
+          hostId,
+          repo
+        })
+      });
+    },
     setNewRoom : function(userId, repo) {
       let roomCount;
       return redisClient.incrbyAsync('ROOMCOUNT', 1)
@@ -57,7 +72,7 @@ module.exports = function (redisClient) {
       }
     },
     getBranches : function(path) {
-      return redisClient.hgetallAsync('room:' + path.roomId + ':branches')
+      return redisClient.getAsync('room:' + path.roomId + ':branches')
       .then(function(data) {
         return Promise.resolve(JSON.parse(data));
       });

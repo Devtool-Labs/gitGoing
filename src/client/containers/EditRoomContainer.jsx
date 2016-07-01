@@ -8,6 +8,7 @@ import * as fileAction from '../actions/file.js';
 import EditRoom from '../components/EditRoom.jsx';
 import * as debug from '../actions/debugMode.js';
 import * as socket from '../actions/socket.js';
+import * as room from '../actions/room.js';
 
 const mapStateToProps = function (state) {
   const { user, branches, commits, room, ui, fileTree, file } = state;
@@ -38,6 +39,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     getFile: function(roomid, sha, file) {
       dispatch(fileAction.get(roomid, sha, file))
+    },
+    getRoom:  function(roomId) {
+      dispatch(room.get(roomId));
     },
     showBranches: function(display) {
       dispatch(ui.showBranches(display));

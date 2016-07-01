@@ -19,9 +19,6 @@ module.exports = function(app, passport, redisClient) {
 
   router.route('/repo/:repo/createroom')
     .post(function(req,res) {
-      if(req.params.repo === undefined) {
-        return res.json({err: 'repo not defined' });
-      }
       const repo = req.params.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
@@ -42,6 +39,14 @@ module.exports = function(app, passport, redisClient) {
   router.route('/user')
     .get(function(req,res) {
       res.json(req.user);
+    });
+
+  router.route('/room/:roomid')
+    .get(function(req,res) {
+      rUtil.getRoom(req.params.roomid)
+      .then(function(room) {
+        return res.json(room);
+      });
     });
 
   router.route('/room/:roomid/branch')//get all branches
