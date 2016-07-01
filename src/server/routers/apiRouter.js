@@ -16,13 +16,15 @@ module.exports = function(app, passport, redisClient) {
     .get(auth.apiAuthRedirect, function(req, res) {
       res.json(rooms);
     });
+    // hello meow cat
 
   router.route('/repo/:repo/createroom')
     .post(auth.apiAuthRedirect, function(req,res) {
       const repo = req.params.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
-          res.json(room);
+          console.log('room = ', room);      // room = { roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }                       
+          res.json(room);                    // then respond with FrontEnd with { roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }     
         })
         .catch(function (err) {
           res.json('There was an error in creating your room. Please try again.');
