@@ -5,12 +5,11 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-rout
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { debugMode, user, repos, branches, commits, ui, fileTree, file, state, allRooms } from './reducer.js';
+import { debugMode, user, repos, branches, commits, ui, fileTree, file, socket, room, allRooms } from './reducer.js';
 import App from './components/App.jsx';
 import TestContainer from './containers/TestContainer.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
 import DirectoryContainer from './containers/DirectoryContainer.jsx';
-import EditorContainer from './containers/EditorContainer.jsx';
 import EditRoom from './containers/EditRoomContainer.jsx';
 
 
@@ -24,12 +23,14 @@ let store = createStore(
   {
     debugMode,
     user,
+    room,
     repos,
     branches,
     commits,
     ui,
     fileTree,
     file,
+    socket,
     allRooms,
     routing: routerReducer
   }), applyMiddleware(
@@ -45,7 +46,6 @@ ReactDom.render((
        <Route path="/" component={DashboardContainer}/>
        <Route path="/room/:roomid" component={EditRoom}/>
        <Route path="/test" component={TestContainer} />
-       <Route path="/editor" component={EditRoom} />
     </Router>
   </Provider>
   ), document.getElementById('app'));

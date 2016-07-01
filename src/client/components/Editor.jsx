@@ -9,7 +9,8 @@ export default class Editor extends React.Component {
     super(props);
     this.state = {
       text: props.ui.editorText
-    }
+    };
+    props.listenToOutwardFileUpdate(this.outwardEdit.bind(this));
   }
 
   componentWillReceiveProps(newProps) {
@@ -18,13 +19,37 @@ export default class Editor extends React.Component {
     })
   }
 
+  outwardEdit(message) {
+    if(this.props.ui.currentFilePath === message.path &&
+      this.props.ui.currentCommitSha === message.sha &&
+      this.props.roomid === message.room) {
+      this.setState({
+        text: message.content,
+      })
+    }
+  }
+
+  commit() {
+    this.props.commit(this.props.roomid,
+      this.props.ui.currentCommitSha,
+      this.props.ui.currentFileSha,
+      this.props.ui.currentFilePath);
+  }
+
+  change(newValue) {
+    this.props.updateFile(newValue);
+  }
+
   render() {
     return (
-      <AceEditor
-      mode="javascript"
-      theme="monokai"
-      value={this.state.text} 
-      onEd />
+      <div>
+        <AceEditor
+        mode="javascript"
+        theme="monokai"
+        value={this.state.text} 
+        onChange={this.change.bind(this)} />
+        <button onClick={this.commit.bind(this)}>Commitment</button>
+      </div>
     )
   }
 }

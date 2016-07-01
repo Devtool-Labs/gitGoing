@@ -2,6 +2,7 @@
 var Promise = require('bluebird');
 var fetch = require('isomorphic-fetch');
 fetch.Promise = Promise;
+var atob = require('atob');
 
 exports.getUsername = function (accessToken) {
   var userTokenURL = 'https://api.github.com/user?access_token=' + accessToken;
@@ -87,7 +88,7 @@ exports.getFileTreeData = function (username, repo, path, accessToken) {
   var {sha} = path;
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/git/trees/' + sha + '?recursive=3';
   if(accessToken) {
-    endpoint += '?access_token=' + accessToken;
+    endpoint += '&access_token=' + accessToken;
   }
   return fetch(endpoint)
     .then(function (response) {
@@ -115,6 +116,39 @@ exports.getFileContents = function (username, repo, path, accessToken) {
       return response.json();
     })
     .then(function(json) {
+      json.content = atob(json.content);
       return Promise.resolve(json);
     });
 };
+
+exports.pushFile = function(username, repo, path, accessToken) {
+  var {file, sha} = path
+  if(!accessToken) {
+    return Promise.reject('Push file failed, no access token');
+  }
+  var body = {
+    path: file,
+    message,
+    content,
+    sha,
+    branch
+  }
+
+  var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file;
+  return fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body)
+  })
+    .then(function (response) {
+      if (response.status >= 400) {
+        return Promise.reject('There was an error editing file. Status:', response.status);
+      }
+      return response.json();
+    })
+    .then(function(json) {
+      return Promise.resolve(json);
+    })
+}

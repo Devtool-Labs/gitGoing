@@ -24,6 +24,7 @@
     "webpack": "^1.13.1"
   },
   "dependencies": {
+    "atob": "^2.0.3",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "brace": "^0.8.0",

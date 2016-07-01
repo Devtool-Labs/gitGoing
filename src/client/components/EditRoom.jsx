@@ -6,13 +6,18 @@ import Editor from './Editor.jsx';
 export default class EditRoom extends React.Component {
   constructor(props) {
     super(props);
+    this.props.initializeSocket();
   }
 
   render() {
     return (
       <div>
         <BranchView {...this.props} roomid={this.props.params.roomid}/>
-        <Editor ui={this.props.ui} />
+        <Editor ui={this.props.ui} 
+        commit={this.props.commit} 
+        roomid={this.props.params.roomid}
+        updateFile = {this.props.updateFile}
+        listenToOutwardFileUpdate = {this.props.listenToOutwardFileUpdate}/>
       </div>
     )
   }

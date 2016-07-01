@@ -7,6 +7,7 @@ import * as fileTree from '../actions/getFileTree.js';
 import * as fileAction from '../actions/file.js';
 import EditRoom from '../components/EditRoom.jsx';
 import * as debug from '../actions/debugMode.js';
+import * as socket from '../actions/socket.js';
 
 const mapStateToProps = function (state) {
   const { user, branches, commits, room, ui, fileTree, file } = state;
@@ -49,6 +50,18 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     debugModeOn: function() {
       dispatch(debug.on());
+    },
+    commit: function(roomid, currentCommitSha, currentFileSha, currentFilePath) {
+      dispatch(fileAction.commit(roomid, currentCommitSha, currentFileSha, currentFilePath));
+    },
+    initializeSocket: function(roomId) {
+      dispatch(socket.initialize(roomId));
+    },
+    updateFile: function(fileContent) {
+      dispatch(socket.updateFile(fileContent));
+    },
+    listenToOutwardFileUpdate: function(listener) {
+      dispatch(socket.listenToOutwardFileUpdate(listener));
     }
   };
 };
