@@ -50,7 +50,6 @@ export const updateFile = function(fileContents) {
   return (dispatcher, getState) => {
     let { socket, ui, room } = getState();
     dispatcher(socketSendFile());
-    console.log(socket.connection);
     socket.connection.emit('updateFile', {
       room: room.roomId,
       path: ui.currentFilePath,

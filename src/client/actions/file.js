@@ -23,7 +23,6 @@ export const fileGetResponse = function(status, data) {
 export const filePostRequest = function() {
   return {
     type: FILE_POST_REQUEST,
-
   }
 }
 
@@ -43,10 +42,14 @@ export const get = function(roomid, sha, file) {
   }, apiEndpoint)
 }
 
-export const commit = function(roomid, commitSha, fileSha ,file) {
-  var apiEndpoint = `/api/room/${roomid}/commitsha/${commitSha}/filesha/${fileSha}/file/${file}`;
+export const commit = function(path, message) {
+  const {roomId, commitSha, fileSha, filePath, branch } = path;
+  var apiEndpoint = `/api/room/${roomId}/commitsha/${commitSha}/filesha/${fileSha}/file/${filePath}`;
   return fetchHelper.post({
     request: filePostResponse,
     response: filePostResponse
-  }, apiEndpoint, {});
+  }, apiEndpoint, {
+    message,
+    branch
+  });
 }

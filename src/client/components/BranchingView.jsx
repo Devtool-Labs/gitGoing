@@ -24,10 +24,11 @@ export default class BranchingView extends React.Component {
     this.clickBackButton = this.clickBackButton.bind(this);
   }
 
-  clickBranch() {
+  clickBranch(event) {
     this.props.showBranches(false);
-    this.props.showCommits(true);
-    this.props.showFileStructure(false, null);
+    console.log('BRANCH', event.target.value);
+    this.props.showCommits(true, event.target.value);
+    this.props.showFileStructure(false);
   }
 
   clickCommit (event) {
@@ -58,9 +59,9 @@ export default class BranchingView extends React.Component {
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
-          {this.props.branches.map((branchObj) => {
+          {this.props.branches.map((branchObj, index) => {
             return (
-              <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
+              <h3 key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</h3>
             )
            })}
         </div>

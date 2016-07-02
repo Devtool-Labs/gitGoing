@@ -10,10 +10,11 @@ export const showBranches = function(display) {
   }
 }
 
-export const showCommits = function(display) {
+export const showCommits = function(display, branchName) {
   return {
     type: SHOW_COMMITS,
-    display
+    display,
+    branchName
   }
 }
 

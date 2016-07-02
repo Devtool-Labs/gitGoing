@@ -98,8 +98,7 @@ export const ui = function(state= intialUiState, action){
       return Object.assign({}, state, {
         sidebarView: action.display,
         sidebarStack: state.sidebarStack.concat([action]),
-        currentBranchName: action.branchName,
-        stackLength: state.sidebarStack.length
+        currentBranchName: action.branchName || state.currentBranchName
       });
     case SHOW_FILE_STRUCTURE:
       return Object.assign({}, state, {

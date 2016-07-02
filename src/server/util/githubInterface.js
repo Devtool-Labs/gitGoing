@@ -3,6 +3,7 @@ var Promise = require('bluebird');
 var fetch = require('isomorphic-fetch');
 fetch.Promise = Promise;
 var atob = require('atob');
+var btoa = require('btoa');
 
 exports.getUsername = function (accessToken) {
   var userTokenURL = 'https://api.github.com/user?access_token=' + accessToken;
@@ -122,23 +123,24 @@ exports.getFileContents = function (username, repo, path, accessToken) {
     });
 };
 
-exports.pushFile = function(username, repo, path, accessToken) {
-  var {file, sha} = path
+exports.pushFile = function(username, repo, path, accessToken, message, content) {
+  var {file, fileSha, branch} = path
   if(!accessToken) {
     return Promise.reject('Push file failed, no access token');
   }
   var body = {
     path: file,
     message,
-    content,
-    sha,
+    content: btoa(content),
+    sha: fileSha,
     branch
   }
-
   var endpoint = 'https://api.github.com/repos/' + username + '/' + repo + '/contents/' + file;
   return fetch(endpoint, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
+      'Authorization': 'token '+accessToken,
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body)
