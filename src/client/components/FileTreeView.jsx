@@ -11,6 +11,7 @@ export default class FileTreeView extends React.Component {
       clickedBefore: [],
       sidebarStack: this.props.ui.sidebarStack,
     };
+    console.log('props are', this.props);
     this.clickFolder = this.clickFolder.bind(this);
     this.toggleFolder = this.toggleFolder.bind(this);
   }

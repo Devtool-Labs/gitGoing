@@ -11,6 +11,7 @@ import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTr
 import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
 import { CONNECT_ROOM_START, CONNECT_ROOM_END } from './actions/socket';
 import io from 'socket.io-client';
+import { ROOMS_GET_REQUEST, ROOMS_GET_RESPONSE } from './actions/getAllRooms.js';
 import { FILETREE_RECURSIVE_GET_REQUEST, FILETREE_RECURSIVE_GET_RESPONSE } from './actions/getFileTreeRecursively.js';
 
 

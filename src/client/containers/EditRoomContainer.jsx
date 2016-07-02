@@ -21,6 +21,7 @@ const mapStateToProps = function (state) {
     ui,
     fileTree,
     file,
+    recursiveFileTree
   };
 };
 
@@ -73,6 +74,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     }
   };
 };
+
+
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (EditRoom);

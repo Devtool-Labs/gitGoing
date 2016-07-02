@@ -9,7 +9,6 @@ import { debugMode, user, repos, branches, commits, ui, fileTree, file, socket, 
 import App from './components/App.jsx';
 import TestContainer from './containers/TestContainer.jsx';
 import DashboardContainer from './containers/DashboardContainer.jsx';
-import EditorContainer from './containers/EditorContainer.jsx';
 import EditRoom from './containers/EditRoomContainer.jsx';
 
 
