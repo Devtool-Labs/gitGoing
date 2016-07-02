@@ -9,9 +9,10 @@ import EditRoom from '../components/EditRoom.jsx';
 import * as debug from '../actions/debugMode.js';
 import * as socket from '../actions/socket.js';
 import * as room from '../actions/room.js';
+import * as recursiveFileTree from '../actions/getFileTreeRecursively.js';
 
 const mapStateToProps = function (state) {
-  const { user, branches, commits, room, ui, fileTree, file } = state;
+  const { user, branches, commits, room, ui, fileTree, file, recursiveFileTree } = state;
   return {
     user,
     branches,
@@ -19,7 +20,8 @@ const mapStateToProps = function (state) {
     room,
     ui,
     fileTree,
-    file
+    file,
+    recursiveFileTree
   };
 };
 
@@ -37,8 +39,11 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     getFileTree: function (roomid, sha) {
       dispatch(fileTree.get(roomid, sha));
     },
+    getFileTreeRecursively: function (roomid, sha) {
+      dispatch(recursiveFileTree.get(roomid, sha));
+    },
     getFile: function(roomid, sha, file) {
-      dispatch(fileAction.get(roomid, sha, file))
+      dispatch(fileAction.get(roomid, sha, file));
     },
     getRoom:  function(roomId) {
       dispatch(room.get(roomId));
@@ -69,6 +74,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     }
   };
 };
+
+
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (EditRoom);

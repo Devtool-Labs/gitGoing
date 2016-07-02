@@ -19,8 +19,9 @@ export default class RepositoryView extends React.Component {
   }
 
   handleSubmit(event) {
-   event.preventDefault(); 
-   this.props.postRoom(this.state.repoName);
+    console.log('submitted a room', this.state.repoName);
+    event.preventDefault(); 
+    this.props.postRoom(this.state.repoName);
   }
 
   clickRadio(e) {
@@ -46,7 +47,7 @@ export default class RepositoryView extends React.Component {
               </div>
             );
           })}
-          <button onClick={this.handleClick}>Create Editing Room</button>
+          <button>Create Editing Room</button>
         </form>
         <table>
           <thead>
