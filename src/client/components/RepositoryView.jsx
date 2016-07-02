@@ -9,6 +9,8 @@ export default class RepositoryView extends React.Component {
     super(props);
     props.getUser();
     this.state = {repoName: null};
+
+
   }
 
   componentWillReceiveProps (newProps) {
@@ -25,6 +27,7 @@ export default class RepositoryView extends React.Component {
   }
 
   clickRadio(e) {
+    console.log('clicked a button!', e.target.value);
     this.setState({ repoName: e.target.value});
   }
 
@@ -35,19 +38,19 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
-        <a href="/logout"><button type="button">Sign out</button></a>
+        <a href="/logout" className="waves-effect waves-light btn">Sign Out</a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
             return (
               <div key={index}>
-                <input type="radio" name="repo" onClick={this.clickRadio.bind(this)} key={index} value={repoObj.name} />
-                <h3>{repoObj.name}</h3>
-                <h5>{repoObj.description}</h5>
-                <h5>{repoObj.url}</h5>
+                <p>
+                  <input type="radio" id={index} name="group1" key={index} value={repoObj.name} onClick={this.clickRadio.bind(this)}/>
+                  <label htmlFor={index}>{repoObj.name}</label>
+                </p>
               </div>
             );
           })}
-          <button>Create Editing Room</button>
+          <button className="waves-effect waves-light btn">Create Editing Room</button>
         </form>
         <table>
           <thead>
