@@ -7,12 +7,9 @@ import * as fileTree from '../actions/getFileTree.js';
 import * as fileAction from '../actions/file.js';
 import EditRoom from '../components/EditRoom.jsx';
 import * as debug from '../actions/debugMode.js';
-<<<<<<< 2d46aab4bf979619cd5183731bb2adf4f43cf1dc
 import * as socket from '../actions/socket.js';
 import * as room from '../actions/room.js';
-=======
 import * as recursiveFileTree from '../actions/getFileTreeRecursively.js';
->>>>>>> Implement finding the top layer files of a repo
 
 const mapStateToProps = function (state) {
   const { user, branches, commits, room, ui, fileTree, file, recursiveFileTree } = state;
