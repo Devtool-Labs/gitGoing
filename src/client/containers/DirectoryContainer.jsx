@@ -41,8 +41,8 @@ const mapDispatchtoProps = function(dispatch, ownProps) {
     showBranches: function(display) {
       dispatch(ui.showBranches(display));
     },
-    showCommits: function(display) {
-      dispatch(ui.showCommits(display));
+    showCommits: function(display, branchName) {
+      dispatch(ui.showCommits(display, branchName));
     },
     showFileStructure: function(display, commitSha) {
       dispatch(ui.showFileStructure(display, commitSha));

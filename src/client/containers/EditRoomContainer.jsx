@@ -46,8 +46,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     showBranches: function(display) {
       dispatch(ui.showBranches(display));
     },
-    showCommits: function(display) {
-      dispatch(ui.showCommits(display));
+    showCommits: function(display, branchName) {
+      dispatch(ui.showCommits(display, branchName));
     },
     showFileStructure: function(display, commitSha) {
       dispatch(ui.showFileStructure(display, commitSha));
@@ -55,8 +55,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     debugModeOn: function() {
       dispatch(debug.on());
     },
-    commit: function(roomid, currentCommitSha, currentFileSha, currentFilePath) {
-      dispatch(fileAction.commit(roomid, currentCommitSha, currentFileSha, currentFilePath));
+    commit: function(path, commitMessage) {
+      dispatch(fileAction.commit(path, commitMessage));
     },
     initializeSocket: function(roomId) {
       dispatch(socket.initialize(roomId));

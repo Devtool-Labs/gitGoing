@@ -30,10 +30,14 @@ export default class Editor extends React.Component {
   }
 
   commit() {
-    this.props.commit(this.props.roomid,
-      this.props.ui.currentCommitSha,
-      this.props.ui.currentFileSha,
-      this.props.ui.currentFilePath);
+    const path = {
+      roomId: this.props.roomid,
+      commitSha: this.props.ui.currentCommitSha,
+      fileSha: this.props.ui.currentFileSha,
+      filePath: this.props.ui.currentFilePath,
+      branch: this.props.ui.currentBranchName 
+    }
+    this.props.commit(path, 'temp commit message');
   }
 
   change(newValue) {

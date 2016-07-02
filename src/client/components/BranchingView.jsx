@@ -18,10 +18,11 @@ export default class BranchingView extends React.Component {
     this.getFileTree = this.props.getFileTree.bind(this);
   }
 
-  clickBranch() {
+  clickBranch(event) {
     this.props.showBranches(false);
-    this.props.showCommits(true);
-    this.props.showFileStructure(false, null);
+    console.log('BRANCH', event.target.value);
+    this.props.showCommits(true, event.target.value);
+    this.props.showFileStructure(false);
   }
 
   clickCommit (event) {
@@ -48,9 +49,9 @@ export default class BranchingView extends React.Component {
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
           <button>Back2</button>
-          {this.props.branches.map((branchObj) => {
+          {this.props.branches.map((branchObj, index) => {
             return (
-              <h3 onClick={this.clickBranch}>{branchObj.name}</h3>
+              <h3 key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</h3>
             )
            })}
         </div>
@@ -60,7 +61,7 @@ export default class BranchingView extends React.Component {
         <div>
           <a href="/logout"><button type="button">Sign out</button></a>
           <button>Back3</button>
-          {this.props.commits.map((commitObj, index) => {
+          {this.props.commits.map((commitObj,index) => {
             return (
               <h4 key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</h4>
             )

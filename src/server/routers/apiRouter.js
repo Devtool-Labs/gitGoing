@@ -102,21 +102,34 @@ module.exports = function(app, passport, redisClient) {
       .then((data) => {res.json(data)});
     })
     
-  router.route('/room/:roomid/commitsha/:commitSha/filesha/:fileSha/file/*')
+  router.route('/room/:roomid/commitsha/:commitSha/filesha/:fileSha/file/*')//for commits
     .post(function(req,res) {
+      let repo;
+      const message = req.body.message;
+      console.log('MESSAGE', message);
       const path = {
-        roomid: req.params.roomid,
+        roomId: req.params.roomid,
         sha: req.params.commitSha, //this is commit sha
-        file: req.url.split('/file/')[1]
+        fileSha: req.params.fileSha,
+        file: req.url.split('/file/')[1],
+        branch: req.body.branch
       };
-      rUtil.getFile(path)
+      rUtil.getRepo(path)
+        .then(function(r) {
+          repo = r;
+          return rUtil.getFile(path);
+        })
         .then(function(data){
-          res.json({data: data});
+          console.log(data);
+          return github.pushFile(req.user.username, repo, path, req.user.accessToken, message, data);
+        })
+        .then(function(responseJson) {
+          res.json(responseJson);
         });
     })
 
   router.route('/auth/github')
-    .get(passport.authenticate('github', { scope: [ 'user:email' ] }));
+    .get(passport.authenticate('github', { scope: [ 'user:email', 'repo' ] }));
 
   router.route('/auth/github/callback')
     .get(passport.authenticate('github', { failureRedirect: '/signin' }),
@@ -130,7 +143,7 @@ module.exports = function(app, passport, redisClient) {
           username: req.user.profile.username,
           profileUrl: req.user.profile.profileUrl,
           provider: req.user.profile.provider,
-          photos: req.user.profile.photos 
+          photos: req.user.profile.photos
         }
         rUtil.setUserToken(userId, req.user.accessToken);
       }
