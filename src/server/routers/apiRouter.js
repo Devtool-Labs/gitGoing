@@ -106,7 +106,6 @@ module.exports = function(app, passport, redisClient) {
     .post(function(req,res) {
       let repo;
       const message = req.body.message;
-      console.log('MESSAGE', message);
       const path = {
         roomId: req.params.roomid,
         sha: req.params.commitSha, //this is commit sha
@@ -117,10 +116,9 @@ module.exports = function(app, passport, redisClient) {
       rUtil.getRepo(path)
         .then(function(r) {
           repo = r;
-          return rUtil.getFile(path);
+          return rUtil.getFileContent(path);
         })
         .then(function(data){
-          console.log(data);
           return github.pushFile(req.user.username, repo, path, req.user.accessToken, message, data);
         })
         .then(function(responseJson) {

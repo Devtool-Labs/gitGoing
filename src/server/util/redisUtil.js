@@ -108,7 +108,10 @@ module.exports = function (redisClient) {
       return redisClient.hsetAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, 'content', JSON.stringify(fileContent));
     },
     getFileContent : function(path) {
-      return redisClient.hgetAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, 'content');
+      return redisClient.hgetAsync('room:'+ path.roomId+ ':sha:'+ path.sha+ ':'+ path.file, 'content')
+      .then(function(data) {
+        return Promise.resolve(JSON.parse(data));
+      });
     },
     getCommits : function(path) {
       return redisClient.getAsync('room:'+ path.roomId+ ':commits')
