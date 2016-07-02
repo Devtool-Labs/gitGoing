@@ -14,6 +14,7 @@ export default class FileTreeView extends React.Component {
     console.log('props are', this.props);
     this.clickFolder = this.clickFolder.bind(this);
     this.toggleFolder = this.toggleFolder.bind(this);
+    this.clickFile = this.clickFile.bind(this);
   }
 
   componentWillReceiveProps (newProps) {
@@ -21,6 +22,11 @@ export default class FileTreeView extends React.Component {
     this.setState({
       fileData: newProps.fileTree.fileData
     });
+  }
+
+  clickFile(event) {
+    console.log('click file is called', event.target.value);
+    this.props.getFile(this.props.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
 
   clickFolder (event) {
@@ -78,7 +84,7 @@ export default class FileTreeView extends React.Component {
             if (childObj.type === 'tree') {
               return (<p style={styles} value={childObj.sha} onClick={this.clickFolder}>{icon}  {childObj.path}</p>);
             } else {
-              return (<p style={styles}>{childObj.path}</p>);
+              return (<p style={styles} value={childObj.absolutePath} onClick={this.clickFile}>{childObj.path}</p>);
             } 
           }
         })}
