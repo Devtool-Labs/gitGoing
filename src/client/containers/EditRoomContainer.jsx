@@ -19,7 +19,6 @@ const mapStateToProps = function (state) {
     ui,
     fileTree,
     file,
-    recursiveFileTree
   };
 };
 
@@ -41,7 +40,7 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       dispatch(recursiveFileTree.get(roomid, sha));
     },
     getFile: function(roomid, sha, file) {
-      dispatch(fileAction.get(roomid, sha, file))
+      dispatch(fileAction.get(roomid, sha, file));
     },
     showBranches: function(display) {
       dispatch(ui.showBranches(display));

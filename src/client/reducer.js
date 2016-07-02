@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import { DEBUG_MODE_ON, DEBUG_MODE_OFF } from './actions/debugMode.js';
 import { FETCH_ERROR, JSON_PARSE_ERROR } from './actions/fetchHelper.js';
 import { USER_GET_REQUEST, USER_GET_RESPONSE } from './actions/user.js';
@@ -123,43 +124,38 @@ export const fileTree = function (state=[], action) {
     case FILETREE_GET_RESPONSE:
       var returnArr = [];
       for (var i = 0; i < action.data.tree.length; i++) {
+        action.data.tree[i].depth = 0;
+        action.data.tree[i].icon = false;
+        action.data.tree[i].visible = true;
         action.data.tree[i].absolutePath = action.data.tree[i].path;
-        action.data.tree[i].children = [];
         returnArr.push(action.data.tree[i]);
       }
       return Object.assign({}, state, {
-        fileData: {
-          sha: '',
-          children: returnArr
-        }
+        fileData: returnArr
       });
     case FILETREE_RECURSIVE_GET_RESPONSE:
-      var findNestedFileTree = function (tree, shaValue) {
-        var filterTree = function (recursiveTree) {
-          if (recursiveTree.sha === shaValue) {
-            recursiveTree.children = recursiveTree.children.concat(action.data.tree);
-            for (var i = 0; i < recursiveTree.children.length; i++) {
-              recursiveTree.children[i].absolutePath = recursiveTree.absolutePath.concat('/', recursiveTree.children[i].path);
-              recursiveTree.children[i].children = [];
-            }
-            return;
-          } else {
-            for (var j = 0; j < recursiveTree.children.length; j++) {
-              filterTree(recursiveTree.children[j]);
-            }
-          }
-        };
-        filterTree(tree);
-        return tree;
-      };
-      findNestedFileTree(state.fileData, action.data.sha);
-      console.log('inside reducer, the state is', state);
-      return state;
+      for (var j = 0; j < state.fileData.length; j++) {
+        if (state.fileData[j].sha === action.data.sha) {
+          var currentDepth = state.fileData[j].depth;
+          for (var k = 0; k < action.data.tree.length; k++) {
+            action.data.tree[k].depth = currentDepth + 1;
+            action.data.tree[k].icon = false;
+            action.data.tree[k].visible = true;
+            action.data.tree[k].absolutePath = state.fileData[j].absolutePath.concat('/', action.data.tree[k].path);
+          } 
+          state.fileData.splice(j+1, 0, action.data.tree);
+          break;
+        } else {
+          continue;
+        }
+      }
+      return Object.assign({}, state, {
+        fileData: _.flatten(state.fileData)
+      });
     default:
       return state;  
   }
 };
-
 
 export const file = function(state={}, action) {
   switch (action.type) {
