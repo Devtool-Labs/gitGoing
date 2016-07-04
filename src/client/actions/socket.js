@@ -33,16 +33,28 @@ export const socketSendFile = function() {
 
 export const initialize = function(roomId) {
   return (dispatcher, getState) => {
-    let { socket } = getState();
+    let { socket, room } = getState();
     if(socket.connection) {
       dispatcher(alreadyConnected());
       return;
     }
     dispatcher(connectRoomStart(roomId));
     socket = getState().socket;
-    socket.connection.on('connection', () => {
+    socket.connection.on('connect', (sock) => {
+      socket.connection.emit('joinRoom', {
+        roomId
+      })
       dispatcher(connectRoomComplete());
     })
+  }
+}
+
+export const joinRoom = function(roomId) {
+  return (dispatcher, getState) => {
+    let { socket } = getState();
+    socket.connection.emit('joinRoom', {
+      roomId
+    });
   }
 }
 
