@@ -13,12 +13,11 @@ export default class DashboardNotifications extends React.Component {
     }
     if (newProps.user.username && !newProps.allRooms.length) {
       var toastText = 'Welcome, ' + newProps.user.username + '! Pick your repository to get started editing.';
-      Materialize.toast(toastText, 8000, 'rounded');
+      Materialize.toast(toastText, 3000, 'rounded');
     }
   }
 
   render () {
-    console.log('inside render');
     return (
       <div className="notifications"></div>
     );
