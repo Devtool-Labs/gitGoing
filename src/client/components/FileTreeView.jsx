@@ -11,26 +11,22 @@ export default class FileTreeView extends React.Component {
       clickedBefore: [],
       sidebarStack: this.props.ui.sidebarStack,
     };
-    console.log('props are', this.props);
     this.clickFolder = this.clickFolder.bind(this);
     this.toggleFolder = this.toggleFolder.bind(this);
     this.clickFile = this.clickFile.bind(this);
   }
 
   componentWillReceiveProps (newProps) {
-    console.log('newprops are', newProps);
     this.setState({
       fileData: newProps.fileTree.fileData
     });
   }
 
   clickFile(event) {
-    console.log('click file is called', event.target.value);
     this.props.getFile(this.props.roomid, this.props.ui.currentCommitSha, event.target.value);
   }
 
   clickFolder (event) {
-    //if it hasn't been clicked before, do the api call. if it has, leave it alone
     var called = false;
     var clicked = this.state.clickedBefore;
     for (var i = 0; i < clicked.length; i++) {
@@ -74,7 +70,6 @@ export default class FileTreeView extends React.Component {
     return (
       <div>
         {flattened.map((childObj) => {
-          console.log('i am rerendering');
           var styles = {
             'marginLeft': 25 * childObj.depth + 'px',
             'cursor': 'pointer'

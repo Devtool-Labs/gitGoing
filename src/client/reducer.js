@@ -179,6 +179,7 @@ export const file = function(state={}, action) {
 export const socket = function(state={}, action) {
   switch (action.type) {
     case CONNECT_ROOM_START:
+      console.log('from the socket action', action);
       return Object.assign({},state, {
         connection: io()
       });

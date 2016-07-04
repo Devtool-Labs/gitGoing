@@ -22,8 +22,10 @@ export default class RepositoryView extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('submitted a room', this.state.repoName);
     event.preventDefault(); 
+    if (!this.state.repoName) {
+      Materialize.toast('Looks like you forgot to pick a repo! Please make sure you do that so that we can get you the right files.', 8000, 'rounded');
+    }
     this.props.postRoom(this.state.repoName);
   }
 
