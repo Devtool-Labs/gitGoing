@@ -1,6 +1,18 @@
-var isAuthenticated = function(req, res, next) {
-  console.log("req.isAuthenticated() = ", req.isAuthenticated());
-  console.log("inside of isAuthenticated function");
+var authRedirect = function(req, res, next) {
   return req.isAuthenticated() ? next(): res.redirect('/signin');
 }
-module.exports = isAuthenticated;
+
+var apiAuthRedirect = function(req, res, next) {
+  if(req.isAuthenticated()) {
+    return next();
+  }
+  else {
+    res.status = 401;
+    return res.json({
+      error: 'unauthorized'
+    });
+  }
+}
+
+exports.authRedirect = authRedirect;
+exports.apiAuthRedirect = apiAuthRedirect;

@@ -34,11 +34,11 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(`${__dirname}/../../dist/client`));
+app.use('/static', express.static(`${__dirname}/../../dist/client`));
 app.set('views', `${__dirname}/../../dist/client`);
+
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
-
 
 
 server.listen(port, function(err) {
