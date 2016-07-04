@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import RoomTableRow from './RoomTableRow.js';
 import fetch from 'isomorphic-fetch';
+import DashboardNotifications from './DashboardNotifications.jsx';
 
 export default class RepositoryView extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
+        <DashboardNotifications {...this.props}/>
         <a href="/logout" className="waves-effect waves-light btn">Sign Out</a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
