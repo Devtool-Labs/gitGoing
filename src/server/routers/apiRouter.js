@@ -3,7 +3,7 @@ const router = require('express').Router();
 const atob = require('atob');
 const github = require('../util/githubInterface');
 const redisUtil = require('../util/redisUtil');
-const isAuthenticated = require('../util/authentication.js');
+const auth = require('../util/authentication.js');
 
 
 module.exports = function(app, passport, redisClient) {
@@ -13,19 +13,19 @@ module.exports = function(app, passport, redisClient) {
   let rooms = [{roomNumber: 1, roomName: 'Brandon\'s Room', repoName: 'Roam'}, {roomNumber: 2, roomName: 'Symphonic Dust\'s room', repoName: 'Symphonic Dust'}, {roomNumber: 3, roomName: 'Veena\'s Room', repoName: 'Roam'}, {roomNumber: 4, roomName: 'Sean\'s room', repoName: 'u-do-u'}];
 
   router.route('/rooms/getAll')
-    .get(function(req, res) {
+    .get(auth.apiAuthRedirect, function(req, res) {
       res.json(rooms);
     });
 
   router.route('/repo/:repo/createroom')
-    .post(function(req,res) {
+    .post(auth.apiAuthRedirect, function(req,res) {
       const repo = req.params.repo;
       rUtil.setNewRoom(req.user.id, repo)
         .then(function(room) {
           res.json(room);
         })
     })
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       if(req.params.repo === undefined) {
         return res.json({err: 'repo not defined' });
       }
@@ -37,12 +37,12 @@ module.exports = function(app, passport, redisClient) {
     });
 
   router.route('/user')
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       res.json(req.user);
     });
 
   router.route('/room/:roomid')
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       rUtil.getRoom(req.params.roomid)
       .then(function(room) {
         return res.json(room);
@@ -50,7 +50,7 @@ module.exports = function(app, passport, redisClient) {
     });
 
   router.route('/room/:roomid/branch')//get all branches
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       const path = {
         roomId: req.params.roomid,
       }
@@ -59,7 +59,7 @@ module.exports = function(app, passport, redisClient) {
     });
 
   router.route('/room/:roomid/branch/:branch')//get a branch
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       const path = {
         roomId: req.params.roomid,
         branch: req.params.branch
@@ -71,7 +71,7 @@ module.exports = function(app, passport, redisClient) {
     });
 
   router.route('/room/:roomid/commits')//get commits
-    .get(function(req, res) {
+    .get(auth.apiAuthRedirect, function(req, res) {
       const path = {
         roomId: req.params.roomid
       }
@@ -82,7 +82,7 @@ module.exports = function(app, passport, redisClient) {
     });
 
   router.route('/room/:roomid/git/tree/:sha')//get a fileTree
-    .get(function(req,res) {
+    .get(auth.apiAuthRedirect, function(req,res) {
       const path = {
         roomId: req.params.roomid,
         sha: req.params.sha
@@ -94,7 +94,7 @@ module.exports = function(app, passport, redisClient) {
     });
     
   router.route('/room/:roomid/sha/:sha/file/*')//get a file
-    .get(function(req, res) {
+    .get(auth.apiAuthRedirect, function(req, res) {
       const path = {
         roomId: req.params.roomid,
         sha: req.params.sha,
@@ -105,7 +105,7 @@ module.exports = function(app, passport, redisClient) {
     })
     
   router.route('/room/:roomid/commitsha/:commitSha/filesha/:fileSha/file/*')//for commits
-    .post(function(req,res) {
+    .post(auth.apiAuthRedirect, function(req,res) {
       let repo;
       const message = req.body.message;
       const path = {

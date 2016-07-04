@@ -1,15 +1,10 @@
 var router = require('express').Router();
-const isAuthenticated = require('../util/authentication.js');
+const auth = require('../util/authentication.js');
 
 module.exports = function(app, redisClient) {
   router.route('/signin')
     .get(function(req,res) {
-      res.render('./signin.html');
-    });
-
-  router.route('/testapi')
-    .get(function(req,res) {
-      res.json({hey: 'hey'});
+      res.render('signin.html');
     });
 
   router.route('/logout')
@@ -25,12 +20,14 @@ module.exports = function(app, redisClient) {
     });
 
   router.route('/*') // all routes not explicity defined
-    .get(function (req, res) {
+    .get(auth.authRedirect, function (req, res) {
+      console.log('/*')
       res.render('index.html');
     });
 
    router.route('/')
-     .get(function (req, res) {
+     .get(auth.authRedirect, function (req, res) {
+       console.log('/');
        res.render('index.html');
      });   
 
