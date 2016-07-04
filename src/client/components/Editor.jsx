@@ -21,8 +21,7 @@ export default class Editor extends React.Component {
 
   outwardEdit(message) {
     if(this.props.ui.currentFilePath === message.path &&
-      this.props.ui.currentCommitSha === message.sha &&
-      this.props.roomid === message.room) {
+      this.props.ui.currentCommitSha === message.sha) {
       this.setState({
         text: message.content,
       })

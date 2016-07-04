@@ -9,10 +9,10 @@ export default class EditRoom extends React.Component {
     if(!props.room) {
       props.getRoom(props.params.roomid);
     }
-    if(!props.user){
+    if(!props.user) {
       props.getUser();
     }
-    console.log('editroom');
+
     props.getBranches(props.params.roomid);
     props.initializeSocket();
   }

@@ -9,8 +9,9 @@ module.exports = function(socketClient , redisClient) {
         sha: message.sha, //commit sha
         file: message.path
       };
+      console.log(message);
       rUtil.setFileContent(path, message.content)
-      .then(function() {
+      .then(function(exists) {
         socket.broadcast.emit('updateFileOutward', message);
       })
     });
