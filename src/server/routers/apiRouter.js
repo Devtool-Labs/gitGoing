@@ -24,6 +24,9 @@ module.exports = function(app, passport, redisClient) {
         .then(function(room) {
           res.json(room);
         })
+        .catch(function (err) {
+          res.json('There was an error in creating your room. Please try again.');
+        });
     })
     .get(function(req,res) {
       if(req.params.repo === undefined) {
