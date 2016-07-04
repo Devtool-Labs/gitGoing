@@ -40,10 +40,21 @@ export const initialize = function(roomId) {
     }
     dispatcher(connectRoomStart(roomId));
     socket = getState().socket;
-    socket.connection.on('connection', (sock) => {
-      sock.join(room.roomId);
+    socket.connection.on('connect', (sock) => {
+      socket.connection.emit('joinRoom', {
+        roomId
+      })
       dispatcher(connectRoomComplete());
     })
+  }
+}
+
+export const joinRoom = function(roomId) {
+  return (dispatcher, getState) => {
+    let { socket } = getState();
+    socket.connection.emit('joinRoom', {
+      roomId
+    });
   }
 }
 
