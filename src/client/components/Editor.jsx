@@ -52,6 +52,12 @@ export default class Editor extends React.Component {
         value={this.state.text} 
         onChange={this.change.bind(this)} />
         <button onClick={this.commit.bind(this)}>Commitment</button>
+        <div>
+          <ul id="messages"></ul>
+          <form action="">
+            <input id="m" autocomplete="off" /><button>Send</button>
+          </form>
+        </div>
       </div>
     )
   }
