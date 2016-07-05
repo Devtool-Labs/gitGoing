@@ -14,6 +14,8 @@ import EditRoom from './containers/EditRoomContainer.jsx';
 
 require('file?name=[name].[ext]!./index.html');
 require('file?name=[name].[ext]!./signin.html');
+require('file?name=[name].[ext]!./signin.css');
+require('file?name=[name].[ext]!./assets/GitHub-Mark-Light-64px.png');
 
 const middlewareRouter = routerMiddleware(browserHistory);
 
