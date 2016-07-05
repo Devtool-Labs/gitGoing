@@ -41,19 +41,18 @@ export const initialize = function(roomId) {
     dispatcher(connectRoomStart(roomId));
     socket = getState().socket;
     socket.connection.on('connect', (sock) => {
-      socket.connection.emit('joinRoom', {
-        roomId
-      })
       dispatcher(connectRoomComplete());
-    })
+    });
   }
 }
 
-export const joinRoom = function(roomId) {
+export const joinRoom = function(roomId, user) {
   return (dispatcher, getState) => {
     let { socket } = getState();
+    console.log('JIOGjeiowjgoweg');
     socket.connection.emit('joinRoom', {
-      roomId
+      roomId,
+      user
     });
   }
 }
@@ -67,7 +66,7 @@ export const updateFile = function(fileContents) {
       path: ui.currentFilePath,
       sha: ui.currentCommitSha,
       content: fileContents
-    })
+    });
   }
 }
 
@@ -79,3 +78,14 @@ export const listenToOutwardFileUpdate = function(listener) {
     });
   }
 }
+
+//listen for other people entering the room
+export const listenToOutwardJoinRoom = function (listener) {
+  return (dispatcher, getState) => {
+    let socket = getState().socket;
+    socket.connection.on('joinRoomOutward', function (data) {
+      console.log('got the data in the action!', data);
+      listener(data);
+    });
+  }
+};

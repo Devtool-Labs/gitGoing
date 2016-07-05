@@ -3,8 +3,9 @@ module.exports = function(socketClient , redisClient) {
   const rUtil = require('../util/redisUtil')(redisClient);
 
   socketClient.on('connection', function (socket){
-    socket.on('joinRoom', function(message) {
-      socket.join(message.roomId);
+    socket.on('joinRoom', function (data) {
+      socket.join(data.roomId);
+      socket.to(data.roomId).broadcast.emit('joinRoomOutward', data);
     });
 
     socket.on('updateFile', function (message) {
