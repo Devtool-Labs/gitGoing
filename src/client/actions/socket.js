@@ -41,9 +41,6 @@ export const initialize = function(roomId) {
     dispatcher(connectRoomStart(roomId));
     socket = getState().socket;
     socket.connection.on('connect', (sock) => {
-      // socket.connection.emit('joinRoom', {
-      //   roomId
-      // })
       dispatcher(connectRoomComplete());
     });
   }
