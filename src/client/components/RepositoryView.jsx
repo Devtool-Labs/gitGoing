@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import RoomTableRow from './RoomTableRow.js';
 import fetch from 'isomorphic-fetch';
+import DashboardNotifications from './DashboardNotifications.jsx';
 
 export default class RepositoryView extends React.Component {
   constructor(props) {
@@ -21,8 +22,10 @@ export default class RepositoryView extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('submitted a room', this.state.repoName);
     event.preventDefault(); 
+    if (!this.state.repoName) {
+      Materialize.toast('Looks like you forgot to pick a repo! Please make sure you do that so that we can get you the right files.', 8000, 'rounded');
+    }
     this.props.postRoom(this.state.repoName);
   }
 
@@ -38,6 +41,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
+        <DashboardNotifications {...this.props}/>
         <a href="/logout" className="waves-effect waves-light btn">Sign Out</a>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.props.repos.map( (repoObj, index) => {
