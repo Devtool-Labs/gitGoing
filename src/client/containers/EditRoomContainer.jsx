@@ -71,6 +71,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     listenToOutwardFileUpdate: function(listener) {
       dispatch(socket.listenToOutwardFileUpdate(listener));
+    },
+    joinRoom: function (roomId, user) {
+      dispatch(socket.joinRoom(roomId, user));
+    },
+    listenToOutwardJoinRoom: function (listener) {
+      dispatch(socket.listenToOutwardJoinRoom(listener));
     }
   };
 };
