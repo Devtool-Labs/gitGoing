@@ -45,12 +45,7 @@ export const user = function (state={}, action) {
 export const repos = function(state=[], action){
   switch (action.type) {
     case REPO_GET_RESPONSE:
-      if (action.status === 401) {
-        state.push('There was a problem getting your repositories. We have noticed that this can sometimes happen because you are not signed in. Please try logging out and signing back in.');
-        return state;
-      } else {
-        return action.data;
-      }
+      return action.data;
     default:
       return state;
   }
@@ -201,6 +196,13 @@ export const notifications = function (state={queue:[]}, action) {
   switch (action.type) {
     case USER_GET_RESPONSE:
       return state.queue.concat(action.data);
+    case REPO_GET_RESPONSE: 
+      if (action.status === 401) {
+        state.push('There was a problem getting your repositories. We have noticed that this can sometimes happen because you are not signed in. Please try logging out and signing back in.');
+        return state;
+      } else {
+        return action.data;
+      }
     default:
       return state;
   }
