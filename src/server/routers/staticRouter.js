@@ -21,13 +21,11 @@ module.exports = function(app, redisClient) {
 
   router.route('/*') // all routes not explicity defined
     .get(auth.authRedirect, function (req, res) {
-      console.log('/*')
       res.render('index.html');
     });
 
    router.route('/')
      .get(auth.authRedirect, function (req, res) {
-       console.log('/');
        res.render('index.html');
      });   
 
