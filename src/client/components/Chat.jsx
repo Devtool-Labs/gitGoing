@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 
-
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,7 @@ export default class Chat extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var socket = io();
     $('form').submit(function(){
       socket.emit('chat message', $('#m').val());
