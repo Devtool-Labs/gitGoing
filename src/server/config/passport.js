@@ -1,13 +1,13 @@
+const callbackURL = process.env.CALLBACKURL || 'http://localhost:3000/api/auth/github/callback';
+//'http://45.55.146.9:5000/api/auth/github/callback'
 const authKeys = require('../../../apiKeys.js');
 const GithubStrategy = require('passport-github').Strategy;
-// callbackURL: 'http://localhost:3000/api/auth/github/callback'
 module.exports = function(passport) {
   passport.use(new GithubStrategy({
     clientID: authKeys.gitHubAuth.clientID,
     clientSecret: authKeys.gitHubAuth.clientSecret,
-    callbackURL: 'http://45.55.146.9:5000/api/auth/github/callback'
+    callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done){
-
     console.log("clientID", authKeys.gitHubAuth.clientID);
     console.log("clientSecret", authKeys.gitHubAuth.clientSecret)
     done(null, {

@@ -11,7 +11,10 @@ const bluebird =require('bluebird');
 const redis = require('redis');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
-const redisClient = redis.createClient(6379,'redis');
+const redisClient = process.env.CREATECLIENT || redis.createClient();
+// redis.createClient(6379,'redis');
+const sessionStore = process.env.SESSIONSTORE || new RedisStore();
+// new RedisStore({ host: 'redis', port: 6379 })
 const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -23,10 +26,7 @@ app.use(session({
   secret: 'mysecret',
   saveUninitialized: false,
   resave: true,
-  store: new RedisStore({
-  	host: 'redis',
-  	port: 6379
-  }),
+  store: sessionStore,
 }));
 
 require('./config/passport.js')(passport, redisClient);
