@@ -11,7 +11,7 @@ const bluebird =require('bluebird');
 const redis = require('redis');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
-const redisClient = redis.createClient();
+const redisClient = redis.createClient(6379,'redis');
 const bodyParser = require('body-parser');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -45,6 +45,7 @@ io.on('connect', function(socket) {
     io.emit('chat message', msg);
   });
 });
+
 
 server.listen(port, function(err) {
   if (err) {
