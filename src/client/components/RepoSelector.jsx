@@ -1,12 +1,11 @@
 import React from 'react';
 
 export default (props) => {
-  console.log('props inside repo selector are', props);
   if (!props.parentState.repoName) {
     return (
       <div className='row margin-top-xl'>
         <div className='card offset-s4 col s4'>
-          <div className='card-content section scrollspy'>
+          <div className='card-content'>
           <span className='card-title'>Select a repository</span>
           <form onSubmit={props.handleSubmit}>
             {props.repos.map( (repoObj, index) => {

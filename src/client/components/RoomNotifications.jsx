@@ -15,6 +15,10 @@ export default class RoomNotifications extends React.Component {
     props.listenToOutwardLeaveRoom(this.outwardLeaveRoom.bind(this));
   }
 
+  componentDidMount() {
+    Materialize.toast('Welcome to the editing room! Please pick the branch and past commit that you\'d like to work from, and we can get started.', 10000, 'rounded');
+  }
+
   componentWillReceiveProps (newProps) {
     console.log(newProps);
     if (newProps.notifications.queue[newProps.notifications.queue.length - 1].commitStatus === 200) {

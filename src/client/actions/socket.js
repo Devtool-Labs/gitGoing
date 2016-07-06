@@ -104,8 +104,6 @@ export const listenToOutwardLeaveRoom = function (listener) {
   return (dispatcher, getState) => {
     let socket = getState().socket;
     socket.connection.on('leaveRoomOutward', function (person) {
-      console.log('got the data from leaving room', person);
-      console.log('someone else is leaving the room');
       listener(person);
     });
   }
