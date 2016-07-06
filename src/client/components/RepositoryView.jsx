@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import RoomTableRow from './RoomTableRow.js';
 import fetch from 'isomorphic-fetch';
 import DashboardNotifications from './DashboardNotifications.jsx';
+import Navbar from './Navbar.jsx';
 
 export default class RepositoryView extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <DashboardNotifications {...this.props}/>
         <a href="/logout" className="waves-effect waves-light btn">Sign Out</a>
         <form onSubmit={this.handleSubmit.bind(this)}>
