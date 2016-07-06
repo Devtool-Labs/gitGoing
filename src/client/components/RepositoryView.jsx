@@ -43,10 +43,12 @@ export default class RepositoryView extends React.Component {
     return (
       <div>
         <Navbar />
-        <DashboardNotifications {...this.props}/>
-        <RepoSelector repos={this.props.repos} 
-        handleSubmit={this.handleSubmit.bind(this)}
-        clickRadio={this.clickRadio.bind(this)}/>
+        <div className='container'>
+          <DashboardNotifications {...this.props}/>
+          <RepoSelector repos={this.props.repos} 
+          handleSubmit={this.handleSubmit.bind(this)}
+          clickRadio={this.clickRadio.bind(this)}/>
+        </div>
       </div>
     );
   }

@@ -16,3 +16,27 @@ nav {
   color: #333333;
   font-size: 17px;
 }
+
+.margin-top-sm {
+  margin-top: 5px;
+}
+
+.margin-top-m {
+  margin-top: 10px;
+}
+
+.margin-top-l {
+  margin-top: 20px;
+}
+
+.margin-top-xl {
+  margin-top: 30px;
+}
+
+.margin-top-xxl {
+  margin-top: 80px;
+}
+
+.margin-top-xxxl {
+  margin-top: 150px;
+}
