@@ -7,6 +7,10 @@ import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 303dca6cd8b4112b97587bb6835b9f6867062717
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
