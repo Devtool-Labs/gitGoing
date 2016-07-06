@@ -19,7 +19,7 @@ export default (props) => {
                 </div>
               );
             })}
-            <button className="waves-effect waves-light btn margin-top-l disabled">Create Editing Room</button>
+            <button className="waves-effect waves-light btn margin-top-l disabled" disabled>Create Editing Room</button>
           </form>
           </div>
         </div>
