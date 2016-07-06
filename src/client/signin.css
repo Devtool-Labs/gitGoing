@@ -2,9 +2,14 @@ body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;  
 }
 
+nav {
+  height: 59px;
+  line-height: 59px
+}
+
 .gitgoing-name {
-  color: black;
-  font-size: 22px;
+  color: #333333;
+  font-size: 20px;
 }
 
 .nav-content-wrapper {
@@ -13,8 +18,8 @@ body {
 }
 
 .nav-text {
-  color: black;
-  font-size: 18px;
+  color: #333333;
+  font-size: 17px;
 }
 
 .main-banner {

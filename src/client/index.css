@@ -1,0 +1,18 @@
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;  
+}
+
+nav {
+  height: 59px;
+  line-height: 59px;
+}
+
+.nav-gitgoing {
+  color: #333333;
+  font-size: 21px;
+}
+
+.nav-text {
+  color: #333333;
+  font-size: 17px;
+}
