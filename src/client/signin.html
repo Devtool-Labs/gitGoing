@@ -2,14 +2,74 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>GitGoing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" href="static/signin.css">
   </head>
   <body>
-    <div>
-      <h2>Click to signin here:</h2>
-      <h5>signin.html</h5>
-      <a href="/api/auth/github"><button type="button">Signin</button></a>
-      <a href="/logout"><button type="button">Sign out</button></a>
+    <nav>
+      <div class="nav-wrapper grey lighten-3">
+        <div class="container">
+          <a href="#" class="gitgoing-name">GitGoing</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a class="nav-text" href="#about">About</a></li>
+            <li><a class="nav-text" href="/api/auth/github">Sign In</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="main-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col s6 margin-top-xl">
+            <h1>Powerful Code Collaboration</h1>
+            <h5>Real time collaborative code editor with
+              github interation.</h5>
+          </div>
+          <div class="margin-top-xxl offset-s2 col s4">
+            <a href="/api/auth/github" class="margin-top-xxl  grey darken-3 waves-effect waves-light btn-large github-button">
+                <img class="github-signin-img" src='static/GitHub-Mark-Light-64px.png'></img>
+                <div class="github-signin-text">Sign in with Github</div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="margin-top-xl col s5">
+          <div class='card'>
+            <div class='card-content'>
+              <span class='card-title'>See your code</span>
+              <p>Halvah donut caramels. Chocolate bar sesame snaps cake muffin pudding tiramisu icing. Tart sweet lollipop chocolate bar apple pie. Halvah croissant candy dragée toffee.  
+              </p>
+            </div>
+          </div>
+          <div class='card margin-top-xl'>
+            <div class='card-content'>
+              <span class='card-title'>Collaborate seamlessly</span>
+              <p>Halvah donut caramels. Chocolate bar sesame snaps cake muffin pudding tiramisu icing. Tart sweet lollipop chocolate bar apple pie. Halvah croissant candy dragée toffee.  
+              </p>
+            </div>
+          </div>
+          <div class='card'>
+            <div class='card-content margin-top-xl'>
+              <span class='card-title'>Commit Changes</span>
+              <p>Halvah donut caramels. Chocolate bar sesame snaps cake muffin pudding tiramisu icing. Tart sweet lollipop chocolate bar apple pie. Halvah croissant candy dragée toffee.  
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="offset-s1 col s5 margin-top-xxl">
+          <img class="margin-top-xxl" src='http://placekitten.com/550/320'></img>
+        </div>
+      </div>
+    </div>
+    <footer class="page-footer grey lighten-3">
+      <div class="container">
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script> 
   </body>
 </html>

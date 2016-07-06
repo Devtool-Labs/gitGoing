@@ -1,0 +1,73 @@
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;  
+}
+
+.gitgoing-name {
+  color: black;
+  font-size: 22px;
+}
+
+.nav-content-wrapper {
+  width: 950px;
+  margin: 0 auto;
+}
+
+.nav-text {
+  color: black;
+  font-size: 18px;
+}
+
+.main-banner {
+  height: 430px;
+  color: #444444;
+  background: linear-gradient(to bottom right, #9CD6F2, #F3CBF1); 
+}
+
+.margin-top-sm {
+  margin-top: 5px;
+}
+
+.margin-top-m {
+  margin-top: 10px;
+}
+
+.margin-top-l {
+  margin-top: 20px;
+}
+
+.margin-top-xl {
+  margin-top: 30px;
+}
+
+.margin-top-xxl {
+  margin-top: 80px;
+}
+
+.margin-top-xxxl {
+  margin-top: 150px;
+}
+.github-button {
+  width: 221px;
+}
+
+.github-signin-img {
+  height: 35px;
+  width: 35px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+  margin-bottom: 2px;
+}
+
+.github-signin-text {
+  display: inline-block;
+  font-family: 'Helvetica';
+  font-size: 10px;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.max-height {
+  display: inline-block;
+  height: 100%
+}
