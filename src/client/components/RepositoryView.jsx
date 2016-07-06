@@ -39,10 +39,6 @@ export default class RepositoryView extends React.Component {
     this.setState({ repoName: e.target.value});
   }
 
-  // createNewRoom() {
-  //   fetch('/api/');             // route, then body
-  // }
-
   render() {
     return (
       <div>
@@ -51,7 +47,8 @@ export default class RepositoryView extends React.Component {
           <DashboardNotifications {...this.props}/>
           <RepoSelector repos={this.props.repos} 
           handleSubmit={this.handleSubmit.bind(this)}
-          clickRadio={this.clickRadio.bind(this)}/>
+          clickRadio={this.clickRadio.bind(this)}
+          parentState={this.state}/>
         </div>
       </div>
     );
