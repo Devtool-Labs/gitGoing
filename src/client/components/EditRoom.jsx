@@ -5,6 +5,7 @@ import Editor from './Editor.jsx';
 import RoomNotifications from './RoomNotifications.jsx';
 import _ from 'underscore';
 
+
 export default class EditRoom extends React.Component {
   constructor(props) {
     super(props);
@@ -19,13 +20,23 @@ export default class EditRoom extends React.Component {
 
     props.getBranches(props.params.roomid);
     props.initializeSocket(props.params.roomid);
+    console.log('window object?', window);
+    window.onbeforeunload = (event) => {
+      props.leaveRoom.call(this, this.props.params.roomid, this.props.user.username);
+    };
   }
 
   componentWillReceiveProps (newProps) {
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
+    console.log('props are', newProps);
   }
+
+  // componentWillUnmount () {
+  //   console.log('unmounting component');
+  //   this.props.leaveRoom(this.props.params.roomid, this.props.user.username);
+  // }
 
   render() {
     console.log('Editor/render: hello!');

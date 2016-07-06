@@ -8,7 +8,7 @@ import { COMMIT_GET_REQUEST, COMMIT_GET_RESPONSE } from './actions/getCommits.js
 import { ROOM_POST_RESPONSE, ROOM_GET_RESPONSE } from './actions/room.js';
 import { SHOW_BRANCHES, SHOW_COMMITS, SHOW_FILE_STRUCTURE, UPDATE_EDITOR} from './actions/ui.js';
 import { FILETREE_GET_REQUEST, FILETREE_GET_RESPONSE } from './actions/getFileTree.js';
-import { FILE_GET_REQUEST, FILE_GET_RESPONSE } from './actions/file';
+import { FILE_GET_REQUEST, FILE_GET_RESPONSE, FILE_POST_REQUEST, FILE_POST_RESPONSE } from './actions/file.js';
 import { CONNECT_ROOM_START, CONNECT_ROOM_END } from './actions/socket';
 import io from 'socket.io-client';
 import { ROOMS_GET_REQUEST, ROOMS_GET_RESPONSE } from './actions/getAllRooms.js';
@@ -195,14 +195,19 @@ export const allRooms = function (state=[], action) {
 export const notifications = function (state={queue:[]}, action) {
   switch (action.type) {
     case USER_GET_RESPONSE:
-      return state.queue.concat(action.data);
+      return Object.assign({}, state, {
+        queue: state.queue.concat({user: action.status})
+      });
     case REPO_GET_RESPONSE: 
-      if (action.status === 401) {
-        state.push('There was a problem getting your repositories. We have noticed that this can sometimes happen because you are not signed in. Please try logging out and signing back in.');
-        return state;
-      } else {
-        return action.data;
-      }
+      return Object.assign({}, state, {
+        queue: state.queue.concat({repos: action.status})
+      });
+    case FILE_POST_RESPONSE:
+      console.log('file post response action is', action.status);
+      console.log('state now is', state);
+      return Object.assign({}, state, {
+        queue: state.queue.concat({commitStatus: action.status})
+      });
     default:
       return state;
   }

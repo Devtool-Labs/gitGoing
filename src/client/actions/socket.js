@@ -49,7 +49,6 @@ export const initialize = function(roomId) {
 export const joinRoom = function(roomId, user) {
   return (dispatcher, getState) => {
     let { socket } = getState();
-    console.log('JIOGjeiowjgoweg');
     socket.connection.emit('joinRoom', {
       roomId,
       user
@@ -66,6 +65,17 @@ export const updateFile = function(fileContents) {
       path: ui.currentFilePath,
       sha: ui.currentCommitSha,
       content: fileContents
+    });
+  };
+};
+
+export const leaveRoom = function (roomId, user) {
+  return (dispatcher, getState) => {
+    let { socket } = getState();
+    console.log('about to trigger the leaveroom function');
+    socket.connection.emit('leaveRoom', {
+      roomId,
+      user
     });
   }
 }
@@ -84,8 +94,19 @@ export const listenToOutwardJoinRoom = function (listener) {
   return (dispatcher, getState) => {
     let socket = getState().socket;
     socket.connection.on('joinRoomOutward', function (data) {
-      console.log('got the data in the action!', data);
       listener(data);
     });
   }
 };
+
+//listen for other people exiting the room
+export const listenToOutwardLeaveRoom = function (listener) {
+  return (dispatcher, getState) => {
+    let socket = getState().socket;
+    socket.connection.on('leaveRoomOutward', function (person) {
+      console.log('got the data from leaving room', person);
+      console.log('someone else is leaving the room');
+      listener(person);
+    });
+  }
+}
