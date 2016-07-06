@@ -37,23 +37,35 @@ export default class Chat extends React.Component {
   }
 
   componentDidMount() {
+    var imgUrl = 'https://avatars2.githubusercontent.com/u/7043747?v=3&s=460';
     var socket = io();
     $('form').submit(function(){
       socket.emit('chat message', $('#m').val());
       $('#m').val('');
       return false;
     });
+    // socket.on('chat message', function(msg) {
+    //   $('#messages').append($('<li>').text(msg));
+    // });
+    var incremeter = 0;
     socket.on('chat message', function(msg) {
-      $('#messages').append($('<li>').text(msg));
+      incremeter++;
+      $('#messages').append($('<div id="' + incremeter + '">' ));
+      var appendString = '#' + incremeter;
+      console.log('appendString: ', appendString);
+      $(appendString).append($('<img>').attr('src', imgUrl));
+      $(appendString).append('<p id="pTag' + incremeter + '" >');
+      var pTagAppend = '#pTag' + incremeter;
+      $(pTagAppend).html(msg);
     });
   }
 
   render() {
     return (
       <div>
-        <ul id="messages"></ul>
+        <div id="messages"></div>
         <form action="">
-          <input id="m" autocomplete="off" /><button>Send</button>
+          <input id="m" autocomplete="off" /><button className='waves-effect waves-light btn'>Send</button>
         </form>
       </div>
     )
