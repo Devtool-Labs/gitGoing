@@ -28,6 +28,7 @@ export default class EditRoom extends React.Component {
   }
 
   render() {
+    console.log('Editor/render: hello!');
     return (
       <div>
         <RoomNotifications {...this.props}/>

@@ -37,15 +37,43 @@ module.exports = function (redisClient) {
       });
     },
     setNewRoom : function(userId, repo) {
-      let roomCount;
-      return redisClient.incrbyAsync('ROOMCOUNT', 1)
+      let roomCount;                                  // initiate roomCount
+      return redisClient.incrbyAsync('ROOMCOUNT', 1)  //  key/value => returns a promise to the rCount on next line 
       .then(function(rCount) {
         roomCount = rCount;
-        return redisClient.setAsync('room:' + rCount +':host', userId);
+        console.log('rCount = ', rCount);
+        console.log('roomCount = ', roomCount);
+        return redisClient.setAsync('room:' + rCount + ':host', userId); // save data to database => 'room:110:host', 7043747
       })
       .then(function() {
-        return redisClient.setAsync('room:' + roomCount +':repo', repo);
+        return redisClient.setAsync('room:' + roomCount +':repo', repo);// save data to database => room:{ roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }:, repoHowsTheWeather
       })
+      // code for storing rooms by user for a future feature
+      // .then(function() {  
+      //   // Verify user exists in DB
+      //   console.log("'userId:' + userId = ", 'userId:' + userId)
+      //   redisClient.get('userId:' + userId, function(err1, reply) {
+      //     // if user doesn't exist
+      //     if (err1) {
+      //       console.log(err);
+      //       console.log("there is an error");
+      //       // create user
+      //       redisClient.set('userId:' + userId, JSON.stringify([]));
+      //     }
+      //     // get user
+      //     console.log('there is no error');
+      //     redisClient.get('userId:' + userId, function(err2, res) {
+      //       console.log('err2 = ', err2);
+      //       console.log('res = ', res);
+      //       if (err2) {
+      //         console.log('error2');
+      //         return console.log(err2);
+      //       }
+      //       // Add room to user's array
+      //       redisClient.set('userId:' + userId, JSON.stringify(res));
+      //     })
+      //   });
+      // })
       .then(function() {
         return new Promise.resolve({
           roomId : roomCount,
@@ -78,7 +106,7 @@ module.exports = function (redisClient) {
       });
     },
     setBranches : function(path, branches) {
-      return redisClient.setAsync('room:'+path.roomId+':branches', JSON.stringify(branches));
+      return redisClient.setAsync('room:' + path.roomId + ':branches', branches);
     },
     getBranch : function(path) {
       return redisClient.getAsync('room:'+ path.roomId+ ':branch:'+ path.branch);
