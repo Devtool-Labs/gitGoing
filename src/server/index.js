@@ -23,7 +23,10 @@ app.use(session({
   secret: 'mysecret',
   saveUninitialized: false,
   resave: true,
-  store: new RedisStore(),
+  store: new RedisStore({
+  	host: 'redis',
+  	port: 6379
+  }),
 }));
 
 require('./config/passport.js')(passport, redisClient);
