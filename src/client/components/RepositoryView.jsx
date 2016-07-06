@@ -5,7 +5,7 @@ import RoomTableRow from './RoomTableRow.js';
 import fetch from 'isomorphic-fetch';
 import DashboardNotifications from './DashboardNotifications.jsx';
 import Navbar from './Navbar.jsx';
-
+import RepoSelector from './RepoSelector.jsx';
 export default class RepositoryView extends React.Component {
   constructor(props) {
     super(props);
@@ -44,36 +44,9 @@ export default class RepositoryView extends React.Component {
       <div>
         <Navbar />
         <DashboardNotifications {...this.props}/>
-        <a href="/logout" className="waves-effect waves-light btn">Sign Out</a>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          {this.props.repos.map( (repoObj, index) => {
-            return (
-              <div key={index}>
-                <p>
-                  <input type="radio" id={index} name="group1" key={index} value={repoObj.name} onClick={this.clickRadio.bind(this)}/>
-                  <label htmlFor={index}>{repoObj.name}</label>
-                </p>
-              </div>
-            );
-          })}
-          <button className="waves-effect waves-light btn">Create Editing Room</button>
-        </form>
-        <table>
-          <thead>
-            <tr>
-              <th>Room Number</th>
-              <th>Room Name</th>
-              <th>Repo Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.allRooms.map(function(room, index) {
-              return (
-                <RoomTableRow room={room} key={index}>{ room.roomName }</RoomTableRow>
-              );
-            })}
-          </tbody>
-        </table>
+        <RepoSelector repos={this.props.repos} 
+        handleSubmit={this.handleSubmit.bind(this)}
+        clickRadio={this.clickRadio.bind(this)}/>
       </div>
     );
   }
