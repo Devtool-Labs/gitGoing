@@ -26,8 +26,8 @@ export default class BranchingView extends React.Component {
 
   clickBranch(event) {
     this.props.showBranches(false);
-    console.log('BRANCH', event.target.value);
-    this.props.showCommits(true, event.target.value);
+    console.log('BRANCH', event.target.value.name);
+    this.props.showCommits(true, event.target.value.name);
     this.props.showFileStructure(false);
   }
 
@@ -65,7 +65,7 @@ export default class BranchingView extends React.Component {
         <div>
           {this.props.branches.map((branchObj, index) => {
             return (
-              <h3 key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</h3>
+              <h3 key={index} onClick={this.clickBranch} value={branchObj}>{branchObj.name}</h3>
             )
            })}
         </div>
