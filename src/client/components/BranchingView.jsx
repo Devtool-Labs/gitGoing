@@ -14,7 +14,8 @@ export default class BranchingView extends React.Component {
     
     this.state = {
       sha: '',
-      sidebarStack: this.props.ui.sidebarStack
+      sidebarStack: this.props.ui.sidebarStack,
+      currentBranchCommits: [] 
     };
 
     this.clickBranch = this.clickBranch.bind(this);
@@ -26,9 +27,30 @@ export default class BranchingView extends React.Component {
 
   clickBranch(event) {
     this.props.showBranches(false);
-    console.log('BRANCH', event.target.value);
-    this.props.showCommits(true, event.target.value);
+    console.log('BRANCH', event.target.value.name);
+    this.props.showCommits(true, event.target.value.name);
     this.props.showFileStructure(false);
+    var theSha = event.target.value.commit.sha;
+    var commits = this.props.commits;
+    var returnArr = [];
+    for (var i = 0; i < commits.length; i++) {
+      console.log('return array is now', returnArr, 'current commit sha is', commits[i].sha, 'and the sha is', theSha);
+      if (commits[i].sha === theSha) {
+        console.log('>>>>>>>>>>>>>>FOUND THE SHA<<<<<<<<<<<<<<<<<<<<');
+        // if (commits[i].parents.length === 0) {
+        //   continue;
+        // } else if (commits[i].parents.length === 1) {
+        //   returnArr.push(commits[i]);
+        //   theSha = commits[i].parents[0].sha;
+        // } else {
+        //   returnArr.push(commits[i]);
+        //   break;
+        // }
+      } 
+    }
+    this.setState({
+      currentBranchCommits: returnArr
+    });
   }
 
   clickCommit (event) {
@@ -59,6 +81,7 @@ export default class BranchingView extends React.Component {
   }
 
   render() {
+    console.log('inside render, state for commits is', this.state);
     var showProperties = this.props.ui.sidebarStack;
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
@@ -68,7 +91,7 @@ export default class BranchingView extends React.Component {
               <div>
                 <span className='card-title'>Select branch</span>
                 <hr />
-                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</div>
+                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj}>{branchObj.name}</div>
               </div>
             )
            })}
