@@ -7,15 +7,12 @@ export default class BranchingView extends React.Component {
   constructor(props) {
     super(props);
     props.debugModeOn();
-    this.roomid = this.props.roomid;
-    props.getBranches(this.roomid);
-    this.props.getCommits(this.roomid);
+    props.getBranches(this.props.roomid);
     this.props.showBranches(true);
     
     this.state = {
       sha: '',
       sidebarStack: this.props.ui.sidebarStack,
-      currentBranchCommits: [] 
     };
 
     this.clickBranch = this.clickBranch.bind(this);
@@ -23,34 +20,19 @@ export default class BranchingView extends React.Component {
     this.clickFile = this.clickFile.bind(this);
     this.getFileTree = this.props.getFileTree.bind(this);
     this.clickBackButton = this.clickBackButton.bind(this);
+    this.getCommits = this.props.getCommits.bind(this);
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('newprops inside branching view is', newProps);
   }
 
   clickBranch(event) {
+    console.log('parameters to getting commits are', this.props.roomid, event.target.value);
+    this.getCommits(this.props.roomid, event.target.value);
     this.props.showBranches(false);
-    console.log('BRANCH', event.target.value.name);
-    this.props.showCommits(true, event.target.value.name);
+    this.props.showCommits(true, event.target.value);
     this.props.showFileStructure(false);
-    var theSha = event.target.value.commit.sha;
-    var commits = this.props.commits;
-    var returnArr = [];
-    for (var i = 0; i < commits.length; i++) {
-      console.log('return array is now', returnArr, 'current commit sha is', commits[i].sha, 'and the sha is', theSha);
-      if (commits[i].sha === theSha) {
-        console.log('>>>>>>>>>>>>>>FOUND THE SHA<<<<<<<<<<<<<<<<<<<<');
-        // if (commits[i].parents.length === 0) {
-        //   continue;
-        // } else if (commits[i].parents.length === 1) {
-        //   returnArr.push(commits[i]);
-        //   theSha = commits[i].parents[0].sha;
-        // } else {
-        //   returnArr.push(commits[i]);
-        //   break;
-        // }
-      } 
-    }
-    this.setState({
-      currentBranchCommits: returnArr
-    });
   }
 
   clickCommit (event) {
@@ -76,10 +58,6 @@ export default class BranchingView extends React.Component {
     });
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log('new props are ', newProps);
-  }
-
   render() {
     console.log('inside render, state for commits is', this.state);
     var showProperties = this.props.ui.sidebarStack;
@@ -91,7 +69,7 @@ export default class BranchingView extends React.Component {
               <div>
                 <span className='card-title'>Select branch</span>
                 <hr />
-                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj}>{branchObj.name}</div>
+                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj.commit.sha}>{branchObj.name}</div>
               </div>
             )
            })}

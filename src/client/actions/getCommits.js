@@ -19,8 +19,9 @@ export const commitGetResponse = function(status, data) {
   };
 };
 
-export const get = function(roomid){
-  var apiEndpoint = '/api/room/' + roomid + '/commits';
+export const get = function(roomid, sha){
+  var apiEndpoint = '/api/room/' + roomid + '/sha/' + sha + '/commits';
+  console.log('endpoint is', apiEndpoint);
   return fetchHelper.get({
     request: commitGetRequest,
     response: commitGetResponse
