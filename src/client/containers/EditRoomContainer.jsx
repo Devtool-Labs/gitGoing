@@ -12,7 +12,7 @@ import * as room from '../actions/room.js';
 import * as recursiveFileTree from '../actions/getFileTreeRecursively.js';
 
 const mapStateToProps = function (state) {
-  const { user, branches, commits, room, ui, fileTree, file, recursiveFileTree } = state;
+  const { user, branches, commits, room, ui, fileTree, file, recursiveFileTree, notifications } = state;
   return {
     user,
     branches,
@@ -21,7 +21,8 @@ const mapStateToProps = function (state) {
     ui,
     fileTree,
     file,
-    recursiveFileTree
+    recursiveFileTree,
+    notifications
   };
 };
 
@@ -77,6 +78,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     listenToOutwardJoinRoom: function (listener) {
       dispatch(socket.listenToOutwardJoinRoom(listener));
+    },
+    leaveRoom: function (roomId, user) {
+      dispatch(socket.leaveRoom(roomId, user));
+    },
+    listenToOutwardLeaveRoom: function (listener) {
+      dispatch(socket.listenToOutwardLeaveRoom(listener));
     }
   };
 };

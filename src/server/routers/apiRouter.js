@@ -16,13 +16,17 @@ module.exports = function(app, passport, redisClient) {
     .get(auth.apiAuthRedirect, function(req, res) {
       res.json(rooms);
     });
+    // hello meow cat
 
   router.route('/repo/:repo/createroom')
     .post(auth.apiAuthRedirect, function(req,res) {
-      const repo = req.params.repo;
-      rUtil.setNewRoom(req.user.id, repo)
+      console.log('req.params = ', req.params); // => req.params =  { repo: 'HowsTheWeather' }
+      const repo = req.params.repo;             // repo = "HowsTheWeather"
+      console.log('req.user = ', req.user);     // req.user =  { accessToken: '26ffae408cf0b617517e870fe91fa555df2eaab3', id: '7043747', username: 'bcourtney5965', profileUrl: 'https://github.com/bcourtney5965', photos: '[{"value":"https://avatars.githubusercontent.com/u/7043747?v=3"}]' }
+      rUtil.setNewRoom(req.user.id, repo)       // create new room in Redis, {id: repo} {7043747: "HowsTheWeather" }       
         .then(function(room) {
-          res.json(room);
+          console.log('room = ', room);      // room = { roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }                       
+          res.json(room);                    // then respond with FrontEnd with { roomId: 110, hostId: '7043747', repo: 'HowsTheWeather' }     
         })
         .catch(function (err) {
           res.json('There was an error in creating your room. Please try again.');
@@ -127,6 +131,7 @@ module.exports = function(app, passport, redisClient) {
           return github.pushFile(req.user.username, repo, path, req.user.accessToken, message, data);
         })
         .then(function(responseJson) {
+          console.log('the response json is', responseJson);
           res.json(responseJson);
         });
     })
@@ -147,7 +152,7 @@ module.exports = function(app, passport, redisClient) {
           profileUrl: req.user.profile.profileUrl,
           provider: req.user.profile.provider,
           photos: req.user.profile.photos
-        }
+        };
         rUtil.setUserToken(userId, req.user.accessToken);
       }
       res.redirect('/');

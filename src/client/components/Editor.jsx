@@ -3,6 +3,10 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import 'brace/theme/github';
 import 'brace/mode/javascript';
+import fetch from 'isomorphic-fetch';
+import * as $ from 'jquery';
+import Chat from './Chat.jsx';
+
 
 export default class Editor extends React.Component {
   constructor(props) {
@@ -11,6 +15,7 @@ export default class Editor extends React.Component {
       text: props.ui.editorText
     };
     props.listenToOutwardFileUpdate(this.outwardEdit.bind(this));
+    // this.getPic = this.getPic.bind(this);
   }
 
   componentWillReceiveProps(newProps) {

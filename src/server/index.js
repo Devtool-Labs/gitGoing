@@ -40,6 +40,11 @@ app.set('views', `${__dirname}/../../dist/client`);
 apiRouter(app, passport, redisClient);
 staticRouter(app, redisClient);
 
+io.on('connect', function(socket) {
+  socket.on('chat message', function(msg) {
+    io.emit('chat message', msg);
+  });
+});
 
 server.listen(port, function(err) {
   if (err) {

@@ -11,14 +11,24 @@ export default class RoomNotifications extends React.Component {
       propsCalled: false
     };
 
-    console.log('inside roomnotifications, props are', props.listenToOutwardJoinRoom(this.outwardJoinRoom.bind(this)));
     props.listenToOutwardJoinRoom(this.outwardJoinRoom.bind(this));
+    props.listenToOutwardLeaveRoom(this.outwardLeaveRoom.bind(this));
+  }
+
+  componentDidMount() {
+    Materialize.toast('Welcome to the editing room! Please pick the branch and past commit that you\'d like to work from, and we can get started.', 10000, 'rounded');
+  }
+
+  componentWillReceiveProps (newProps) {
+    console.log(newProps);
+    if (newProps.notifications.queue[newProps.notifications.queue.length - 1].commitStatus === 200) {
+      Materialize.toast('Success! Your code has been committed.', 5000, 'rounded');
+    }
   }
 
   outwardJoinRoom(data) {
-    console.log('joining the room', data);
     if (!this.state.propsCalled) {
-      var toastText = data.user + ' just joined room number ' + data.roomId + '!';
+      var toastText = data.user + ' just joined room ' + data.roomId + '!';
       Materialize.toast(toastText, 8000, 'rounded');
       this.setState({
         propsCalled: true
@@ -26,7 +36,14 @@ export default class RoomNotifications extends React.Component {
     }
   }
 
+  outwardLeaveRoom (data) {
+    console.log('someone left the room!', data);
+    var toast = data.user + ' just left this room.';
+    Materialize.toast(toast, 5000, 'rounded');
+  }
+
   render () {
+    console.log('commit status is', this.props.commitStatus);
     return (
       <div></div>
     );
