@@ -1,7 +1,7 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 import brace from 'brace';
-import 'brace/theme/monokai';
+import 'brace/theme/github';
 import 'brace/mode/javascript';
 import fetch from 'isomorphic-fetch';
 import * as $ from 'jquery';
@@ -48,38 +48,16 @@ export default class Editor extends React.Component {
     this.props.updateFile(newValue);
   }
 
-  // getPic() {
-  //   console.log('inside getPic');
-  //   return fetch("/api/user", {
-  //     credentials: 'same-origin'
-  //   })
-  //   .then(function(res) {
-  //     return res.json();
-  //   })
-  //   .then(function(jsonRes) {
-  //     var photosArr = JSON.parse(jsonRes.photos);
-  //     var currentPhoto = photosArr[photosArr.length - 1];
-  //     var currentPhotoUrl = currentPhoto.value;
-  //     console.log('currentPhotoUrl: ', currentPhotoUrl);
-  //     return currentPhotoUrl;
-  //   }).catch(function(err) {
-  //     console.log('err: ' + err);
-  //     return err;
-  //   });
-  // }
-
   render() {
     return (
-      <div>
-        <AceEditor
-        mode="javascript"
-        theme="monokai"
-        value={this.state.text} 
-        onChange={this.change.bind(this)} />
-        <button onClick={this.commit.bind(this)}>Commitment</button>
-        <button onClick={this.getPic}>Testing</button>
-        <Chat />
-      </div>
+      <AceEditor
+      width="100%"
+      mode="javascript"
+      theme="github"
+      value={this.state.text} 
+      onChange={this.change.bind(this)} />
     )
   }
 }
+
+//<button onClick={this.commit.bind(this)}>Commitment</button>
