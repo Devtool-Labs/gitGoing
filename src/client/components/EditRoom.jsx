@@ -11,6 +11,9 @@ export default class EditRoom extends React.Component {
   constructor(props) {
     super(props);
     props.debugModeOn();
+    this.state = {
+      editorMode: ['css', 'html', 'javascript', 'json', 'less', 'markdown', 'mysql', 'php', 'plain_text', 'sass', 'scss', 'text', 'xml']
+    };
 
     if(_.isEmpty(props.room)) {
       props.getRoom(props.params.roomid);
@@ -18,7 +21,6 @@ export default class EditRoom extends React.Component {
     if(_.isEmpty(props.user)) {
       props.getUser();
     }
-
     props.getBranches(props.params.roomid);
     props.initializeSocket(props.params.roomid);
     window.onbeforeunload = (event) => {
@@ -58,6 +60,7 @@ export default class EditRoom extends React.Component {
         <Navbar />
         <RoomNotifications {...this.props}/>
         <div className='container'>
+          <button className='btn' onClick={this.openModal}>Commit</button>
           <div className='row margin-top-xl'>
             <div className='col s4'>
               <div className='card'>
@@ -87,7 +90,6 @@ export default class EditRoom extends React.Component {
               </div>
             </div>
           </div>
-          <button className='btn' onClick={this.openModal}>Commit</button>
         </div>
         <div id="modal1" className="modal">
           <div className="modal-content">

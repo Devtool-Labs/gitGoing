@@ -21,6 +21,7 @@ export default class Editor extends React.Component {
     this.setState({
       text: newProps.ui.editorText
     });
+    console.log('editor props are', newProps);
   }
 
   outwardEdit(message) {
