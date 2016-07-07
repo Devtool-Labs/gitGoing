@@ -36,6 +36,18 @@ export default class EditRoom extends React.Component {
       $('#modal1').openModal();
   }
 
+  commit() {
+    console.log(this.refs.commitMessage);
+    // const path = {
+    //   roomId: this.props.roomid,
+    //   commitSha: this.props.ui.currentCommitSha,
+    //   fileSha: this.props.ui.currentFileSha,
+    //   filePath: this.props.ui.currentFilePath,
+    //   branch: this.props.ui.currentBranchName 
+    // }
+    // this.props.commit(path, 'temp commit message');
+  }
+
   render() {
     return (
       <div>
@@ -69,14 +81,14 @@ export default class EditRoom extends React.Component {
             <div className="row">
               <h6>Committing file: {this.props.ui.currentFilePath}</h6>
               <div className="input-field col s12">
-                <input id="commit_message" type="text" class="validate" />
+                <input ref='commitMessage' id="commit_message" type="text" class="validate" />
                 <label for="commit_message">Commit Message</label>
               </div>
             </div>
           </div>
           <div className="modal-footer">
-            <a className=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-            <a className=" modal-action modal-close waves-effect waves-green btn-flat">Commit</a>
+            <a className="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.commit.bind(this)}>Commit</a>
           </div>
         </div>
       </div>
