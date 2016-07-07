@@ -18,7 +18,13 @@ module.exports = function(socketClient , redisClient) {
       rUtil.setFileContent(path, message.content)
       .then(function(exists) {
         socket.to(path.roomId).broadcast.emit('updateFileOutward', message);
-      })
+      });
     });
+
+    socket.on('leaveRoom', function (person) {
+      socket.leave(person.roomId);
+      socket.to(person.roomId).broadcast.emit('leaveRoomOutward', person);
+    });
+
   });
-}
+};

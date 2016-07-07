@@ -54,6 +54,10 @@ export default class BranchingView extends React.Component {
     });
   }
 
+  componentWillReceiveProps(newProps) {
+    console.log('new props are ', newProps);
+  }
+
   render() {
     var showProperties = this.props.ui.sidebarStack;
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {

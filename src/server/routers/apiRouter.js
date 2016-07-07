@@ -131,6 +131,7 @@ module.exports = function(app, passport, redisClient) {
           return github.pushFile(req.user.username, repo, path, req.user.accessToken, message, data);
         })
         .then(function(responseJson) {
+          console.log('the response json is', responseJson);
           res.json(responseJson);
         });
     })
@@ -151,7 +152,7 @@ module.exports = function(app, passport, redisClient) {
           profileUrl: req.user.profile.profileUrl,
           provider: req.user.profile.provider,
           photos: req.user.profile.photos
-        }
+        };
         rUtil.setUserToken(userId, req.user.accessToken);
       }
       res.redirect('/');
