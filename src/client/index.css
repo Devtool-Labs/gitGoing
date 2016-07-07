@@ -23,6 +23,10 @@ nav {
   line-height: 1;
 }
 
+.myToast {
+  background-color: red;
+}
+
 .card-editor {
 }
 
