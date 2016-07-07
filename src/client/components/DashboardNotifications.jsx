@@ -14,7 +14,7 @@ export default class DashboardNotifications extends React.Component {
     if (newProps.user.username && !newProps.allRooms.length) {
       console.log('newProps.use is', newProps.user);
       var toastText = 'Welcome, ' + newProps.user.username + '! Pick your repo to get started editing. Please note: you will not be able to proceed until you have picked one.';
-      Materialize.toast(toastText, 10000, 'rounded');
+      Materialize.toast(toastText, 5000, 'rounded');
     }
   }
 

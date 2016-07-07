@@ -16,7 +16,7 @@ export default class RoomNotifications extends React.Component {
   }
 
   componentDidMount() {
-    Materialize.toast('Welcome to the editing room! Please pick the branch and past commit that you\'d like to work from, and we can get started.', 10000, 'rounded');
+    Materialize.toast('Welcome to the editing room! Please pick the branch and past commit that you\'d like to work from, and we can get started.', 5000, 'rounded');
   }
 
   componentWillReceiveProps (newProps) {
@@ -29,7 +29,7 @@ export default class RoomNotifications extends React.Component {
   outwardJoinRoom(data) {
     if (!this.state.propsCalled) {
       var toastText = data.user + ' just joined room ' + data.roomId + '!';
-      Materialize.toast(toastText, 8000, 'rounded');
+      Materialize.toast(toastText, 5000, 'rounded');
       this.setState({
         propsCalled: true
       });

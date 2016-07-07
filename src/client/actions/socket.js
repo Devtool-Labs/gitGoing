@@ -72,10 +72,21 @@ export const updateFile = function(fileContents) {
 export const leaveRoom = function (roomId, user) {
   return (dispatcher, getState) => {
     let { socket } = getState();
-    console.log('about to trigger the leaveroom function');
     socket.connection.emit('leaveRoom', {
       roomId,
       user
+    });
+  }
+}
+
+export const sendChat = function (roomId, userImage, text) {
+  return (dispatcher, getState) => {
+    let { socket } = getState();
+    console.log('called send chat', roomId, userImage, text);
+    socket.connection.emit('sendChat', {
+      roomId,
+      userImage,
+      text
     });
   }
 }
@@ -105,6 +116,16 @@ export const listenToOutwardLeaveRoom = function (listener) {
     let socket = getState().socket;
     socket.connection.on('leaveRoomOutward', function (person) {
       listener(person);
+    });
+  }
+}
+
+export const listenToOutwardSendChat = function (listener) {
+  return (dispatcher, getState) => {
+    let socket= getState().socket;
+    socket.connection.on('sendChatOutward', function (message) {
+      console.log('inside the send chat outward', message);
+      listener(message);
     });
   }
 }

@@ -5,6 +5,7 @@ import Editor from './Editor.jsx';
 import RoomNotifications from './RoomNotifications.jsx';
 import Navbar from './Navbar.jsx';
 import _ from 'underscore';
+import Conversation from './Conversation.jsx';
 
 export default class EditRoom extends React.Component {
   constructor(props) {
@@ -73,6 +74,15 @@ export default class EditRoom extends React.Component {
                   roomid={this.props.params.roomid}
                   updateFile = {this.props.updateFile}
                   listenToOutwardFileUpdate = {this.props.listenToOutwardFileUpdate}/>
+                </div>
+              </div>
+            </div>
+            <div className='row margin-top-s'>
+              <div className='col s12'>
+                <div className='card'>
+                  <div className='card-content'>
+                    <Conversation {...this.props} roomid={this.props.params.roomid}/>
+                  </div>
                 </div>
               </div>
             </div>
