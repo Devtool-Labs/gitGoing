@@ -58,7 +58,7 @@ export default class EditRoom extends React.Component {
     return (
       <div>
         <Navbar />
-        <RoomNotifications {...this.props}/>
+        <RoomNotifications {...this.props} />
         <div className='container'>
           <button className='btn' onClick={this.openModal}>Commit</button>
           <div className='row margin-top-xl'>
