@@ -17,6 +17,12 @@ nav {
   font-size: 17px;
 }
 
+.path-title {
+  margin-left: 10px;
+  font-size: 24px;
+  line-height: 1;
+}
+
 .margin-top-sm {
   margin-top: 5px;
 }

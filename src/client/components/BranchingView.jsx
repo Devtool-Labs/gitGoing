@@ -26,7 +26,6 @@ export default class BranchingView extends React.Component {
 
   clickBranch(event) {
     this.props.showBranches(false);
-    console.log('BRANCH', event.target.value);
     this.props.showCommits(true, event.target.value);
     this.props.showFileStructure(false);
   }
@@ -61,7 +60,11 @@ export default class BranchingView extends React.Component {
         <div>
           {this.props.branches.map((branchObj, index) => {
             return (
-              <h3 key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</h3>
+              <div>
+                <span className='card-title'>Select branch</span>
+                <hr />
+                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj.name}>{branchObj.name}</div>
+              </div>
             )
            })}
         </div>
@@ -69,11 +72,12 @@ export default class BranchingView extends React.Component {
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button onClick={this.clickBackButton}>Back</button>
+          <span><i onClick={this.clickBackButton} className="material-icons">fast_rewind</i></span>
+          <span className='path-title'>Select Commit</span>
+          <hr />
           {this.props.commits.map((commitObj, index) => {
             return (
-              <h4 key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</h4>
+              <div className='git-commit' key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</div>
             )
           })}
         </div>
@@ -81,12 +85,13 @@ export default class BranchingView extends React.Component {
     } else {
       return (
         <div>
-          <a href="/logout"><button type="button">Sign out</button></a>
-          <button onClick={this.clickBackButton}>Back</button>
+          <span><i onClick={this.clickBackButton} className="material-icons">fast_rewind</i></span>
+          <span className='path-title'>Select File</span>
+          <hr />
           <FileTreeView {...this.props} sha={this.state.sha} recursiveFileTree={this.props.getFileTreeRecursively} fileTree={this.props.fileTree}/>
         </div>
       );
     } 
   }
 }
-
+//<button className='btn path-back-btn' onClick={this.clickBackButton}>Back</button>

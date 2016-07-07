@@ -1,7 +1,7 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 import brace from 'brace';
-import 'brace/theme/monokai';
+import 'brace/theme/github';
 import 'brace/mode/javascript';
 
 export default class Editor extends React.Component {
@@ -45,14 +45,14 @@ export default class Editor extends React.Component {
 
   render() {
     return (
-      <div>
-        <AceEditor
-        mode="javascript"
-        theme="monokai"
-        value={this.state.text} 
-        onChange={this.change.bind(this)} />
-        <button onClick={this.commit.bind(this)}>Commitment</button>
-      </div>
+      <AceEditor
+      width="100%"
+      mode="javascript"
+      theme="github"
+      value={this.state.text} 
+      onChange={this.change.bind(this)} />
     )
   }
 }
+
+//<button onClick={this.commit.bind(this)}>Commitment</button>
