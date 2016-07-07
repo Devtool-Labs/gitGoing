@@ -26,6 +26,7 @@ export default class BranchingView extends React.Component {
 
   clickBranch(event) {
     this.props.showBranches(false);
+    console.log('BRANCH', event.target.value);
     this.props.showCommits(true, event.target.value);
     this.props.showFileStructure(false);
   }
