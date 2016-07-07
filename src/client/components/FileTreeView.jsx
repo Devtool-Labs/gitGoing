@@ -77,9 +77,9 @@ export default class FileTreeView extends React.Component {
           var icon = childObj.icon ? '-' : '+';
           if (childObj.visible) {
             if (childObj.type === 'tree') {
-              return (<p style={styles} value={childObj.sha} onClick={this.clickFolder}>{icon}  {childObj.path}</p>);
+              return (<div style={styles} value={childObj.sha} onClick={this.clickFolder}>{icon}  {childObj.path}</div>);
             } else {
-              return (<p style={styles} value={childObj.absolutePath} onClick={this.clickFile}>{childObj.path}</p>);
+              return (<div style={styles} value={childObj.absolutePath} onClick={this.clickFile}>{childObj.path}</div>);
             } 
           }
         })}
