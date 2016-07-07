@@ -13,7 +13,13 @@ export default class Chat extends React.Component {
     this.state = {
       // text: props.ui.editorText
     };
+    this.getPic = this.getPic.bind(this);
 
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('props in chat: ', newProps);
+    console.log('this.props.user', this.props.user);
   }
 
   getPic() {
@@ -30,14 +36,22 @@ export default class Chat extends React.Component {
       var currentPhotoUrl = currentPhoto.value;
       console.log('currentPhotoUrl: ', currentPhotoUrl);
       return currentPhotoUrl;
-    }).catch(function(err) {
+    })
+    .then(function(link) {
+      return link;
+    })
+    .catch(function(err) {
       console.log('err: ' + err);
       return err;
     });
   }
 
   componentDidMount() {
-    var imgUrl = 'https://avatars2.githubusercontent.com/u/7043747?v=3&s=460';
+    // console.log('inside of componenetDidMount');
+    // console.log('inside of componentDidMount JSON.parse(this.props.user.photos)[0].value = ', JSON.parse(this.props.user.photos)[0].value);
+    // console.log('inside of componentDidMount JSON.parse(this.props.user.photos[0]) = ', JSON.parse(this.props.user.photos[0]));
+
+    var imgUrl = JSON.parse(this.props.user.photos)[0].value;
     var socket = io();
     $('form').submit(function(){
       socket.emit('chat message', $('#m').val());
@@ -64,7 +78,7 @@ export default class Chat extends React.Component {
     return (
       <div>
         <div id="messages"></div>
-        <form action="">
+        <form action="" >
           <input id="m" autocomplete="off" /><button className='waves-effect waves-light btn'>Send</button>
         </form>
       </div>

@@ -28,6 +28,7 @@ export default class EditRoom extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
+    console.log('editRooms newProps', newProps);
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
