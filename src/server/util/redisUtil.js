@@ -116,13 +116,13 @@ module.exports = function (redisClient) {
       });
     },
     getCommits : function(path) {
-      return redisClient.getAsync('room:'+ path.roomId+ ':commits')
+      return redisClient.getAsync('room:'+ path.roomId+ ':sha:' + path.sha+ ':commits')
       .then(function(data) {
         return Promise.resolve(JSON.parse(data));
       });
     },
     setCommits : function(path, commits) {
-      return redisClient.setAsync('room:'+ path.roomId+ ':commits', JSON.stringify(commits));
+      return redisClient.setAsync('room:'+ path.roomId+':sha:'+ path.sha +':commits', JSON.stringify(commits));
     },
 
   }

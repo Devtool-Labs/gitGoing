@@ -46,9 +46,9 @@ exports.getBranchData = function (username, repo, path, accessToken) {
 };
 
 exports.getCommitsData = function(username, repo, path, accessToken) {
-  var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits';
+  var endpoint = 'https://api.github.com/repos/'+username +'/'+repo +'/commits?sha=' + path.sha;
   if(accessToken) {
-    endpoint += '?access_token=' + accessToken;
+    endpoint += '&access_token=' + accessToken;
   }
   return fetchHelper(endpoint);
 }
