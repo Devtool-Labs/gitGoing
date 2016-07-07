@@ -30,11 +30,7 @@ export default class EditRoom extends React.Component {
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
-
-  // componentWillUnmount () {
-  //   console.log('unmounting component');
-  //   this.props.leaveRoom(this.props.params.roomid, this.props.user.username);
-  // }
+  }
 
   render() {
     return (

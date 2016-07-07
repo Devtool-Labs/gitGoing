@@ -19,7 +19,6 @@ export const fileTreeGetResponse = function (status, data) {
 
 export const get = function (roomid, sha) {
   var apiEndpoint = '/api/room/' + roomid + '/git/tree/' + sha;
-  console.log('the endpoint is', apiEndpoint);
   return fetchHelper.get({
     request: fileTreeGetRequest,
     response: fileTreeGetResponse

@@ -34,8 +34,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     getBranches: function(roomid) {
       dispatch(getBranches.get(roomid));
     },
-    getCommits: function(roomid){
-      dispatch(getCommits.get(roomid));
+    getCommits: function(roomid, sha){
+      dispatch(getCommits.get(roomid, sha));
     },
     getFileTree: function (roomid, sha) {
       dispatch(fileTree.get(roomid, sha));
