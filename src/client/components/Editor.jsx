@@ -60,11 +60,11 @@ export default class Editor extends React.Component {
         value={this.state.text} 
         onChange={this.change.bind(this)} />
         <button onClick={this.commit.bind(this)}>Commitment</button>
-        <Chat 
-          {...this.props}
-          user={this.props.user}
-          />
       </div>
     );
   }
 }
+        // <Chat 
+        //   {...this.props}
+        //   user={this.props.user}
+        //   />

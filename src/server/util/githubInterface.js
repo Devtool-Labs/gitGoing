@@ -11,7 +11,7 @@ var fetchHelper = function(endpoint) {
       if(response.status >= 400) {
         console.log('ERROR:', response.status);
         console.log('AT ENDPOINT:', endpoint);
-        return Promise.reject('ERROR: ' + reponse.status);
+        return Promise.reject('ERROR: ' + response.status);
       }
       return response.json();
     })
