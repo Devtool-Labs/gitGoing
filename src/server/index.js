@@ -17,7 +17,7 @@ const server        = require('http').Server(app);
 const io            = require('socket.io')(server);
 require('./config/socketio.js')(io, redisClient);
 
-console.log("The IP address is ", process.env.CALLBACKURL || 'http://localhost:3000/api/auth/github/callback');
+console.log("Current callback IP address set to:", process.env.CALLBACKURL || 'http://localhost:3000/api/auth/github/callback');
 
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
