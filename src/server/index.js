@@ -1,26 +1,20 @@
-console.log(process.env.CREATECLIENT);
-console.log(process.env.SESSIONSTORE);
-
-const express = require('express');
-const app = express();
-const apiRouter = require('./routers/apiRouter.js');
-const staticRouter = require('./routers/staticRouter.js');
-const port = process.env.PORT || 3000;
-const passport = require('passport');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
-const bluebird =require('bluebird');
-const redis = require('redis');
+const express       = require('express');
+const app           = express();
+const apiRouter     = require('./routers/apiRouter.js');
+const staticRouter  = require('./routers/staticRouter.js');
+const port          = process.env.PORT || 3000;
+const passport      = require('passport');
+const cookieParser  = require('cookie-parser');
+const session       = require('express-session');
+const RedisStore    = require('connect-redis')(session);
+const bluebird      = require('bluebird');
+const redis         = require('redis');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
-const redisClient = process.env.CREATECLIENT || redis.createClient();
-// redis.createClient(6379,'redis');
-const sessionStore = process.env.SESSIONSTORE || new RedisStore();
-// new RedisStore({ host: 'redis', port: 6379 })
-const bodyParser = require('body-parser');
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const redisClient   = redis.createClient(6379, process.env.HOST || 'localhost');
+const bodyParser    = require('body-parser');
+const server        = require('http').Server(app);
+const io            = require('socket.io')(server);
 require('./config/socketio.js')(io, redisClient);
 
 app.engine('html', require('ejs').renderFile);
@@ -29,7 +23,7 @@ app.use(session({
   secret: 'mysecret',
   saveUninitialized: false,
   resave: true,
-  store: sessionStore,
+  store: new RedisStore({ host: process.env.HOST || 'localhost', port: 6379 }),
 }));
 
 require('./config/passport.js')(passport, redisClient);
