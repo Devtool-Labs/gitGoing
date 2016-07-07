@@ -83,6 +83,10 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 
 
 
+#Git Going
+​
+Insert inspiring description
+>>>>>>> Add readme
 ​
 ##Table of Contents
 * [Developers](#developers)
@@ -94,6 +98,25 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 * [System Architecture](#system-architecture)
 * [Database Schema](#database-schema)
 * [License](#license)
+​
+<<<<<<< d1532f534494ef2f0fd6fa5f6b4c76288dc4e098
+=======
+##Developers
+[![Daniel Vu](https://avatars3.githubusercontent.com/u/17260170?v=3&s=150)](http://github.com/d-vu)
+Daniel Vu 
+http://github.com/d-vu
+​
+[![Veena Sridhar](https://avatars1.githubusercontent.com/u/9629061?v=3&s=150)](https://github.com/veena-sridhar)
+Veena Sridhar
+https://github.com/veena-sridhar
+​
+[![Sean Ho](https://avatars2.githubusercontent.com/u/3504821?v=3&s=150)](http://github.com/seanhho)
+Sean Ho
+http://github.com/seanhho
+​
+[![Brandon Courtney](https://avatars3.githubusercontent.com/u/7043747?v=3&s=150)](http://github.com/)
+Brandon Courtney
+http://github.com/bcourtney5965
 ​
 ##Demo
 www.GitGoing.io
