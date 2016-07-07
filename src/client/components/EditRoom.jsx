@@ -36,16 +36,19 @@ export default class EditRoom extends React.Component {
       $('#modal1').openModal();
   }
 
+  closeModal() {
+      $('#modal1').closeModal();
+  }
+
   commit() {
-    console.log(this.refs.commitMessage);
-    // const path = {
-    //   roomId: this.props.roomid,
-    //   commitSha: this.props.ui.currentCommitSha,
-    //   fileSha: this.props.ui.currentFileSha,
-    //   filePath: this.props.ui.currentFilePath,
-    //   branch: this.props.ui.currentBranchName 
-    // }
-    // this.props.commit(path, 'temp commit message');
+    const path = {
+      roomId: this.props.params.roomid,
+      commitSha: this.props.ui.currentCommitSha,
+      fileSha: this.props.ui.currentFileSha,
+      filePath: this.props.ui.currentFilePath,
+      branch: this.props.ui.currentBranchName 
+    }
+    this.props.commit(path, this.refs.commitMessage.value);
   }
 
   render() {
@@ -87,7 +90,7 @@ export default class EditRoom extends React.Component {
             </div>
           </div>
           <div className="modal-footer">
-            <a className="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.closeModal.bind(this)}>Cancel</a>
             <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.commit.bind(this)}>Commit</a>
           </div>
         </div>
