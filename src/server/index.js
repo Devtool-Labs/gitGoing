@@ -1,3 +1,6 @@
+console.log(process.env.CREATECLIENT);
+console.log(process.env.SESSIONSTORE);
+
 const express = require('express');
 const app = express();
 const apiRouter = require('./routers/apiRouter.js');

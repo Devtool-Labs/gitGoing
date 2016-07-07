@@ -8,8 +8,6 @@ module.exports = function(passport) {
     clientSecret: authKeys.gitHubAuth.clientSecret,
     callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done){
-    console.log("clientID", authKeys.gitHubAuth.clientID);
-    console.log("clientSecret", authKeys.gitHubAuth.clientSecret)
     done(null, {
       accessToken: accessToken,
       profile: profile
