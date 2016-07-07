@@ -30,6 +30,7 @@ export default class EditRoom extends React.Component {
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
+  }
 
   // componentWillUnmount () {
   //   console.log('unmounting component');
@@ -40,7 +41,7 @@ export default class EditRoom extends React.Component {
     return (
       <div>
         <Navbar />
-        <RoomNotifications {...this.props}/>
+        <RoomNotifications {...this.props} />
         <div className='container'>
           <div className='row margin-top-xl'>
             <div className='col s4'>
