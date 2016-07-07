@@ -21,6 +21,11 @@ module.exports = function(socketClient , redisClient) {
       });
     });
 
+    socket.on('sendChat', function (message) {
+      console.log('on the server side!', message);
+      socketClient.to(message.roomId).emit('sendChatOutward', message);
+    });
+
     socket.on('leaveRoom', function (person) {
       socket.leave(person.roomId);
       socket.to(person.roomId).broadcast.emit('leaveRoomOutward', person);

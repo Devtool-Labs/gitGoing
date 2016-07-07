@@ -5,7 +5,6 @@ import 'brace/theme/github';
 import 'brace/mode/javascript';
 import fetch from 'isomorphic-fetch';
 import * as $ from 'jquery';
-import Chat from './Chat.jsx';
 
 
 export default class Editor extends React.Component {
@@ -22,6 +21,7 @@ export default class Editor extends React.Component {
     this.setState({
       text: newProps.ui.editorText
     });
+    console.log('editor props are', newProps);
   }
 
   outwardEdit(message) {
@@ -59,7 +59,3 @@ export default class Editor extends React.Component {
     );
   }
 }
-        // <Chat 
-        //   {...this.props}
-        //   user={this.props.user}
-        //   />
