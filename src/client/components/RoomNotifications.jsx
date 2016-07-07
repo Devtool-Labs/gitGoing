@@ -16,20 +16,20 @@ export default class RoomNotifications extends React.Component {
   }
 
   componentDidMount() {
-    Materialize.toast('Welcome to the editing room! Please pick the branch and past commit that you\'d like to work from, and we can get started.', 10000, 'rounded');
+    Materialize.toast('Welcome to the editing room!', 1000, 'rounded');
   }
 
   componentWillReceiveProps (newProps) {
     console.log(newProps);
     if (newProps.notifications.queue[newProps.notifications.queue.length - 1].commitStatus === 200) {
-      Materialize.toast('Success! Your code has been committed.', 5000, 'rounded');
+      Materialize.toast('Success! Your code has been committed.', 2000, 'rounded');
     }
   }
 
   outwardJoinRoom(data) {
     if (!this.state.propsCalled) {
       var toastText = data.user + ' just joined room ' + data.roomId + '!';
-      Materialize.toast(toastText, 8000, 'rounded');
+      Materialize.toast(toastText, 1000, 'rounded');
       this.setState({
         propsCalled: true
       });
@@ -39,7 +39,7 @@ export default class RoomNotifications extends React.Component {
   outwardLeaveRoom (data) {
     console.log('someone left the room!', data);
     var toast = data.user + ' just left this room.';
-    Materialize.toast(toast, 5000, 'rounded');
+    Materialize.toast(toast, 1000, 'rounded');
   }
 
   render () {
