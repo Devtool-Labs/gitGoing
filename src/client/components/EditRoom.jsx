@@ -6,7 +6,6 @@ import RoomNotifications from './RoomNotifications.jsx';
 import Navbar from './Navbar.jsx';
 import _ from 'underscore';
 
-
 export default class EditRoom extends React.Component {
   constructor(props) {
     super(props);
@@ -21,26 +20,23 @@ export default class EditRoom extends React.Component {
 
     props.getBranches(props.params.roomid);
     props.initializeSocket(props.params.roomid);
-    console.log('window object?', window);
     window.onbeforeunload = (event) => {
       props.leaveRoom.call(this, this.props.params.roomid, this.props.user.username);
     };
+
   }
 
   componentWillReceiveProps (newProps) {
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
-    console.log('props are', newProps);
   }
 
-  // componentWillUnmount () {
-  //   console.log('unmounting component');
-  //   this.props.leaveRoom(this.props.params.roomid, this.props.user.username);
-  // }
+  openModal() {
+      $('#modal1').openModal();
+  }
 
   render() {
-    console.log('Editor/render: hello!');
     return (
       <div>
         <Navbar />
@@ -56,7 +52,7 @@ export default class EditRoom extends React.Component {
             </div>
             <div className='col s8'>
               <div className='card card-editor'>
-                <div className='card-content card-git-path'>
+                <div className='card-content'>
                   <Editor ui={this.props.ui} 
                   commit={this.props.commit} 
                   roomid={this.props.params.roomid}
@@ -65,6 +61,22 @@ export default class EditRoom extends React.Component {
                 </div>
               </div>
             </div>
+          </div>
+          <button className='btn' onClick={this.openModal}>Commit</button>
+        </div>
+        <div id="modal1" className="modal">
+          <div className="modal-content">
+            <div className="row">
+              <h6>Committing file: {this.props.ui.currentFilePath}</h6>
+              <div className="input-field col s12">
+                <input id="commit_message" type="text" class="validate" />
+                <label for="commit_message">Commit Message</label>
+              </div>
+            </div>
+          </div>
+          <div className="modal-footer">
+            <a className=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            <a className=" modal-action modal-close waves-effect waves-green btn-flat">Commit</a>
           </div>
         </div>
       </div>
