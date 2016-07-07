@@ -21,7 +21,6 @@ export default class EditRoom extends React.Component {
 
     props.getBranches(props.params.roomid);
     props.initializeSocket(props.params.roomid);
-    console.log('window object?', window);
     window.onbeforeunload = (event) => {
       props.leaveRoom.call(this, this.props.params.roomid, this.props.user.username);
     };
@@ -31,11 +30,9 @@ export default class EditRoom extends React.Component {
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
-    console.log('props are', newProps);
   }
 
   render() {
-    console.log('Editor/render: hello!');
     return (
       <div>
         <Navbar />

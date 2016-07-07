@@ -23,12 +23,7 @@ export default class BranchingView extends React.Component {
     this.getCommits = this.props.getCommits.bind(this);
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log('newprops inside branching view is', newProps);
-  }
-
   clickBranch(event) {
-    console.log('parameters to getting commits are', this.props.roomid, event.target.value);
     this.getCommits(this.props.roomid, event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(true, event.target.value);
@@ -39,7 +34,7 @@ export default class BranchingView extends React.Component {
     this.setState({
       sha: event.target.value
     });
-    this.getFileTree(this.roomid, event.target.value);
+    this.getFileTree(this.props.roomid, event.target.value);
     this.props.showBranches(false);
     this.props.showCommits(false);
     this.props.showFileStructure(true, event.target.value); 
@@ -59,7 +54,6 @@ export default class BranchingView extends React.Component {
   }
 
   render() {
-    console.log('inside render, state for commits is', this.state);
     var showProperties = this.props.ui.sidebarStack;
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
@@ -100,4 +94,3 @@ export default class BranchingView extends React.Component {
     } 
   }
 }
-//<button className='btn path-back-btn' onClick={this.clickBackButton}>Back</button>
