@@ -49,18 +49,13 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    // console.log('inside render, getPic: ', this.getPic());
-    console.log('inside of Editor render this.props = ', this.props);
     return (
-      <div>
-        <AceEditor
-        width="100%"
-        mode="javascript"
-        theme="github"
-        value={this.state.text} 
-        onChange={this.change.bind(this)} />
-        <button onClick={this.commit.bind(this)}>Commitment</button>
-      </div>
+      <AceEditor
+      width="100%"
+      mode="javascript"
+      theme="github"
+      value={this.state.text} 
+      onChange={this.change.bind(this)} />
     );
   }
 }
