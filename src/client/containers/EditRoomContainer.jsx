@@ -84,6 +84,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     },
     listenToOutwardLeaveRoom: function (listener) {
       dispatch(socket.listenToOutwardLeaveRoom(listener));
+    },
+    sendChat: function (roomId, userImage, text) {
+      dispatch(socket.sendChat(roomId, userImage, text));
+    },
+    listenToOutwardSendChat: function (listener) {
+      dispatch(socket.listenToOutwardSendChat(listener));
     }
   };
 };
