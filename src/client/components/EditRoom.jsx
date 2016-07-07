@@ -21,19 +21,15 @@ export default class EditRoom extends React.Component {
 
     props.getBranches(props.params.roomid);
     props.initializeSocket(props.params.roomid);
-    console.log('window object?', window);
     window.onbeforeunload = (event) => {
       props.leaveRoom.call(this, this.props.params.roomid, this.props.user.username);
     };
   }
 
   componentWillReceiveProps (newProps) {
-    console.log('editRooms newProps', newProps);
     if (this.props.user.username) {
       newProps.joinRoom(newProps.params.roomid, newProps.user.username);
     }
-    console.log('props are', newProps);
-  }
 
   // componentWillUnmount () {
   //   console.log('unmounting component');
@@ -41,7 +37,6 @@ export default class EditRoom extends React.Component {
   // }
 
   render() {
-    console.log('Editor/render: hello!');
     return (
       <div>
         <Navbar />
