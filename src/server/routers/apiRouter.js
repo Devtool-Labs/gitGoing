@@ -73,10 +73,11 @@ module.exports = function(app, passport, redisClient) {
       });
     });
 
-  router.route('/room/:roomid/commits')//get commits
+  router.route('/room/:roomid/sha/:sha/commits')//get commits
     .get(auth.apiAuthRedirect, function(req, res) {
       const path = {
-        roomId: req.params.roomid
+        roomId: req.params.roomid,
+        sha: req.params.sha //branch sha
       }
       cache.getCommits(req.user, path)
       .then((data) => {
