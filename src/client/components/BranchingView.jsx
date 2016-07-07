@@ -26,7 +26,8 @@ export default class BranchingView extends React.Component {
   clickBranch(event) {
     this.getCommits(this.props.roomid, event.target.value);
     this.props.showBranches(false);
-    this.props.showCommits(true, event.target.value);
+    console.log('BRANCH', event.target.value.name);
+    this.props.showCommits(true, event.target.value.name);
     this.props.showFileStructure(false);
   }
 
@@ -54,6 +55,7 @@ export default class BranchingView extends React.Component {
   }
 
   render() {
+    console.log('inside render, state for commits is', this.state);
     var showProperties = this.props.ui.sidebarStack;
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
