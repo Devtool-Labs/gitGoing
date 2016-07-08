@@ -82,8 +82,8 @@ View the project roadmap [here](https://github.com/Devtool-Labs/gitGoing/issues)
 See [github.md](github.md) for contribution and github workflow guidelines.
 
 <hr>
-## Architecture
-[url=https://postimg.org/image/99rt4rrs1/][img=https://s32.postimg.org/99rt4rrs1/Screen_Shot_2016_07_08_at_2_07_10_PM.png][/url]
+## Architecture      
+![](https://s32.postimg.org/hf9v2xg11/Screen_Shot_2016_07_08_at_2_07_10_PM.png)
 
 <hr>
 ## Deployment
