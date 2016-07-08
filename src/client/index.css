@@ -63,3 +63,8 @@ nav {
 .margin-top-xxxl {
   margin-top: 150px;
 }
+
+.commit {
+  margin: 10px 86.5%;
+  margin-bottom: -25px;
+}
