@@ -12,7 +12,11 @@ A real time Github-enabled editor for collaborating engineers
 ## Table of Contents
 
 1. [Technology Stack](#technology-stack)
+<<<<<<< HEAD
 1. [Usage](#usage)
+=======
+1. [Usage](#Usage)
+>>>>>>> bc6b08139c7ae8782d79aa9302e28ec19abba135
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -95,6 +99,11 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 * [Database Schema](#database-schema)
 * [License](#license)
 ​
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> bc6b08139c7ae8782d79aa9302e28ec19abba135
 ##Demo
 www.GitGoing.io
 insert gifs
