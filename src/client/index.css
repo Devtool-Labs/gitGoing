@@ -71,12 +71,12 @@ nav {
 
 .chatScroller {
   overflow: auto;
-  height: 200px;
+  height: 100px;
 }
 
 .repoView {
   overflow: auto;
-  height: 600px;
+  height: 450px;
 } 
 
 .commitTitle,
