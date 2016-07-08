@@ -82,9 +82,7 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 
 <hr>
 ## Architecture
-
-### High Level Architecture
-![](https://postimg.org/image/99rt4rrs1/)
+![Architecture](https://postimg.org/image/99rt4rrs1/)
 
 <hr>
 ## Deployment
