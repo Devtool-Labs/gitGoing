@@ -68,3 +68,13 @@ nav {
   margin: 10px 0 -25px 77.5%;
   width: 200px;
 }
+
+.chatScroller {
+  overflow: auto;
+  height: 300px;
+}
+
+.repoView {
+  overflow: auto;
+  height: 600px;
+} 

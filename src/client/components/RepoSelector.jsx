@@ -7,7 +7,7 @@ export default (props) => {
         <div className='card offset-s4 col s4'>
           <div className='card-content'>
           <span className='card-title'>Select a repository</span>
-          <form onSubmit={props.handleSubmit}>
+          <form className="repoView" onSubmit={props.handleSubmit}>
             {props.repos.map( (repoObj, index) => {
               return (
                 <div key={index}>
