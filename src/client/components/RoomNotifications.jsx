@@ -6,7 +6,6 @@ export default class RoomNotifications extends React.Component {
 
   constructor (props) {
     super(props);
-
     this.state = {
       propsCalled: false
     };

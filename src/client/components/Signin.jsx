@@ -8,12 +8,10 @@ class Signin extends React.Component {
   constructor() {
     super();
     this.state = {
-
     }
   }
 
   componentDidMount() {
-    console.log('Signin componentDidMount');
   }
 
   render() {

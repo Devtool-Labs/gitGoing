@@ -8,7 +8,6 @@ export default class BranchingView extends React.Component {
   props.getBranches();
  }
 
-
  render() {
   return (
     <div>

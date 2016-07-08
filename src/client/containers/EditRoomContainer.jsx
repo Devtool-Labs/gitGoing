@@ -94,8 +94,4 @@ const mapDispatchToProps = function(dispatch, ownProps) {
   };
 };
 
-
-
-
-
 export default connect(mapStateToProps, mapDispatchToProps) (EditRoom);
