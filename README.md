@@ -1,5 +1,5 @@
 # Git Going
-A real time Github-enabled editor for collaborating engineers
+> A real time Github-enabled editor for collaborating engineers
 
 <hr>
 ## Team
@@ -13,13 +13,14 @@ A real time Github-enabled editor for collaborating engineers
 
 1. [Technology Stack](#technology-stack)
 1. [Usage](#usage)
+1. [Demo](#demo)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Roadmap](#roadmap)
-1. [Contributing](#contributing)
+1. [How to Start the Application Locally](#How-to-start-the-application-locally)
 1. [Architecture](#architecture)
-1. [API](#api)
+1. [Contributing](#contributing)
 1. [Deployment](#deployment)
 
 <hr>
@@ -38,6 +39,11 @@ A real time Github-enabled editor for collaborating engineers
 ## Usage
 
 Use gitGoing while collaborating with colleagues, especially while troubleshooting.  GitGoing is also perfect for introducing people to git and its functionality.  
+
+<hr>
+## Demo
+
+![roam](https://makeagif.com/i/cMGTgq)
 
 <hr>
 ## Requirements
@@ -63,14 +69,25 @@ npm install
 View the project roadmap [here](https://github.com/Devtool-Labs/gitGoing/issues)
 
 <hr>
+## How to start the application locally
+
+<hr>
 ## Contributing
 
 See [github.md](github.md) for contribution and github workflow guidelines.
 
+<hr>
+## Architecture
+
+### High Level Architecture
+![](http://i.imgur.com/mqdnWVh.png)
+
+<hr>
+## Deployment
 
 
-
-
+* [How to Start the Application Locally](#How-to-start-the-application-locally)
+* [Install Dependencies](#Install-dependencies)
 
 
 
@@ -115,6 +132,7 @@ http://github.com/seanhho
 Brandon Courtney
 http://github.com/bcourtney5965
 ​
+
 ##Demo
 www.GitGoing.io
 insert gifs
