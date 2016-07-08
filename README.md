@@ -1,5 +1,5 @@
 # Git Going
-> A real time Github-enabled editor for collaborating engineers
+> A real time Github-enabled editor for collaborating engineers.  ASDFGSDFHfgBFGDHDFHXFGh
 
 <hr>
 ## Team
