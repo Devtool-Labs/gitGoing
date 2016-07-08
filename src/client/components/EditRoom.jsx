@@ -57,13 +57,13 @@ export default class EditRoom extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <RoomNotifications {...this.props} />
+        <Navbar user={this.props.user}/>
+        <RoomNotifications {...this.props}/>
         <div className='container'>
-          <button className='btn' onClick={this.openModal}>Commit</button>
+          <button className='btn margin-top-m commit' onClick={this.openModal}>Commit & Push</button>
           <div className='row margin-top-xl'>
             <div className='col s4'>
-              <div className='card'>
+              <div className='card sideBarView'>
                 <div className='card-content'>
                   <BranchView {...this.props} roomid={this.props.params.roomid}/>
                 </div>
@@ -103,7 +103,7 @@ export default class EditRoom extends React.Component {
           </div>
           <div className="modal-footer">
             <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.closeModal.bind(this)}>Cancel</a>
-            <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.commit.bind(this)}>Commit</a>
+            <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.commit.bind(this)}>Commit & Push</a>
           </div>
         </div>
       </div>

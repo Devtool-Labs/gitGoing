@@ -68,7 +68,7 @@ export default class FileTreeView extends React.Component {
   render () {
     var flattened = _.flatten(this.state.fileData);
     return (
-      <div>
+      <div className="fileTree">
         {flattened.map((childObj) => {
           var styles = {
             'marginLeft': 25 * childObj.depth + 'px',

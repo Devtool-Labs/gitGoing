@@ -9,7 +9,7 @@ export default class Chat extends React.Component {
     this.state = {
       userImage: '',
       messages: [],
-      currentMessage: '',
+      currentMessage: ''
     };
 
     props.listenToOutwardSendChat(this.outwardSendChat.bind(this));
@@ -60,7 +60,7 @@ export default class Chat extends React.Component {
   render() {
     return (
       <div className="row">
-        <div id="messages">
+        <div id="messages" className="chatScroller">
         {this.state.messages.map((messageObj) => {
           return (
             <div className="col s10">

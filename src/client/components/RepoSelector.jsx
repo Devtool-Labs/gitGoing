@@ -8,6 +8,7 @@ export default (props) => {
           <div className='card-content'>
           <span className='card-title'>Select a repository</span>
           <form onSubmit={props.handleSubmit}>
+            <div className="repoView">
             {props.repos.map( (repoObj, index) => {
               return (
                 <div key={index}>
@@ -18,6 +19,7 @@ export default (props) => {
                 </div>
               );
             })}
+            </div>
             <button className="waves-effect waves-light btn margin-top-l disabled" disabled>Create Editing Room</button>
           </form>
           </div>
@@ -28,9 +30,10 @@ export default (props) => {
     return (
       <div className='row margin-top-xl'>
         <div className='card offset-s4 col s4'>
-          <div className='card-content section scrollspy'>
+          <div className='card-content'>
           <span className='card-title'>Select a repository</span>
           <form onSubmit={props.handleSubmit}>
+            <div className="repoView">
             {props.repos.map( (repoObj, index) => {
               return (
                 <div key={index}>
@@ -41,6 +44,7 @@ export default (props) => {
                 </div>
               );
             })}
+            </div>
             <button className="waves-effect waves-light btn margin-top-l">Create Editing Room</button>
           </form>
           </div>
