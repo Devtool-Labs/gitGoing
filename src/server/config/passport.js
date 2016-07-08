@@ -13,7 +13,6 @@ module.exports = function(passport) {
   }));
 
   passport.serializeUser(function(user, done) {
-    console.log("serializeUser", user);
     const userObj = {
       accessToken: user.accessToken,
       id: user.profile.id,

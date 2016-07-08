@@ -23,8 +23,18 @@ nav {
   line-height: 1;
 }
 
-.myToast {
-  background-color: red;
+.userimg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 23px;
+  height: 23px;
+}
+
+.chat-text {
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 18px;
 }
 
 .card-editor {
