@@ -1,6 +1,5 @@
 # Git Going
 > A real time Github-enabled editor for collaborating engineers
-A real time Github-enabled editor for collaborating engineers
 
 <hr>
 ## Team
@@ -85,10 +84,11 @@ npm run dev
 ```
 
 <hr>
+## Architecture      
+![](https://s32.postimg.org/hf9v2xg11/Screen_Shot_2016_07_08_at_2_07_10_PM.png)
+
+<hr>
 ## Contributing
 
 See [github.md](github.md) for contribution and github workflow guidelines.
 
-<hr>
-## Architecture      
-![](https://s32.postimg.org/hf9v2xg11/Screen_Shot_2016_07_08_at_2_07_10_PM.png)
