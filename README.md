@@ -7,7 +7,16 @@ A real time Github-enabled editor for collaborating engineers
 
   - __Product Owner__: [Sean Ho](https://github.com/seanhho)
   - __Scrum Master__: [Daniel Vu](https://github.com/d-vu)
-  - __Development Team Members__: [Veena Sridhar](https://github.com/veena-sridhar), [Brandon Courtney](https://github.com/bcourtney5965)
+  - __Development Team Members__: [Veena Sridhar](https://github.com/veena-sridhar), [Brandon Courtney](https://github.com/bcourtney5965), [Sean Ho](https://github.com/seanhho), [Daniel Vu](https://github.com/d-vu)
+
+
+<hr>
+## Team1
+
+[![Daniel Vu](https://avatars3.githubusercontent.com/u/17260170?v=3&s=150)](http://github.com/d-vu)
+[![Veena Sridhar](https://avatars1.githubusercontent.com/u/9629061?v=3&s=150)](https://github.com/veena-sridhar)
+[![Sean Ho](https://avatars2.githubusercontent.com/u/3504821?v=3&s=150)](http://github.com/seanhho)
+[![Brandon Courtney](https://avatars3.githubusercontent.com/u/7043747?v=3&s=150)](http://github.com/)
 
 <hr>
 ## Table of Contents
@@ -19,13 +28,11 @@ A real time Github-enabled editor for collaborating engineers
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Roadmap](#roadmap)
-1. [How to Start the Application Locally](#How-to-start-the-application-locally)
+1. [How to Start the Application Locally](#How to start the application locally)
 1. [Architecture](#architecture)
 1. [Contributing](#contributing)
 1. [Contributing](#contributing)
 1. [Architecture](#architecture)
-1. [API](#api)
-1. [Deployment](#deployment)
 
 <hr>
 ##Technology Stack
@@ -75,6 +82,13 @@ View the project roadmap [here](https://github.com/Devtool-Labs/gitGoing/issues)
 
 <hr>
 ## How to start the application locally
+
+```sh
+redis-server
+```
+```sh
+npm run dev
+```
 
 <hr>
 ## Contributing
