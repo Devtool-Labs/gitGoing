@@ -6,8 +6,7 @@ export default (props) => {
   return (
   <div>
     <ul id="dropdown1" className="dropdown-content">
-      <li><a className="nav-text" href="">{username}</a></li>
-      <li className="divider"></li>
+      <li><a className="nav-text" href="/">Repos</a></li>
       <li><a className="nav-text" href="#about">Help</a></li>
       <li><a className="nav-text" href="/logout">Sign Out</a></li>
     </ul>

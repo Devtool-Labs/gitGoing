@@ -57,7 +57,7 @@ export default class EditRoom extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar user={this.props.user}/>
         <RoomNotifications {...this.props}/>
         <div className='container'>
           <button className='btn margin-top-m commit' onClick={this.openModal}>Commit & Push</button>
