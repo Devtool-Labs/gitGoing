@@ -12,7 +12,7 @@ A real time Github-enabled editor for collaborating engineers
 ## Table of Contents
 
 1. [Technology Stack](#technology-stack)
-1. [Usage](#Usage)
+1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -63,7 +63,7 @@ npm install
 View the project roadmap [here](https://github.com/Devtool-Labs/gitGoing/issues)
 
 <hr>
-## Contributing + Github Workflow
+## Contributing
 
 See [github.md](github.md) for contribution and github workflow guidelines.
 
