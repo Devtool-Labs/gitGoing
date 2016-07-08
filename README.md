@@ -86,7 +86,6 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 #Git Going
 ​
 Insert inspiring description
->>>>>>> Add readme
 ​
 ##Table of Contents
 * [Developers](#developers)
@@ -99,8 +98,6 @@ Insert inspiring description
 * [Database Schema](#database-schema)
 * [License](#license)
 ​
-<<<<<<< d1532f534494ef2f0fd6fa5f6b4c76288dc4e098
-=======
 ##Developers
 [![Daniel Vu](https://avatars3.githubusercontent.com/u/17260170?v=3&s=150)](http://github.com/d-vu)
 Daniel Vu 
