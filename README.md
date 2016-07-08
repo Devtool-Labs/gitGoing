@@ -1,5 +1,5 @@
 # Git Going
-> A real time Github-enabled editor for collaborating engineers.  ASDFGSDFHfgBFGDHDFHXFGh
+> A real time Github-enabled editor for collaborating engineers.
 
 <hr>
 ## Team
@@ -8,10 +8,10 @@
   - __Scrum Master__: [Daniel Vu](https://github.com/d-vu)
   - __Development Team Members__: [Veena Sridhar](https://github.com/veena-sridhar), [Brandon Courtney](https://github.com/bcourtney5965), [Sean Ho](https://github.com/seanhho), [Daniel Vu](https://github.com/d-vu)
 
-[![Daniel Vu](https://avatars3.githubusercontent.com/u/17260170?v=3&s=150)](http://github.com/d-vu)
-[![Veena Sridhar](https://avatars1.githubusercontent.com/u/9629061?v=3&s=150)](https://github.com/veena-sridhar)
-[![Sean Ho](https://avatars2.githubusercontent.com/u/3504821?v=3&s=150)](http://github.com/seanhho)
-[![Brandon Courtney](https://avatars3.githubusercontent.com/u/7043747?v=3&s=150)](http://github.com/)
+[[Daniel Vu](https://avatars3.githubusercontent.com/u/17260170?v=3&s=150)](http://github.com/d-vu)
+[[Veena Sridhar](https://avatars1.githubusercontent.com/u/9629061?v=3&s=150)](https://github.com/veena-sridhar)
+[[Sean Ho](https://avatars2.githubusercontent.com/u/3504821?v=3&s=150)](http://github.com/seanhho)
+[[Brandon Courtney](https://avatars3.githubusercontent.com/u/7043747?v=3&s=150)](http://github.com/)
 
 <hr>
 ## Table of Contents
