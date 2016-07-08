@@ -17,7 +17,6 @@ export const jsonParseError = function(error) {
 }
 
 export const get  = function(actions, endpoint) {
-  
   return dispatcher => {
     dispatcher(actions.request());
     let status;
@@ -29,8 +28,6 @@ export const get  = function(actions, endpoint) {
         return response.json();
       })
       .then(json => { return dispatcher(actions.response(status, json))})
-      //.catch(() => { return dispatcher(jsonParseError('invalid json from get ' + endpoint))})
-      //.error( e => { console.log(e);return dispatcher(fetchError(e))});
   }
 }
 
@@ -53,7 +50,5 @@ export const post = function(actions, endpoint, data) {
     .then(json => {
       return dispatcher(actions.response(status, json))
     })
-    //.catch(() => { return dispatcher(jsonParseError('invalid json from post ' + endpoint))})
-    //.error( e => { return dispatcher(fetchError(e))});
   }
 }

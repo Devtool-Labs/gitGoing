@@ -3,7 +3,6 @@ import * as fetchHelper from './fetchHelper.js';
 export const REPO_GET_REQUEST = 'REPO_GET_REQUEST';
 export const REPO_GET_RESPONSE = 'REPO_GET_RESPONSE';
 
-
 export const repoGetRequest = function() {
   return {
     type: REPO_GET_REQUEST

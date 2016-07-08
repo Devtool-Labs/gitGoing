@@ -31,8 +31,3 @@ module.exports = function(app, redisClient) {
 
   app.use('', router);
 };
-
-/*
-res.redirect('/signin');
-res.render('index.html');
-*/

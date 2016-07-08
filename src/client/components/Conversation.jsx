@@ -57,7 +57,6 @@ export default class Chat extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div className="row">

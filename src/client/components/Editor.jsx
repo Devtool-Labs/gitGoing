@@ -14,14 +14,12 @@ export default class Editor extends React.Component {
       text: props.ui.editorText
     };
     props.listenToOutwardFileUpdate(this.outwardEdit.bind(this));
-    // this.getPic = this.getPic.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     this.setState({
       text: newProps.ui.editorText
     });
-    console.log('editor props are', newProps);
   }
 
   outwardEdit(message) {

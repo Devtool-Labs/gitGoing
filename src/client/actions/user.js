@@ -4,8 +4,6 @@ export const USER_GET_REQUEST = 'USER_GET_REQUEST';
 export const USER_GET_RESPONSE = 'USER_GET_RESPONSE';
 
 const ENDPOINT = '/api/user';
-// export const 
-// export const
 
 export const userGetRequest = function () {
   return {

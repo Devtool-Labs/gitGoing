@@ -11,8 +11,6 @@ export default class RepositoryView extends React.Component {
     super(props);
     props.getUser();
     this.state = {repoName: null};
-
-
   }
 
   componentWillMount() {
