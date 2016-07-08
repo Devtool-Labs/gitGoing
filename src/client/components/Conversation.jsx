@@ -67,7 +67,7 @@ export default class Chat extends React.Component {
           return (
             <div className="col s10">
               <img className="userimg circle responsive-img" src={messageObj.userImage}/>
-              <div className="col s10">{messageObj.text}</div>
+              <div className="chat-text">{messageObj.text}</div>
             </div>
           );
         })}
