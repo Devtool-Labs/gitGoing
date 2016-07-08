@@ -71,10 +71,25 @@ nav {
 
 .chatScroller {
   overflow: auto;
-  height: 300px;
+  height: 200px;
 }
 
 .repoView {
   overflow: auto;
   height: 600px;
 } 
+
+.commitTitle,
+.branchTitle,
+.fileTree {
+  overflow: auto;
+  height: 450px;
+}
+
+.sideBarView {
+  height: 540px;
+}
+
+.git-commit {
+  padding-bottom: 5px;
+}

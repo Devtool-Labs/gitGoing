@@ -58,15 +58,17 @@ export default class BranchingView extends React.Component {
     if (showProperties.length === 0 || (showProperties[0].display && showProperties.length === 1) || (showProperties[showProperties.length - 3].display && showProperties.length > 1)) {
       return (
         <div>
-          {this.props.branches.map((branchObj, index) => {
-            return (
-              <div>
-                <span className='card-title'>Select branch</span>
-                <hr />
-                <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj.commit.sha}>{branchObj.name}</div>
-              </div>
-            )
-           })}
+          <span className='card-title'>Select branch</span>
+          <hr />
+          <div className="branchTitle">
+            {this.props.branches.map((branchObj, index) => {
+              return (
+                <div>
+                  <div className='git-branch' key={index} onClick={this.clickBranch} value={branchObj.commit.sha}>{branchObj.name}</div>
+                </div>
+              )
+             })}
+          </div>
         </div>
       )
     } else if (showProperties[showProperties.length - 2].display && showProperties.length >= 2) {
@@ -75,11 +77,13 @@ export default class BranchingView extends React.Component {
           <span><i onClick={this.clickBackButton} className="material-icons">fast_rewind</i></span>
           <span className='path-title'>Select Commit</span>
           <hr />
-          {this.props.commits.map((commitObj, index) => {
-            return (
-              <div className='git-commit' key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</div>
-            )
-          })}
+          <div className="commitTitle">
+            {this.props.commits.map((commitObj, index) => {
+              return (
+                <div className='git-commit' key={index} onClick={this.clickCommit} value={commitObj.sha}>{commitObj.commit.message}</div>
+              )
+            })}
+          </div>
         </div>
       )
     } else {
