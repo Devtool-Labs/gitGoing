@@ -9,7 +9,7 @@ export default class Chat extends React.Component {
     this.state = {
       userImage: '',
       messages: [],
-      currentMessage: ''
+      currentMessage: '',
     };
 
     props.listenToOutwardSendChat(this.outwardSendChat.bind(this));
@@ -40,7 +40,6 @@ export default class Chat extends React.Component {
   }
 
   submitChat (event) {
-    console.log('submitted a chat');
     event.preventDefault();
     this.props.sendChat(this.props.roomid, this.state.userImage, this.state.currentMessage);
     this.setState({
@@ -66,8 +65,13 @@ export default class Chat extends React.Component {
         {this.state.messages.map((messageObj) => {
           return (
             <div className="col s10">
+<<<<<<< b4b7623f4d85614baa84bdd79dc527d943180c90
               <img className="userimg circle responsive-img" src={messageObj.userImage}/>
               <div className="chat-text">{messageObj.text}</div>
+=======
+              <img className="responsive-img col s2" src={messageObj.userImage}/>
+              <div className="col s10">{messageObj.text}</div>
+>>>>>>> Enable user picture to be shown in chat room
             </div>
           );
         })}
