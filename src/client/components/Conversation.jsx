@@ -3,6 +3,8 @@ import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 
+$(".chatScroller").scrollTop($(".chatScroller").scrollHeight);
+
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +47,8 @@ export default class Chat extends React.Component {
     this.setState({
       currentMessage: ''
     });
+    var convo = document.getElementsByClassName('chatScroller');
+    convo.scrollTop = convo.scrollHeight;
   }
 
   outwardSendChat (message) {
@@ -60,7 +64,7 @@ export default class Chat extends React.Component {
   render() {
     return (
       <div className="row">
-        <div id="messages">
+        <div id="messages" className="chatScroller">
         {this.state.messages.map((messageObj) => {
           return (
             <div className="col s10">
