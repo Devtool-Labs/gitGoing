@@ -82,7 +82,6 @@ export const leaveRoom = function (roomId, user) {
 export const sendChat = function (roomId, userImage, text) {
   return (dispatcher, getState) => {
     let { socket } = getState();
-    console.log('called send chat', roomId, userImage, text);
     socket.connection.emit('sendChat', {
       roomId,
       userImage,
@@ -124,7 +123,6 @@ export const listenToOutwardSendChat = function (listener) {
   return (dispatcher, getState) => {
     let socket= getState().socket;
     socket.connection.on('sendChatOutward', function (message) {
-      console.log('inside the send chat outward', message);
       listener(message);
     });
   }
