@@ -1,5 +1,6 @@
 # Git Going
 > A real time Github-enabled editor for collaborating engineers
+A real time Github-enabled editor for collaborating engineers
 
 <hr>
 ## Team
@@ -14,6 +15,8 @@
 1. [Technology Stack](#technology-stack)
 1. [Usage](#usage)
 1. [Demo](#demo)
+1. [Usage](#usage)
+1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -21,6 +24,9 @@
 1. [How to Start the Application Locally](#How-to-start-the-application-locally)
 1. [Architecture](#architecture)
 1. [Contributing](#contributing)
+1. [Contributing](#contributing)
+1. [Architecture](#architecture)
+1. [API](#api)
 1. [Deployment](#deployment)
 
 <hr>
@@ -100,6 +106,10 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 
 
 
+
+
+
+
 #Git Going
 ​
 Insert inspiring description
@@ -132,6 +142,8 @@ http://github.com/seanhho
 Brandon Courtney
 http://github.com/bcourtney5965
 ​
+
+
 
 ##Demo
 www.GitGoing.io
