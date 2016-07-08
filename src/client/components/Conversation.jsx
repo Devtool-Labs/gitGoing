@@ -3,15 +3,13 @@ import io from 'socket.io-client';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 
-$(".chatScroller").scrollTop($(".chatScroller").scrollHeight);
-
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userImage: '',
       messages: [],
-      currentMessage: '',
+      currentMessage: ''
     };
 
     props.listenToOutwardSendChat(this.outwardSendChat.bind(this));
@@ -47,8 +45,6 @@ export default class Chat extends React.Component {
     this.setState({
       currentMessage: ''
     });
-    var convo = document.getElementsByClassName('chatScroller');
-    convo.scrollTop = convo.scrollHeight;
   }
 
   outwardSendChat (message) {
