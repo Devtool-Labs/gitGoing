@@ -21,7 +21,7 @@ export default class RoomNotifications extends React.Component {
   componentWillReceiveProps (newProps) {
     console.log(newProps);
     if (newProps.notifications.queue[newProps.notifications.queue.length - 1].commitStatus === 200) {
-      Materialize.toast('Success! Your code has been committed.', 2000);
+      Materialize.toast('Success! Your code has been committed and pushed.', 3000);
     }
   }
 
