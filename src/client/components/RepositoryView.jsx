@@ -36,7 +36,7 @@ export default class RepositoryView extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar user={this.props.user}/>
         <DashboardNotifications {...this.props}/>
         <div className='container'>
           <RepoSelector repos={this.props.repos} 
