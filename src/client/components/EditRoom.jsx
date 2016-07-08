@@ -63,7 +63,7 @@ export default class EditRoom extends React.Component {
           <button className='btn margin-top-m commit' onClick={this.openModal}>Commit & Push</button>
           <div className='row margin-top-xl'>
             <div className='col s4'>
-              <div className='card'>
+              <div className='card sideBarView'>
                 <div className='card-content'>
                   <BranchView {...this.props} roomid={this.props.params.roomid}/>
                 </div>
