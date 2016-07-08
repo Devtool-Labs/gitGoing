@@ -47,6 +47,8 @@ export default class Chat extends React.Component {
     this.setState({
       currentMessage: ''
     });
+    var convo = document.getElementsByClassName('chatScroller');
+    convo.scrollTop = convo.scrollHeight;
   }
 
   outwardSendChat (message) {
