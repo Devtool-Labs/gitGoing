@@ -17,7 +17,7 @@ export default class Chat extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
+  componentWillReceiveProps() {
     var randomImages = ['http://r.ddmcdn.com/s_f/o_1/cx_633/cy_0/cw_1725/ch_1725/w_720/APL/uploads/2014/11/too-cute-doggone-it-video-playlist.jpg', 'http://www.factslides.com/imgs/black-cat.jpg', 'http://www.horsebreedsinfo.com/images/miniature_horse.jpg', 'http://slodive.com/wp-content/uploads/2013/02/cute-bunny-pictures/wild-bunny.jpg', 'http://www.peabodysmith.com/blog/files/2013/01/100_1739.jpg', 'https://s-media-cache-ak0.pinimg.com/236x/f7/c5/33/f7c5334e0f06c4aa86fcec2385d132eb.jpg', 'https://s-media-cache-ak0.pinimg.com/236x/74/1c/ff/741cffafdb3915e4fc135156527b2a6c.jpg'];
     var imgUrl;
     if (!this.props.user.photos) {
@@ -66,7 +66,7 @@ export default class Chat extends React.Component {
         {this.state.messages.map((messageObj) => {
           return (
             <div className="col s10">
-              <img className="userimg circle responsive-img" src={messageObj.userImage}/>
+              <img className="circle responsive-img col s2" height="100" width="100" src={messageObj.userImage}/>
               <div className="col s10">{messageObj.text}</div>
             </div>
           );
