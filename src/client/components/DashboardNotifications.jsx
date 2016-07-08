@@ -8,9 +8,6 @@ export default class DashboardNotifications extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (!newProps.repos.length && !newProps.user.username) {
-      Materialize.toast('There was a problem getting your repositories.', 1000);
-    }
     if (newProps.user.username && !newProps.allRooms.length) {
       var toastText = 'Welcome, ' + newProps.user.username + '! Pick a repo to start editing.';
       Materialize.toast(toastText, 3000);
