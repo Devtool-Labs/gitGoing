@@ -15,8 +15,6 @@ A real time Github-enabled editor for collaborating engineers
 1. [Technology Stack](#technology-stack)
 1. [Usage](#usage)
 1. [Demo](#demo)
-1. [Usage](#usage)
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -86,7 +84,7 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 ## Architecture
 
 ### High Level Architecture
-![](http://i.imgur.com/mqdnWVh.png)
+![](https://postimg.org/image/99rt4rrs1/)
 
 <hr>
 ## Deployment
