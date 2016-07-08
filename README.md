@@ -24,11 +24,9 @@ A real time Github-enabled editor for collaborating engineers
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Roadmap](#roadmap)
-1. [How to Start the Application Locally](#How to start the application locally)
+1. [How to Start the Application Locally](#how-to-start-the-application-locally)
 1. [Architecture](#architecture)
 1. [Contributing](#contributing)
-1. [Contributing](#contributing)
-1. [Architecture](#architecture)
 
 <hr>
 ##Technology Stack
@@ -94,11 +92,3 @@ See [github.md](github.md) for contribution and github workflow guidelines.
 <hr>
 ## Architecture      
 ![](https://s32.postimg.org/hf9v2xg11/Screen_Shot_2016_07_08_at_2_07_10_PM.png)
-
-<hr>
-## Deployment
-
-
-* [How to Start the Application Locally](#How-to-start-the-application-locally)
-* [Install Dependencies](#Install-dependencies)
-
